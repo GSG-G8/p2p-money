@@ -133,7 +133,7 @@ the admin can add agent price manually through a pop up button that show him cur
 
 ## Database Schema :file_cabinet:
 
-![](https://i.imgur.com/HfQMKaB.png)
+![](https://i.imgur.com/osaC2Wo.png)
 
 ## Technologies :computer:
 
@@ -143,11 +143,13 @@ the admin can add agent price manually through a pop up button that show him cur
 - React Hooks
 - ant design
 - Javascript
-- HTML and CSS
 
 ### Backend
 
 - Express JS
+- Node js
+- yup
+- axios
 
 ### Database
 
