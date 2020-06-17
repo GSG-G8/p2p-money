@@ -19,7 +19,7 @@
 
 ## Application description :information_source:
 
-This is an app to help people exchange money online. without a middleman like a bank or exchange agency, we connect people through our app, this application is a good place for make profit from money exchange. we provide them with a wallet to save and exchnage their money anytime.
+This is an app to help people exchange money online. without a middleman like a bank or exchange agency, we connect people through our app, this application is a good place for make profit from money exchange. we provide them with a wallet to save and exchange their money anytime.
 currently, we are in the beta stage, we will provide virtual money for users to test our app, and review users feedback.
 
 ## Application Setup :mag:
@@ -68,19 +68,29 @@ npm run build:database:pro
 ## Main Problems :heavy_exclamation_mark:
 
 1- Currency difference between exchange shops.
+
 2- waste the time and efforts when I search for the best price.
+
 3- Torn and damaged money.
 
 ## Our Solutions :bulb:
 
 1- Gain the best Price between different prices.
+
 2- sea the different exchange prices for each bank and the money exchange agencies.
+
 3- manage your cash flow by states and charts.
+
 4- increase user profits.
+
 5- exchange your money in a secured and trusted environment.
+
 6- make changing money a simple process.
+
 7- reduce time and efforts
+
 8- flexible timing for exchange
+
 9- provide history stats.
 
 ## stackholders:
@@ -89,12 +99,6 @@ npm run build:database:pro
 - money exchange practicers.
 - money exchange agancies.
 - banks
-
-## Inspiration webapps:
-
-- currencyfair.com
-- transferwise.com
-- xe.com
 
 ## user stories::bookmark_tabs:
 
@@ -148,8 +152,6 @@ the admin can add agent price manually through a pop up button that show him cur
 
 - Express JS
 - Node js
-- yup
-- axios
 
 ### Database
 
