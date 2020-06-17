@@ -1,0 +1,20 @@
+{
+  "name": "p2p-money",
+  "version": "1.0.0",
+  "description": "An app to help people exchange money online. without a middleman like a bank or exchange agency",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GSG-G8/p2p-money.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GSG-G8/p2p-money/issues"
+  },
+  "homepage": "https://github.com/GSG-G8/p2p-money#readme"
+}
