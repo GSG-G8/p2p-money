@@ -4,7 +4,15 @@
   "description": "An app to help people exchange money online. without a middleman like a bank or exchange agency",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\""
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm start",
+    "start": "NODE_ENV=production node server/index.js",
+    "dev": "nodemon server/index.js",
+    "kill": "fuser -k 5000/tcp",
+    "kill-run": "npm run kill && npm run server",
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "build:database:pro": "NODE_ENV=production node server/database/index.js",
+    "build:database:dev": "NODE_ENV=test node server/database/index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +24,19 @@
   "bugs": {
     "url": "https://github.com/GSG-G8/p2p-money/issues"
   },
-  "homepage": "https://github.com/GSG-G8/p2p-money#readme"
+  "homepage": "https://github.com/GSG-G8/p2p-money#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bcrypt": "^4.0.1",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.5",
+    "env2": "^2.2.2",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "yup": "^0.28.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
+  }
 }
