@@ -32,7 +32,7 @@ const clientSchema = new Schema({
     required: true,
   },
   mainBank: {
-    type: String,
+    type: Number,
     trim: true,
     required: true,
   },
