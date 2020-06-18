@@ -1,8 +1,8 @@
-import React from "react";
-import "./style.css";
+import React from 'react';
+import './style.css';
 
 function App() {
-  return <div>App</div>;
+  return <div>Welcome in P2P Exchange Money App</div>;
 }
 
 export default App;
