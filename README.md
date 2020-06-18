@@ -141,8 +141,7 @@ the admin can add agent price manually through a pop up button that show him cur
 
 ## Database Schema :file_cabinet:
 
-![](https://i.imgur.com/k9UYklZ.png)
-
+![p2p-last](https://user-images.githubusercontent.com/29041512/85019682-dde1aa80-b177-11ea-8546-8ef9165006ff.png)
 ## Technologies :computer:
 
 ### Frontend
