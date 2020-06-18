@@ -29,7 +29,7 @@ currently, we are in the beta stage, we will provide virtual money for users to 
 
 - run `npm i && cd client npm i && npm run build` to install all dependencies & dev-dependencies for the app and also build react on the server.
 
-- add config.env file that contains SECRET_KEY as Environmental Variable and PostgreSQL Url for your database.
+- add config.env file that contains SECRET_KEY as Environmental Variable and Mongodb Url for your database.
 
 #### Environment Variables
 
@@ -43,22 +43,26 @@ SECRET_KEY
 
 #### Database Setup
 
-- you can set the **database url** in your **_config.env_** as follows (setting the values in square brackets to the values you defined in PostgreSQL url):
+- Create MongoDB database account from [here](https://account.mongodb.com/account/register).
+- Now you can set the **database url** in your ***config.env*** as follows (setting the values in square brackets to the values you defined in MongoDB website url above):
 
-`postgres://[username]:[password]@localhost:5432/[database]`
+
+`mongodb+srv://[username:password]@host:port/[database]?options...`
 
 - Add a these two variables in config.env and added database url that you created as shown above :
 
 ```
-DEV_URI = postgres://[username]:[password]@localhost:5432/[database]  // database for development
-PRODUCT_URI = postgres://[username]:[password]@localhost:5432/[database] // database for production
+DEV_URI = mongodb url xxxxxxxx       // database for development
+PRODUCT_URI = mongodb url xxxxxxxx // database for production
+
 ```
 
-- Now in the Terminal run this command to build the fake data on your database on both development and production databases
+- Now in the Terminal run this command to build the fake data on your database on both development and production databases 
 
 ```
 npm run build:database:dev
 npm run build:database:pro
+
 ```
 
 #### Run the Project
@@ -137,8 +141,7 @@ the admin can add agent price manually through a pop up button that show him cur
 
 ## Database Schema :file_cabinet:
 
-![](https://i.imgur.com/osaC2Wo.png)
-
+![p2p-last](https://user-images.githubusercontent.com/29041512/85019682-dde1aa80-b177-11ea-8546-8ef9165006ff.png)
 ## Technologies :computer:
 
 ### Frontend
@@ -155,4 +158,5 @@ the admin can add agent price manually through a pop up button that show him cur
 
 ### Database
 
-- PostgreSQL
+- MongoDB
+- mongoose
