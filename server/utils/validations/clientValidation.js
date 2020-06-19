@@ -12,11 +12,10 @@ const schema = yup.object().shape({
     )
     .required(),
   passwordConfirmation: yup.mixed().oneOf([yup.ref('password')]),
-  bankAccounts: yup.number().required(),
+  bankAccounts: yup.object().required(),
   mainBank: yup.number().required(),
   balance: yup.object().required(),
   avatar: yup.string().url().trim(),
-  accepted: yup.boolean(),
 });
 
 const clientValidation = (obj) => schema.isValid(obj);
