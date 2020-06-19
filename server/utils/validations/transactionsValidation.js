@@ -13,7 +13,7 @@ const schema = yup.object().shape({
   result: yup.number().required('please add the result').positive(),
   spread: yup.number().required('Please add the spread').positive(),
   saved_money: yup.number().required('Please add the saved money').positive(),
-  operation_time: yup.number().required('Please add the date').positive(),
+  operation_time: yup.number().required('Please add the date'),
 });
 
 const transactionsValidation = (transactions) =>

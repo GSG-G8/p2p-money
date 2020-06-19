@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const SchemaTypes = mongoose.Schema.Types;
 
 const transactions = new Schema({
   client_id: {
@@ -10,9 +9,8 @@ const transactions = new Schema({
     trim: true,
   },
   amount: {
-    type: SchemaTypes.Float,
+    type: Number,
     required: true,
-    trim: true,
   },
   from: {
     type: String,
@@ -25,24 +23,20 @@ const transactions = new Schema({
     trim: true,
   },
   result: {
-    type: String,
+    type: Number,
     required: true,
-    trim: true,
   },
   spread: {
-    type: String,
+    type: Number,
     required: true,
-    trim: true,
   },
   saved_money: {
-    type: String,
+    type: Number,
     required: true,
-    trim: true,
   },
   operation_time: {
-    type: String,
-    required: true,
-    trim: true,
+    type: Date,
+    default: Date.now,
   },
 });
 
