@@ -1,3 +1,4 @@
 const client = require('./client');
+const admin = require('./admin');
 
-module.exports = { client };
+module.exports = { client, admin };
