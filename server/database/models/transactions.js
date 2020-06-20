@@ -4,9 +4,8 @@ const { Schema } = mongoose;
 
 const transactions = new Schema({
   client_id: {
-    type: String,
-    required: true,
-    trim: true,
+    type: Schema.Types.ObjectId,
+    ref: 'client',
   },
   amount: {
     type: Number,
@@ -23,6 +22,10 @@ const transactions = new Schema({
     trim: true,
   },
   result: {
+    type: Number,
+    required: true,
+  },
+  rate: {
     type: Number,
     required: true,
   },
