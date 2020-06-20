@@ -35,7 +35,7 @@ module.exports = async () => {
       password: '$2b$10$gB8D2bI6/X7xTwsSRs5JQe2BvwOLEdMag8dinhfIY4Eu0tIEWVTr2',
       avatar:
         'https://cdn.shopify.com/s/files/1/0074/5432/6862/files/mongoose-envoy-0063-tested_grande.jpg?v=1585927855',
-      mobileNumber: '4555787946664',
+      mobileNumber: '455578794666544',
       bankAccounts: [
         {
           bankName: 'Palestine Bank',
@@ -68,7 +68,7 @@ module.exports = async () => {
       password: '$2b$10$gB8D2bI6/X7xTwsSRs5JQe2BvwOLEdMag8dinhfIY4Eu0tIEWVTr2',
       avatar:
         'https://cdn.shopify.com/s/files/1/0074/5432/6862/files/mongoose-envoy-0063-tested_grande.jpg?v=1585927855',
-      mobileNumber: '4555787946664',
+      mobileNumber: '45557879746664',
       bankAccounts: [
         {
           bankName: 'Unit Bank',
@@ -101,7 +101,7 @@ module.exports = async () => {
       password: '$2b$10$gB8D2bI6/X7xTwsSRs5JQe2BvwOLEdMag8dinhfIY4Eu0tIEWVTr2',
       avatar:
         'https://cdn.shopify.com/s/files/1/0074/5432/6862/files/mongoose-envoy-0063-tested_grande.jpg?v=1585927855',
-      mobileNumber: '4555787946664',
+      mobileNumber: '45557879466649',
       bankAccounts: [
         {
           bankName: 'Unit Bank',
