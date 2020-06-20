@@ -1,23 +1,25 @@
 const bcrypt = require('bcrypt');
 const { sign } = require('jsonwebtoken');
 
-const adminValidation = require('../../utils/validations/adminValidation');
+const loginValidation = require('../validation/loginValidation');
 const Admin = require('../../database/models/admin');
 const Client = require('../../database/models/client');
 
 require('env2')('config.env');
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, mobileNumber } = req.body;
   try {
-    const valid = await adminValidation(email, password);
+    const valid = await loginValidation(email, mobileNumber, password);
     if (!valid) {
       res.status(400).json({
         status: 'failed',
         message: 'Check the entered data',
       });
     } else {
-      const clients = await Client.findOne({ email });
+      const clients = await Client.findOne({
+        $or: [{ email }, { mobileNumber }],
+      });
       await bcrypt.compare(password, clients.password, (err, result) => {
         if (!result)
           res.status(400).json({
@@ -31,6 +33,7 @@ const login = async (req, res) => {
           role: 'applicant',
           data: {
             email,
+            mobileNumber,
             fullName: `${clients.fullName}`,
             avatar: `${clients.avatar}`,
           },
