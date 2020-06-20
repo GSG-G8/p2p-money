@@ -10,9 +10,10 @@ const schema = yup.object().shape({
     ),
 });
 
-const adminValidation = (obj) =>
+const adminValidation = (email, password) =>
   schema.isValid({
-    obj,
+    email,
+    password,
   });
 
 module.exports = adminValidation;
