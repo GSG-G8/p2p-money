@@ -27,7 +27,6 @@ const schema = yup.object().shape({
     .oneOf(['بنك فلسطين', 'بنك الإسكان', 'بنك القدس'])
     .required(),
   mainBankAccount: yup.number().required(),
-  avatar: yup.string().url().trim(),
 });
 
 const signUpValidation = (obj) => schema.validate(obj, { abortEarly: false });
