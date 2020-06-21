@@ -7,61 +7,65 @@ const Client = require('../../database/models/client');
 
 require('env2')('config.env');
 
+const errResponse = {
+  status: 'failed',
+  message: 'Data is not exists',
+};
+
 const login = async (req, res) => {
   const { email, password, mobileNumber } = req.body;
   try {
     const valid = await loginValidation(email, mobileNumber, password);
-    if (!valid) {
+    if (!valid)
       res.status(400).json({
         status: 'failed',
-        message: 'Check the entered data',
+        message: 'Data is not Valid',
       });
-    } else {
-      const clients = await Client.findOne({
-        $or: [{ email }, { mobileNumber }],
-      });
+
+    const clients = await Client.findOne({
+      $or: [{ email }, { mobileNumber }],
+    });
+    if (clients)
       await bcrypt.compare(password, clients.password, (err, result) => {
-        if (!result)
-          res.status(400).json({
-            status: 'failed',
-            message: 'somthing wrong with Email or passoword',
+        if (!result) {
+          res.status(400).json(errResponse);
+        } else {
+          const userToken = { userId: clients.id };
+          const cookie = sign(userToken, process.env.SECRET_KEY);
+          res.cookie('client', cookie).json({
+            status: 'successfully',
+            role: 'client',
+            data: {
+              email,
+              mobileNumber,
+              fullName: `${clients.fullName}`,
+            },
           });
-        const userToken = { userId: clients.id };
-        const cookie = sign(userToken, process.env.SECRET_KEY);
-        res.cookie('userId', clients.id);
-        res.cookie('client', cookie).json({
-          status: 'successfully',
-          role: 'applicant',
-          data: {
-            email,
-            mobileNumber,
-            fullName: `${clients.fullName}`,
-          },
-        });
+        }
       });
-    }
-  } catch (e) {
-    try {
-      const admins = await Admin.findOne({ email });
+
+    const admins = await Admin.findOne({ email });
+    if (admins)
       await bcrypt.compare(password, admins.password, (err, result) => {
-        if (!result)
-          res
-            .status(400)
-            .json({ message: 'somthing wrong with Email or passoword' });
-        const userToken = { userId: admins.id };
-        const cookie = sign(userToken, process.env.SECRET_KEY);
-        res.cookie('client', cookie).json({
-          status: 'successfully',
-          role: 'admin',
-          data: { email },
-        });
+        if (!result) {
+          res.status(400).json(errResponse);
+        } else {
+          const userToken = { userId: admins.id };
+          const cookie = sign(userToken, process.env.SECRET_KEY);
+          res.cookie('client', cookie).json({
+            status: 'successfully',
+            role: 'admin',
+            data: { email },
+          });
+        }
       });
-    } catch (err) {
-      res.json({
-        status: 'failed',
-        message: 'somthing wrong with Email or passoword',
-      });
-    }
+
+    if (admins === null && clients === null) res.json(errResponse);
+  } catch (e) {
+    res.json({
+      status: 'failed',
+      message: 'internal server error',
+    });
   }
 };
 
