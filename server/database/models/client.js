@@ -10,13 +10,13 @@ const clientSchema = new Schema({
   email: {
     type: String,
     lowercase: true,
-    unique: true,
     trim: true,
+    default: null,
   },
   mobileNumber: {
     type: String,
-    unique: true,
     trim: true,
+    default: null,
   },
   password: {
     type: String,
@@ -27,13 +27,18 @@ const clientSchema = new Schema({
     type: Array,
     required: true,
   },
-  balance: {
-    type: Array,
+  mainBankName: {
+    type: String,
+    trim: true,
     required: true,
   },
-  mainBank: {
+  mainBankAccount: {
     type: Number,
     trim: true,
+    required: true,
+  },
+  mainBalance: {
+    type: Array,
     required: true,
   },
   avatar: {
@@ -56,7 +61,7 @@ const clientSchema = new Schema({
   defaultCurrency: {
     type: String,
     trim: true,
-    default: 'ILS',
+    default: 'USD',
   },
   feedback: {
     type: String,
