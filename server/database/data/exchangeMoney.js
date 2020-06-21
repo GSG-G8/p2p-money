@@ -27,7 +27,7 @@ module.exports = async () => {
       bank_price_sell: 350,
       bank_price_buy: 340,
       agency_price_sell: 355,
-      agency_price_buy: 3س49,
+      agency_price_buy: 349,
       agency_saved_money: 5,
     },
     {
