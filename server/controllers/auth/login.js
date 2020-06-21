@@ -28,6 +28,7 @@ const login = async (req, res) => {
           });
         const userToken = { userId: clients.id };
         const cookie = sign(userToken, process.env.SECRET_KEY);
+        res.cookie('userId', clients.id);
         res.cookie('client', cookie).json({
           status: 'successfully',
           role: 'applicant',
@@ -35,7 +36,6 @@ const login = async (req, res) => {
             email,
             mobileNumber,
             fullName: `${clients.fullName}`,
-            avatar: `${clients.avatar}`,
           },
         });
       });
