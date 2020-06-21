@@ -2,7 +2,7 @@
 
 ## Application Link :link:
 
-[check it out from here](https://herokuapp.com/)
+[check it out from here](https://p2p-money.herokuapp.com/)
 
 ## Team :busts_in_silhouette:
 
@@ -141,7 +141,7 @@ the admin can add agent price manually through a pop up button that show him cur
 
 ## Database Schema :file_cabinet:
 
-![p2p-last](https://user-images.githubusercontent.com/29041512/85019682-dde1aa80-b177-11ea-8546-8ef9165006ff.png)
+![p2p-last](https://media.discordapp.net/attachments/722149587464355920/723990382169423892/schema.PNG?width=700&height=458)
 ## Technologies :computer:
 
 ### Frontend
