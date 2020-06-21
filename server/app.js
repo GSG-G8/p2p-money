@@ -2,7 +2,9 @@ const express = require('express');
 const { join } = require('path');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
+
 const database = require('./database/dbConnection');
+const router = require('./router');
 
 const app = express();
 
@@ -23,6 +25,8 @@ database
   .on('error', () => process.exit(1));
 
 app.use(express.static(join(__dirname, '..', 'client', 'build')));
+
+app.use('/api/v1', router);
 
 app.get('*', (req, res) => {
   res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
