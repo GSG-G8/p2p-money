@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const transactions = new Schema({
+const exchangeMoney = new Schema({
   client_id: {
     type: Schema.Types.ObjectId,
     ref: 'client',
@@ -21,11 +21,15 @@ const transactions = new Schema({
     required: true,
     trim: true,
   },
-  result: {
+  app_price_sell: {
     type: Number,
     required: true,
   },
-  rate: {
+  app_price_buy: {
+    type: Number,
+    required: true,
+  },
+  app_saved_money: {
     type: Number,
     required: true,
   },
@@ -33,7 +37,23 @@ const transactions = new Schema({
     type: Number,
     required: true,
   },
-  saved_money: {
+  bank_price_sell: {
+    type: Number,
+    required: true,
+  },
+  bank_price_buy: {
+    type: Number,
+    required: true,
+  },
+  agency_price_sell: {
+    type: Number,
+    required: true,
+  },
+  agency_price_buy: {
+    type: Number,
+    required: true,
+  },
+  agency_saved_money: {
     type: Number,
     required: true,
   },
@@ -43,4 +63,4 @@ const transactions = new Schema({
   },
 });
 
-module.exports = mongoose.model('transactions', transactions);
+module.exports = mongoose.model('exchange_money', exchangeMoney);

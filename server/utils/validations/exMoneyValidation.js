@@ -11,9 +11,9 @@ const schema = yup.object().shape({
   to: yup.string().required('Please Enter currency you want to exchange to it'),
 });
 
-const transactionsValidation = (transactions) =>
+const exchangeMoneyValidation = (transactions) =>
   schema.isValid({
     transactions,
   });
 
-module.exports = transactionsValidation;
+module.exports = exchangeMoneyValidation;
