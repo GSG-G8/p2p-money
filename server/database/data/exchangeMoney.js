@@ -1,7 +1,7 @@
-const transactions = require('../models/exchangeMoney');
+const exchangeMoney = require('../models/exchangeMoney');
 
 module.exports = async () => {
-  const newTransactions = [
+  const newConversion = [
     {
       amount: 200,
       from: 'USD',
@@ -16,6 +16,62 @@ module.exports = async () => {
       agency_price_buy: 696,
       agency_saved_money: 1,
     },
+    {
+      amount: 1250,
+      from: 'ILS',
+      to: 'USD',
+      app_price_sell: 357,
+      app_price_buy: 356,
+      app_saved_money: 4,
+      spread: 1,
+      bank_price_sell: 352,
+      bank_price_buy: 651,
+      agency_price_sell: 355,
+      agency_price_buy: 354,
+      agency_saved_money: 3,
+    },
+    {
+      amount: 200,
+      from: 'USD',
+      to: 'ILS',
+      app_price_sell: 700,
+      app_price_buy: 697,
+      app_saved_money: 2,
+      spread: 3,
+      bank_price_sell: 691,
+      bank_price_buy: 690,
+      agency_price_sell: 698,
+      agency_price_buy: 696,
+      agency_saved_money: 1,
+    },
+    {
+      amount: 1000,
+      from: 'USD',
+      to: 'ILS',
+      app_price_sell: 3549.5,
+      app_price_buy: 3520.45,
+      app_saved_money: 29,
+      spread: 30,
+      bank_price_sell: 3520,
+      bank_price_buy: 3519,
+      agency_price_sell: 3540,
+      agency_price_buy: 3530,
+      agency_saved_money: 20,
+    },
+    {
+      amount: 300,
+      from: 'USD',
+      to: 'ILS',
+      app_price_sell: 1035,
+      app_price_buy: 1027,
+      app_saved_money: 15,
+      spread: 8,
+      bank_price_sell: 1025,
+      bank_price_buy: 1020,
+      agency_price_sell: 1030,
+      agency_price_buy: 1025,
+      agency_saved_money: 5,
+    },
   ];
-  await transactions.create(newTransactions);
+  await exchangeMoney.create(newConversion);
 };

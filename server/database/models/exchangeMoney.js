@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const exchangeMoney = new Schema({
-  client_id: {
-    type: Schema.Types.ObjectId,
-    ref: 'client',
-  },
   amount: {
     type: Number,
     required: true,
