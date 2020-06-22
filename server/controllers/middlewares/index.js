@@ -21,4 +21,4 @@ const isClient = (req, res, next) => {
     next(err);
   }
 };
-module.exports = isClient;
+module.exports = { isClient };
