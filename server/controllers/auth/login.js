@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const { compare } = require('bcrypt');
 const { sign } = require('jsonwebtoken');
 
 const loginValidation = require('../validation/loginValidation');
@@ -26,7 +26,7 @@ const login = async (req, res) => {
       $or: [{ email }, { mobileNumber }],
     });
     if (clients)
-      await bcrypt.compare(password, clients.password, (err, result) => {
+      await compare(password, clients.password, (err, result) => {
         if (!result) {
           res.status(400).json(errResponse);
         } else {
@@ -38,7 +38,9 @@ const login = async (req, res) => {
             data: {
               email,
               mobileNumber,
-              fullName: `${clients.fullName}`,
+              fullName: clients.fullName,
+              avatar: clients.avatar,
+              balance: clients.mainBalance,
             },
           });
         }
@@ -46,7 +48,7 @@ const login = async (req, res) => {
 
     const admins = await Admin.findOne({ email });
     if (admins)
-      await bcrypt.compare(password, admins.password, (err, result) => {
+      await compare(password, admins.password, (err, result) => {
         if (!result) {
           res.status(400).json(errResponse);
         } else {
@@ -62,7 +64,7 @@ const login = async (req, res) => {
 
     if (admins === null && clients === null) res.json(errResponse);
   } catch (e) {
-    res.json({
+    res.status(500).json({
       status: 'failed',
       message: 'internal server error',
     });
