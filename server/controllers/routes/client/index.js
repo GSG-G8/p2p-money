@@ -1,3 +1,3 @@
-const getClintData = require('./getClintData');
+const getClientData = require('./getClientData');
 
-module.exports = { getClintData };
+module.exports = { getClientData };

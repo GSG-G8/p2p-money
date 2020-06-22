@@ -2,8 +2,8 @@ const express = require('express');
 
 const clientRouter = express.Router();
 
-const { getClintData } = require('../controllers/routes/client');
+const { getClientData } = require('../controllers/routes/client');
 
-clientRouter.get('/', getClintData);
+clientRouter.get('/', getClientData);
 
 module.exports = clientRouter;
