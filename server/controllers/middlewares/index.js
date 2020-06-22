@@ -21,4 +21,24 @@ const isClient = (req, res, next) => {
     next(err);
   }
 };
-module.exports = { isClient };
+
+const isAdmin = (req, res, next) => {
+  try {
+    verify(req.cookies.admin, process.env.SECRET_KEY, (err, token) => {
+      if (err) {
+        res.status(401).send({
+          statusCode: 401,
+          auth: false,
+          message: 'you are Unauthorized',
+        });
+      } else {
+        const { adminId } = token;
+        res.adminId = adminId;
+        next();
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+module.exports = { isClient, isAdmin };
