@@ -1,4 +1,10 @@
-const { client, admin, exchangeMoney, transactions } = require('../models');
+const {
+  client,
+  admin,
+  exchangeMoney,
+  transactions,
+  prices,
+} = require('../models');
 
 const createEmptyCollection = async () => {
   try {
@@ -6,6 +12,7 @@ const createEmptyCollection = async () => {
     await admin.createCollection();
     await exchangeMoney.createCollection();
     await transactions.createCollection();
+    await prices.createCollection();
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log('creating collection Error', err);

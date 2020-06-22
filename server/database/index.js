@@ -2,7 +2,13 @@ const mongoose = require('mongoose');
 
 const dbConnection = require('./dbConnection');
 const { createCollection, resetDatabase } = require('./utils');
-const { admin, client, exchangeMoney, transactions } = require('./data');
+const {
+  admin,
+  client,
+  exchangeMoney,
+  transactions,
+  prices,
+} = require('./data');
 
 const buildDatabase = () =>
   new Promise((resolve, reject) => {
@@ -14,6 +20,7 @@ const buildDatabase = () =>
         await client();
         await exchangeMoney();
         await transactions();
+        await prices();
       })
       .then(resolve)
       .catch(reject);

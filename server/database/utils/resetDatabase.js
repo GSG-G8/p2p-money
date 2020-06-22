@@ -1,4 +1,10 @@
-const { client, admin, exchangeMoney, transactions } = require('../models');
+const {
+  client,
+  admin,
+  exchangeMoney,
+  transactions,
+  prices,
+} = require('../models');
 
 const resetDatabase = async () => {
   try {
@@ -6,6 +12,7 @@ const resetDatabase = async () => {
     await admin.deleteMany();
     await exchangeMoney.deleteMany();
     await transactions.deleteMany();
+    await prices.deleteMany();
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log('database resting Error', err);
