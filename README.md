@@ -141,7 +141,7 @@ the admin can add agent price manually through a pop up button that show him cur
 
 ## Database Schema :file_cabinet:
 
-![p2p-last](https://media.discordapp.net/attachments/722149587464355920/723990382169423892/schema.PNG?width=700&height=458)
+![p2p-last](https://media.discordapp.net/attachments/722149587464355920/724614057835102249/Screenshot_from_2020-06-22_16-17-05.png)
 ## Technologies :computer:
 
 ### Frontend
