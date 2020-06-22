@@ -5,6 +5,8 @@ let dbURI = '';
 
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.PRODUCT_URI;
+} else if (process.env.NODE_ENV === 'test') {
+  dbURI = process.env.TEST_URI;
 } else {
   dbURI = process.env.DEV_URI;
 }
