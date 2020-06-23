@@ -1,3 +1,4 @@
 const getClientData = require('./getClientData');
+const getTransactionsById = require('./getTransactionById');
 
-module.exports = { getClientData };
+module.exports = { getClientData, getTransactionsById };
