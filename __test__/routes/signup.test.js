@@ -18,7 +18,7 @@ describe('post request to /signup', () => {
       passwordConfirmation: '*hassan123*',
       mainBankName: 'بنك القدس',
       mainBankAccount: 111798451,
-      email: 'hassan@hotmail.com',
+      email: 'ali@hotmail.com',
     };
     const response = await request.post('/api/v1/signup').send(reqBody);
     expect(response.status).toBe(200);

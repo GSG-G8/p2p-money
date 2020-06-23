@@ -30,10 +30,9 @@ buildDatabase()
   .then(() => {
     // eslint-disable-next-line no-console
     console.log('Database was built successfully !');
-    mongoose.disconnect();
   })
   .catch((err) => {
     // eslint-disable-next-line no-console
     console.log(err);
-    mongoose.disconnect();
+    dbConnection.close();
   });
