@@ -1,5 +1,4 @@
-const { compare } = require('bcrypt');
-const { hash } = require('bcrypt');
+const { compare, hash } = require('bcrypt');
 const client = require('../../../database/models/client');
 const updateClientValidation = require('../../../utils/validations/updateClientValidation');
 

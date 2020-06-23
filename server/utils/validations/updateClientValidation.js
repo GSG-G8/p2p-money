@@ -2,11 +2,10 @@ const yup = require('yup');
 
 const schema = yup.object().shape({
   fullName: yup.string().trim().required(),
-  email: yup.string().email('Please use a valid email address.').required(),
+  email: yup.string().email('Please use a valid email address.'),
   mobileNumber: yup
     .string()
-    .matches(/^[0-9]{10,}$/, 'Mobile number must Contain 10 numbers')
-    .required(),
+    .matches(/^[0-9]{10,}$/, 'Mobile number must Contain 10 numbers'),
   oldPassword: yup
     .string()
     .matches(
