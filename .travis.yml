@@ -4,8 +4,6 @@ node_js:
 services:
   - mongodb
 
-  before_script:
-  - mongo mongodb+srv://p2p-development:exhangep2p@cluster0-bep3r.mongodb.net/test --eval 
   env:
   global:
     - MONGODB_VERSION=2.6.10
