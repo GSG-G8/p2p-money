@@ -1,11 +1,41 @@
 language: node_js
+
+
 node_js:
-  - lts/*
-services:
-  - mongodb
+  - "11.10.1"
+
+cache:
+  directories:
+    - node_modules
+
+env:
+  - MONGODB=4.0.0
+
+matrix:
+  fast_finish: true
+
+install:
+  - wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-${MONGODB}.tgz
+  - tar xzf mongodb-linux-x86_64-${MONGODB}.tgz
+  - ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod --version
+  - mongo --version
+  - npm install
+  - npm run client:init
+
 before_script:
-  - mkdir -p data/db
-  - mongod --dbpath=data/db &
-  - sleep 5
-  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
-  
+  - mkdir ${PWD}/mongodb-linux-x86_64-${MONGODB}/data
+  - ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod --dbpath ${PWD}/mongodb-linux-x86_64-${MONGODB}/data --logpath ${PWD}/mongodb-linux-x86_64-${MONGODB}/mongodb.log --fork
+  - npm run build
+  - mongo --version
+
+script:
+  - npm test
+
+on:
+  branch: master
+
+after_success:
+  - npm run coverage
+
+after_script:
+  - pkill mongod
