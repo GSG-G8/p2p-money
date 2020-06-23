@@ -19,7 +19,8 @@ install:
   - ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod --version
   - mongo --version
   - npm install
-  - npm run client 
+  - npm run client:init
+
 
 before_script:
   - mkdir ${PWD}/mongodb-linux-x86_64-${MONGODB}/data
