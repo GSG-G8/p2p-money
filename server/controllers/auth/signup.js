@@ -14,6 +14,8 @@ const signUp = async (req, res, next) => {
     mainBankName,
     mainBankAccount,
   } = req.body;
+  const backgroundColor = Math.floor(Math.random() * 16777215).toString(16);
+  const avatar = `https://ui-avatars.com/api/?name=${fullName}&rounded=true&background=${backgroundColor}&color=F3F3F3`;
 
   const addClient = async (value) => {
     const checkClient = await client.find(value);
@@ -41,6 +43,7 @@ const signUp = async (req, res, next) => {
           },
         ],
         mainBalance: [{ type: 'USD', total: 1000 }],
+        avatar,
       });
       const userToken = { clientId: _id };
       const cookie = sign(userToken, process.env.SECRET_KEY);

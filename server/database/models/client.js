@@ -61,7 +61,7 @@ const clientSchema = new Schema({
   defaultCurrency: {
     type: String,
     trim: true,
-    default: 'USD',
+    default: 'ILS',
   },
   feedback: {
     type: String,
