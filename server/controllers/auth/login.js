@@ -1,7 +1,7 @@
 const { compare } = require('bcrypt');
 const { sign } = require('jsonwebtoken');
 
-const loginValidation = require('../validation/loginValidation');
+const loginValidation = require('../../utils/validations/loginValidation');
 const Admin = require('../../database/models/admin');
 const Client = require('../../database/models/client');
 
@@ -9,18 +9,26 @@ require('env2')('config.env');
 
 const errResponse = {
   status: 'failed',
-  message: 'Data is not exists',
+  message: 'Data is Error',
 };
 
 const login = async (req, res) => {
   const { email, password, mobileNumber } = req.body;
+
+  let preferredContact = '';
+  if (mobileNumber) {
+    preferredContact = 'mobile';
+  } else {
+    preferredContact = 'email';
+  }
+
   try {
-    const valid = await loginValidation(email, mobileNumber, password);
-    if (!valid)
-      res.status(400).json({
-        status: 'failed',
-        message: 'Data is not Valid',
-      });
+    await loginValidation({
+      email,
+      mobileNumber,
+      password,
+      preferredContact,
+    });
 
     const clients = await Client.findOne({
       $or: [{ email }, { mobileNumber }],
@@ -30,8 +38,8 @@ const login = async (req, res) => {
         if (!result) {
           res.status(400).json(errResponse);
         } else {
-          const userToken = { userId: clients.id };
-          const cookie = sign(userToken, process.env.SECRET_KEY);
+          const clientToken = { clientId: clients.id };
+          const cookie = sign(clientToken, process.env.SECRET_KEY);
           res.cookie('client', cookie).json({
             status: 'successfully',
             role: 'client',
@@ -52,8 +60,8 @@ const login = async (req, res) => {
         if (!result) {
           res.status(400).json(errResponse);
         } else {
-          const userToken = { userId: admins.id };
-          const cookie = sign(userToken, process.env.SECRET_KEY);
+          const adminToken = { userId: admins.id };
+          const cookie = sign(adminToken, process.env.SECRET_KEY);
           res.cookie('client', cookie).json({
             status: 'successfully',
             role: 'admin',
@@ -64,10 +72,7 @@ const login = async (req, res) => {
 
     if (admins === null && clients === null) res.json(errResponse);
   } catch (e) {
-    res.status(500).json({
-      status: 'failed',
-      message: 'internal server error',
-    });
+    res.send(e);
   }
 };
 
