@@ -1,3 +1,4 @@
 const getClientData = require('./getClientData');
+const updateClientData = require('./updateClient');
 
-module.exports = { getClientData };
+module.exports = { getClientData, updateClientData };
