@@ -5,7 +5,7 @@ const updateClientValidation = require('../../../utils/validations/updateClientV
 
 const updateClientById = async (req, res) => {
   const { id } = res;
-  const { oldPassword, newPassword, ...rest } = req.body;
+  const { oldPassword, newPassword, passwordConfirmation, ...rest } = req.body;
 
   if (await updateClientValidation(req.body)) {
     // handle change password

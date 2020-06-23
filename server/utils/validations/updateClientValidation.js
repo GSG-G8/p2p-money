@@ -11,7 +11,7 @@ const schema = yup.object().shape({
     .string()
     .matches(
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
+      'your old password Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
     ),
   newPassword: yup
     .string()
@@ -19,6 +19,7 @@ const schema = yup.object().shape({
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
       'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
     ),
+  passwordConfirmation: yup.mixed().oneOf([yup.ref('newPassword')]),
   mainBankName: yup.string(),
   mainBankAccount: yup.number(),
   avatar: yup.string(),
