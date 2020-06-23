@@ -1,3 +1,4 @@
 const getClientData = require('./getClientData');
+const addBankAccountValidation = require('./addNewBank');
 
-module.exports = { getClientData };
+module.exports = { getClientData, addBankAccountValidation };
