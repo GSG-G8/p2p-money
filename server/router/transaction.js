@@ -4,6 +4,6 @@ const transactionRouter = express.Router();
 
 const { getTransactionsById } = require('../controllers/routes/client');
 
-transactionRouter.get('/:id', getTransactionsById);
+transactionRouter.get('/', getTransactionsById);
 
 module.exports = transactionRouter;

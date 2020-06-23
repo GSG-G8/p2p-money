@@ -2,6 +2,7 @@ const express = require('express');
 const { join } = require('path');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
+
 const database = require('./database/dbConnection');
 const router = require('./router');
 
