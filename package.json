@@ -6,8 +6,9 @@
   "scripts": {
     "server": "cd server && npm run dev",
     "client": "cd client && npm start",
+    "client:init": "cd client && npm run build",
     "start": "NODE_ENV=production node server/index.js",
-    "test": "NODE_ENV=test jest --no-cache --runInBand --coverage",
+    "test": "NODE_ENV=test jest --runInBand --detectOpenHandles --coverage",
     "dev": "nodemon server/index.js",
     "kill": "fuser -k 5000/tcp",
     "kill-run": "npm run kill && npm run server",
