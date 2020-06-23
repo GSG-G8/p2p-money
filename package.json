@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server": "cd server && npm run dev",
-    "client": "cd client && npm start",
+    "client": "cd client && npm i && npm start",
     "start": "NODE_ENV=production node server/index.js",
     "test": "NODE_ENV=test jest --runInBand --detectOpenHandles --coverage",
     "dev": "nodemon server/index.js",
