@@ -3,7 +3,3 @@ node_js:
   - lts/*
 services:
   - mongodb
-
-  env:
-  global:
-    - MONGODB_VERSION=2.6.10
