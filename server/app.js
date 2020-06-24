@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 
 const database = require('./database/dbConnection');
 const router = require('./router');
+const autoUpdatePrices = require('./controllers/routes/prices/AutoUpdatePrices');
 
 const app = express();
 
@@ -18,6 +19,7 @@ const middleware = [
   express.urlencoded({ extended: false }),
 ];
 app.use(middleware);
+// setInterval(() => console.log(i++), 1000);
 
 database
   // eslint-disable-next-line no-console
@@ -26,6 +28,8 @@ database
 
 app.use(express.static(join(__dirname, '..', 'client', 'build')));
 app.use('/api/v1', router);
+
+autoUpdatePrices();
 
 app.get('*', (req, res) => {
   res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
