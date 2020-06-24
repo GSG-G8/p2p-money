@@ -39,39 +39,3 @@ describe('test get transaction router', () => {
     done();
   });
 });
-
-// const superTest = require('supertest');
-
-// const app = require('../../server/app');
-
-// const request = superTest(app);
-
-// const dbConnection = require('../../server/database/dbConnection');
-
-// const cookie =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6IjVlZjMwODBjNzQ3MDZhZmM1NDBjOGU5YSIsImlhdCI6MTU5Mjk4NTYxMn0.7YMAKvlyVSFuW3EpqO5DjYIWZp1Zpaa6OFvtH7iNW88';
-
-// describe('get all transaction for the given client id', () => {
-//   afterAll(() => dbConnection.close());
-
-//   it('return status 200 for successful ', async (done) => {
-//     const response = await request
-//       .get('/api/v1/transaction')
-//       .set('Cookie', [`client=${cookie}`]);
-//     console.log(response);
-//     expect(response.status).toBe(200);
-//     // expect(response.body).({
-//     //   message: 'Logout Successfully',
-//     // });
-//     done();
-//   });
-//   it('return status 400 if the client is not exists', async (done) => {
-//     const response = await request.get('/api/v1/transaction');
-
-//     expect(response.status).toBe(400);
-//     // expect(response.body).toStrictEqual({
-//     //   message: 'Logout Successfully',
-//     // });
-//     done();
-//   });
-// });
