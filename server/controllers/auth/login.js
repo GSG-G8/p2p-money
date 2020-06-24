@@ -47,7 +47,7 @@ const login = async (req, res) => {
 
           const adminToken = { userId: admins.id };
           const cookie = sign(adminToken, process.env.SECRET_KEY);
-          res.cookie('client', cookie).json({
+          res.cookie('admin', cookie).json({
             status: 'successfully',
             role: 'admin',
             data: { email },
