@@ -17,18 +17,15 @@ const addClientBank = async (req, res) => {
       },
       { useFindAndModify: false },
       (err) => {
-        if (err)
-          res.status(400).json({ status: 'failed', message: 'User not exist' });
+        if (err) res.status(400).json({ message: 'User not exist' });
         else
           res.status(200).json({
-            status: 'success',
             message: 'User Bank added successfully',
           });
       }
     );
   } else
     res.status(400).json({
-      status: 'failed',
       message: 'Please check your data and your Account Number already exist',
     });
 };
