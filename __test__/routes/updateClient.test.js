@@ -1,5 +1,4 @@
 const superTest = require('supertest');
-const { sign } = require('jsonwebtoken');
 
 const app = require('../../server/app');
 
@@ -24,7 +23,7 @@ describe('post request to /signup', () => {
       password: '*aA123456*',
       passwordConfirmation: '*aA123456*',
       mainBankName: 'بنك فلسطين',
-      mainBankAccount: 897,
+      mainBankAccount: 63214,
       email: 'ahmad@gmail.com',
     };
     request
@@ -46,7 +45,7 @@ describe('post request to /signup', () => {
       password: '*aA123456*',
       passwordConfirmation: '*aA123456*',
       mainBankName: 'بنك فلسطين',
-      mainBankAccount: 555555,
+      mainBankAccount: 21547,
       email: 'ahmad.salah.test@gmail.com',
     };
     request
@@ -73,7 +72,7 @@ describe('post request to /signup', () => {
       password: '*aA123456*',
       passwordConfirmation: '*aA123456*',
       mainBankName: 'بنك فلسطين',
-      mainBankAccount: 963,
+      mainBankAccount: 99863,
       email: 'ahmad.salah.test2@gmail.com',
     };
     request
