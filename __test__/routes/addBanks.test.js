@@ -11,86 +11,78 @@ describe('post request to /signup', () => {
   beforeAll(() => buildDB);
   afterAll(() => dbConnection.close());
 
-  it('return status 401 for failed update without auth', async (done) => {
-    const response = await request.patch('/api/v1/client');
+  it('return status 401 for add bank without auth', async (done) => {
+    const response = await request.post('/api/v1/client/bank');
     expect(response.status).toBe(401);
     done();
   });
 
-  // it('return status 200 for successful update user data', async (done) => {
-  //   const reqBody = {
-  //     fullName: 'احمد صلاح',
-  //     password: '*aA123456*',
-  //     passwordConfirmation: '*aA123456*',
-  //     mainBankName: 'بنك فلسطين',
-  //     mainBankAccount: 897,
-  //     email: 'ahmad@gmail.com',
-  //   };
-  //   request
-  //     .post('/api/v1/signup')
-  //     .send(reqBody)
-  //     .then(async (res) => {
-  //       const response = await request
-  //         .patch('/api/v1/client')
-  //         .send({ fullName: 'احمد' })
-  //         .set('cookie', res.header['set-cookie']);
-  //       expect(response.status).toBe(200);
-  //     });
-  //   done();
-  // });
+  it('return status 400 for same bank account want to add again', async (done) => {
+    const reqBody = {
+      fullName: 'احمد صلاح',
+      password: '*aA123456*',
+      passwordConfirmation: '*aA123456*',
+      mainBankName: 'بنك فلسطين',
+      mainBankAccount: 63214,
+      email: 'testbank1@gmail.com',
+    };
+    request
+      .post('/api/v1/signup')
+      .send(reqBody)
+      .then(async (res) => {
+        const response = await request
+          .post('/api/v1/client/bank')
+          .send({ accountNumber: 63214 })
+          .set('cookie', res.header['set-cookie']);
+        expect(response.status).toBe(400);
+      });
+    done();
+  });
 
-  // it('return status 400 and message when change password wrong validation', async (done) => {
-  //   const reqBody = {
-  //     fullName: 'احمد يوسف صلاح',
-  //     password: '*aA123456*',
-  //     passwordConfirmation: '*aA123456*',
-  //     mainBankName: 'بنك فلسطين',
-  //     mainBankAccount: 555555,
-  //     email: 'ahmad.salah.test@gmail.com',
-  //   };
-  //   request
-  //     .post('/api/v1/signup')
-  //     .send(reqBody)
-  //     .then(async (res) => {
-  //       const response = await request
-  //         .patch('/api/v1/client')
-  //         .set('cookie', res.header['set-cookie'])
-  //         .send({
-  //           oldPassword: '123',
-  //           newPassword: '332',
-  //           passwordConfirmation: '556',
-  //         });
-  //       expect(response.status).toBe(400);
-  //       expect(response.body.message).toBe('Check your data');
-  //     });
-  //   done();
-  // });
+  it('return status 400 for same bank account want to add again', async (done) => {
+    const reqBody = {
+      fullName: 'احمد صلاح',
+      password: '*aA123456*',
+      passwordConfirmation: '*aA123456*',
+      mainBankName: 'بنك فلسطين',
+      mainBankAccount: 95874506,
+      email: 'testank2@gmail.com',
+    };
+    request
+      .post('/api/v1/signup')
+      .send(reqBody)
+      .then(async (res) => {
+        const response = await request
+          .post('/api/v1/client/bank')
+          .send({ accountNumber: 963 })
+          .set('cookie', res.header['set-cookie']);
+        expect(response.body.message).toBe(
+          'Please check your data and your Account Number already exist'
+        );
+      });
+    done();
+  });
 
-  // it('return status 200 and message when change password successfully validation', async (done) => {
-  //   const reqBody = {
-  //     fullName: 'test2',
-  //     password: '*aA123456*',
-  //     passwordConfirmation: '*aA123456*',
-  //     mainBankName: 'بنك فلسطين',
-  //     mainBankAccount: 963,
-  //     email: 'ahmad.salah.test2@gmail.com',
-  //   };
-  //   request
-  //     .post('/api/v1/signup')
-  //     .send(reqBody)
-  //     .then(async (res) => {
-  //       const response = await request
-  //         .patch('/api/v1/client')
-  //         .set('cookie', res.header['set-cookie'])
-  //         .send({
-  //           oldPassword: '*aA123456*',
-  //           newPassword: '*aA123457*',
-  //           passwordConfirmation: '*aA123457*',
-  //           email: 'ahmad.salah.test2pass@gmail.com',
-  //         });
-  //       expect(response.status).toBe(200);
-  //       expect(response.body.message).toBe('Client updated successfully');
-  //     });
-  //   done();
-  // });
+  it('return status 200 for add new bank account', async (done) => {
+    const reqBody = {
+      fullName: 'احمد صلاح',
+      password: '*aA123456*',
+      passwordConfirmation: '*aA123456*',
+      mainBankName: 'بنك فلسطين',
+      mainBankAccount: 632146985,
+      email: 'testbank2@gmail.com',
+    };
+    request
+      .post('/api/v1/signup')
+      .send(reqBody)
+      .then(async (res) => {
+        const response = await request
+          .post('/api/v1/client/bank')
+          .send({ accountNumber: 212125 })
+          .set('cookie', res.header['set-cookie']);
+        expect(response.status).toBe(200);
+        expect(response.body.message).toBe('User Bank added successfully');
+      });
+    done();
+  });
 });
