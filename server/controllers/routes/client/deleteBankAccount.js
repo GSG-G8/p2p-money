@@ -19,13 +19,9 @@ const deleteBankAccount = async (req, res) => {
       { useFindAndModify: false }
     );
     res.status(200).json({
-      status: 'Success',
       message: 'Account was deleted successfully',
     });
-  } else
-    res
-      .status(400)
-      .json({ status: 'failed', message: "Account doesn't exist" });
+  } else res.status(400).json({ message: "Account doesn't exist" });
 };
 
 module.exports = deleteBankAccount;
