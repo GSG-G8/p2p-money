@@ -32,7 +32,7 @@ const signupTests = () => {
         passwordConfirmation: '*hassan123*',
         mainBankName: 'بنك القدس',
         mainBankAccount: 7895648237,
-        email: 'hassan1@hotmail.com',
+        email: 'hassan@gmail.com',
       };
 
       const response = await request.post('/api/v1/signup').send(reqBody);
