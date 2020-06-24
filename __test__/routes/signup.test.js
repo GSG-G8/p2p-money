@@ -64,7 +64,7 @@ describe('post request to /signup', () => {
       password: '*hassan123*',
       passwordConfirmation: '*hassan123*',
       mainBankName: 'بنك القدس',
-      mainBankAccount: 7895864822387,
+      mainBankAccount: 9876542,
       email: 'ahmed@gmail.com',
     };
 
