@@ -2,11 +2,11 @@ const client = require('../../../database/models/client');
 const deleteBankAccountValidation = require('../../../utils/validations/deleteBankValidation');
 
 const deleteBankAccount = async (req, res) => {
-  const { id } = res;
+  const { clientId } = res;
   const { accountNumber } = req.body;
   // check if account exist
   const accountExist = await client.find({
-    _id: id,
+    _id: clientId,
     'bankAccounts.accountNumber': accountNumber,
   });
   // check account validation
@@ -14,7 +14,7 @@ const deleteBankAccount = async (req, res) => {
 
   if (accountExist.length > 0 && accountValidation) {
     await client.findByIdAndUpdate(
-      id,
+      clientId,
       { $pull: { bankAccounts: { accountNumber } } },
       { useFindAndModify: false }
     );
