@@ -5,11 +5,11 @@ const app = require('../../server/app');
 
 const request = superTest(app);
 
-const db = require('../../server/database/dbConnection');
+const dbConnection = require('../../server/database/dbConnection');
 
 describe('Login to the website', () => {
-  
-  afterAll(() => db.close());
+  beforeAll(() => {});
+  afterAll(() => dbConnection.close());
 
   it('login client by mobile number', async (done) => {
     const response = await request.post('/api/v1/login').send({
@@ -52,7 +52,7 @@ describe('Login to the website', () => {
   });
 
 
-  it('login data is Error', async (done) => {
+  it('Not exists user', async (done) => {
     const response = await request.post('/api/v1/login').send({
       email: 'eyad@mail.com',
       password: 'geek###2020',
@@ -60,7 +60,7 @@ describe('Login to the website', () => {
 
     expect(response.body).toStrictEqual({
       "status": "failed",
-      "message": "Data is Error"
+      "message": "User is not exists"
       });
     done();
   });

@@ -12,7 +12,10 @@ const schema = yup.object().shape({
   }),
   mobileNumber: yup.string().when('preferredContact', {
     is: 'mobile',
-    then: yup.string().required('Mobile number is required.'),
+    then: yup
+      .string()
+      .matches(/^[0-9]{10}$/, 'Mobile number must Contain 10 numbers')
+      .required('Mobile number is required.'),
   }),
   password: yup
     .string()

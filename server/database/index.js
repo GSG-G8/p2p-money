@@ -34,5 +34,5 @@ buildDatabase()
   .catch((err) => {
     // eslint-disable-next-line no-console
     console.log(err);
-    mongoose.disconnect();
+    dbConnection.close();
   });

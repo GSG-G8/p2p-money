@@ -15,6 +15,52 @@ const errResponse = {
 const login = async (req, res) => {
   const { email, password, mobileNumber } = req.body;
 
+  const loginFunc = async (value) => {
+    const clients = await Client.findOne(value);
+
+    if (clients) {
+      await compare(password, clients.password, (err, result) => {
+        if (err) {
+          res.status(400).send({ err: 'error compare' });
+        }
+        const clientToken = { clientId: clients.id };
+        const cookie = sign(clientToken, process.env.SECRET_KEY);
+        res.cookie('client', cookie).json({
+          status: 'successfully',
+          role: 'client',
+          data: {
+            email: value.email,
+            mobileNumber: value.mobileNumber,
+            fullName: clients.fullName,
+            avatar: clients.avatar,
+            balance: clients.mainBalance,
+          },
+        });
+      });
+    } else {
+      const admins = await Admin.findOne(value);
+      if (admins) {
+        await compare(password, admins.password, (err, result) => {
+          if (err) {
+            res.status(400).json(errResponse);
+          }
+
+          const adminToken = { userId: admins.id };
+          const cookie = sign(adminToken, process.env.SECRET_KEY);
+          res.cookie('client', cookie).json({
+            status: 'successfully',
+            role: 'admin',
+            data: { email },
+          });
+        });
+      } else {
+        res
+          .status(400)
+          .send({ status: 'failed', message: 'User is not exists' });
+      }
+    }
+  };
+
   let preferredContact = '';
   if (mobileNumber) {
     preferredContact = 'mobile';
@@ -24,55 +70,19 @@ const login = async (req, res) => {
 
   try {
     await loginValidation({
+      preferredContact,
       email,
       mobileNumber,
       password,
-      preferredContact,
     });
 
-    const clients = await Client.findOne({
-      $or: [{ email }, { mobileNumber }],
-    });
-    if (clients)
-      await compare(password, clients.password, (err, result) => {
-        if (!result) {
-          res.status(400).json(errResponse);
-        } else {
-          const clientToken = { clientId: clients.id };
-          const cookie = sign(clientToken, process.env.SECRET_KEY);
-          res.cookie('client', cookie).json({
-            status: 'successfully',
-            role: 'client',
-            data: {
-              email,
-              mobileNumber,
-              fullName: clients.fullName,
-              avatar: clients.avatar,
-              balance: clients.mainBalance,
-            },
-          });
-        }
-      });
-
-    const admins = await Admin.findOne({ email });
-    if (admins)
-      await compare(password, admins.password, (err, result) => {
-        if (!result) {
-          res.status(400).json(errResponse);
-        } else {
-          const adminToken = { userId: admins.id };
-          const cookie = sign(adminToken, process.env.SECRET_KEY);
-          res.cookie('client', cookie).json({
-            status: 'successfully',
-            role: 'admin',
-            data: { email },
-          });
-        }
-      });
-
-    if (admins === null && clients === null) res.json(errResponse);
-  } catch (e) {
-    res.send(e);
+    if (email) {
+      loginFunc({ email });
+    } else {
+      loginFunc({ mobileNumber });
+    }
+  } catch (error) {
+    res.status(400).send(error);
   }
 };
 

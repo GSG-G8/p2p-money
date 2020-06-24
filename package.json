@@ -6,6 +6,7 @@
   "scripts": {
     "server": "cd server && npm run dev",
     "client": "cd client && npm start",
+    "client:init": "cd client && npm run build",
     "start": "NODE_ENV=production node server/index.js",
     "test": "NODE_ENV=test jest --runInBand --detectOpenHandles --coverage",
     "dev": "nodemon server/index.js",
