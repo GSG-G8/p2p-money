@@ -2,10 +2,10 @@ const express = require('express');
 
 const Router = express.Router();
 
-const clientRouter = require('./client');
-const transactionRouter = require('./transaction');
 const { signup } = require('./auth-router');
 const { isClient } = require('../controllers/middlewares');
+const clientRouter = require('./client');
+const transactionRouter = require('./transaction');
 
 Router.post('/signup', signup);
 Router.use('/client', isClient, clientRouter);
