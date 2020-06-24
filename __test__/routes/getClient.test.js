@@ -1,5 +1,4 @@
 const superTest = require('supertest');
-const { sign } = require('jsonwebtoken');
 
 const app = require('../../server/app');
 
@@ -12,6 +11,12 @@ describe('post request to /signup', () => {
   beforeAll(() => buildDB);
   afterAll(() => dbConnection.close());
 
+  it('return status 401 for failed without auth get user data', async (done) => {
+    const response = await request.get('/api/v1/client');
+    expect(response.status).toBe(401);
+    done();
+  });
+
   it('return status 200 for successful get user data', async (done) => {
     const reqBody = {
       fullName: 'احمد يوسف صلاح',
@@ -21,17 +26,36 @@ describe('post request to /signup', () => {
       mainBankAccount: 59869876,
       email: 'ahmad@gmail.com',
     };
-    const signUp = await request
+    await request
       .post('/api/v1/signup')
       .send(reqBody)
-      .then((res) => {});
-    const cookie = signUp.header['set-cookie'];
-    const response = await request.get('/api/v1/client');
-    // const userToken = { clientId: _id };
-    // const cookie = sign(userToken, process.env.SECRET_KEY);
-    // const response = await request.cookie('client', cookie);
+      .then(async (res) => {
+        const response = await request
+          .get('/api/v1/client')
+          .set('cookie', res.header['set-cookie']);
+        expect(response.status).toBe(200);
+      });
+    done();
+  });
 
-    expect(response.status).toBe(400);
+  it('return response message successfully for get user data', async (done) => {
+    const reqBody = {
+      fullName: 'احمد',
+      password: '*aA123456*',
+      passwordConfirmation: '*aA123456*',
+      mainBankName: 'بنك القدس',
+      mainBankAccount: 1235,
+      email: 'ahmad.salah@gmail.com',
+    };
+    await request
+      .post('/api/v1/signup')
+      .send(reqBody)
+      .then(async (res) => {
+        const response = await request
+          .get('/api/v1/client')
+          .set('cookie', res.header['set-cookie']);
+        expect(response.body.message).toBe('Success');
+      });
     done();
   });
 });
