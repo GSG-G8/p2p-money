@@ -45,7 +45,7 @@ const login = async (req, res) => {
             res.status(400).json(errResponse);
           }
 
-          const adminToken = { userId: admins.id };
+          const adminToken = { adminId: admins.id };
           const cookie = sign(adminToken, process.env.SECRET_KEY);
           res.cookie('admin', cookie).json({
             status: 'successfully',
