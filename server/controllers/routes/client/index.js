@@ -1,5 +1,11 @@
 const getClientData = require('./getClientData');
-const addBankAccount = require('./addNewBank');
 const updateClientData = require('./updateClient');
+const addBankAccount = require('./addNewBank');
+const deleteBankAccount = require('./deleteBankAccount');
 
-module.exports = { getClientData, updateClientData, addBankAccount };
+module.exports = {
+  getClientData,
+  updateClientData,
+  addBankAccount,
+  deleteBankAccount,
+};
