@@ -40,7 +40,7 @@ describe('post request to /signup', () => {
     done();
   });
 
-  it('return status 200 for successful update user data', async (done) => {
+  it('return status 400 and message when change password wrong validation', async (done) => {
     const reqBody = {
       fullName: 'احمد يوسف صلاح',
       password: '*aA123456*',
@@ -67,25 +67,31 @@ describe('post request to /signup', () => {
     done();
   });
 
-  // it('return response message successfully for get user data', async (done) => {
-  //   const reqBody = {
-  //     fullName: 'احمد',
-  //     password: '*aA123456*',
-  //     passwordConfirmation: '*aA123456*',
-  //     mainBankName: 'بنك القدس',
-  //     mainBankAccount: 1235,
-  //     email: 'ahmad.salah@gmail.com',
-  //   };
-  //   await request
-  //     .post('/api/v1/signup')
-  //     .send(reqBody)
-  //     .then(async (res) => {
-  //       console.log(res);
-  //       const response = await request
-  //         .get('/api/v1/client')
-  //         .set('cookie', res.header['set-cookie']);
-  //       expect(response.body.message).toBe('Success');
-  //     });
-  //   done();
-  // });
+  it('return status 200 and message when change password successfully validation', async (done) => {
+    const reqBody = {
+      fullName: 'test2',
+      password: '*aA123456*',
+      passwordConfirmation: '*aA123456*',
+      mainBankName: 'بنك فلسطين',
+      mainBankAccount: 963,
+      email: 'ahmad.salah.test2@gmail.com',
+    };
+    request
+      .post('/api/v1/signup')
+      .send(reqBody)
+      .then(async (res) => {
+        const response = await request
+          .patch('/api/v1/client')
+          .set('cookie', res.header['set-cookie'])
+          .send({
+            oldPassword: '*aA123456*',
+            newPassword: '*aA123457*',
+            passwordConfirmation: '*aA123457*',
+            email: 'ahmad.salah.test2pass@gmail.com',
+          });
+        expect(response.status).toBe(200);
+        expect(response.body.message).toBe('Client updated successfully');
+      });
+    done();
+  });
 });
