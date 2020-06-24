@@ -17,17 +17,15 @@ describe('post request to /logout', () => {
       .post('/api/v1/logout')
       .set('Cookie', [`client=${cookie}`]);
     expect(response.body).toStrictEqual({
-      status: 'done',
       message: 'Logout Successfully',
     });
     done();
   });
-  it('return status 200 for successful logout client', async (done) => {
+  it('return status 200 for successful logout admin', async (done) => {
     const response = await request
       .post('/api/v1/logout')
       .set('Cookie', [`admin=${cookie}`]);
     expect(response.body).toStrictEqual({
-      status: 'done',
       message: 'Logout Successfully',
     });
     done();
@@ -35,7 +33,6 @@ describe('post request to /logout', () => {
   it('return bad request with status 400 if do not have cookies', async (done) => {
     const response = await request.post('/api/v1/logout');
     expect(response.body).toStrictEqual({
-      status: 'failed',
       message: `you're not sign-in`,
     });
     done();
