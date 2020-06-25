@@ -8,7 +8,7 @@ const dbConnection = require('../../server/database/dbConnection');
 const buildDB = require('../../server/database/index');
 
 describe('post request to add /bank', () => {
-  // beforeAll(() => buildDB);
+  beforeAll(() => buildDB);
   afterAll(() => dbConnection.close());
 
   it('return status 401 for add bank without auth', async (done) => {
@@ -18,17 +18,12 @@ describe('post request to add /bank', () => {
   });
 
   it('return status 400 for same bank account want to add again', async (done) => {
-    const reqBody = {
-      fullName: 'احمد صلاح',
-      password: '*aA123456*',
-      passwordConfirmation: '*aA123456*',
-      mainBankName: 'بنك فلسطين',
-      mainBankAccount: 63214,
-      email: 'testbank1@gmail.com',
-    };
     request
-      .post('/api/v1/signup')
-      .send(reqBody)
+      .post('/api/v1/login')
+      .send({
+        email: 'ali@gmail.com',
+        password: 'geeksCA@2020',
+      })
       .then(async (res) => {
         const response = await request
           .post('/api/v1/client/bank')
@@ -41,17 +36,12 @@ describe('post request to add /bank', () => {
   });
 
   it('return status 400 for same bank account want to add again', async (done) => {
-    const reqBody = {
-      fullName: 'احمد صلاح',
-      password: '*aA123456*',
-      passwordConfirmation: '*aA123456*',
-      mainBankName: 'بنك فلسطين',
-      mainBankAccount: 95874506,
-      email: 'testank2@gmail.com',
-    };
     request
-      .post('/api/v1/signup')
-      .send(reqBody)
+      .post('/api/v1/login')
+      .send({
+        email: 'ali@gmail.com',
+        password: 'geeksCA@2020',
+      })
       .then(async (res) => {
         const response = await request
           .post('/api/v1/client/bank')
@@ -65,17 +55,12 @@ describe('post request to add /bank', () => {
   });
 
   it('return status 200 for add new bank account', async (done) => {
-    const reqBody = {
-      fullName: 'احمد صلاح',
-      password: '*aA123456*',
-      passwordConfirmation: '*aA123456*',
-      mainBankName: 'بنك فلسطين',
-      mainBankAccount: 632146985,
-      email: 'testbank3@gmail.com',
-    };
     request
-      .post('/api/v1/signup')
-      .send(reqBody)
+      .post('/api/v1/login')
+      .send({
+        email: 'ali@gmail.com',
+        password: 'geeksCA@2020',
+      })
       .then(async (res) => {
         const response = await request
           .post('/api/v1/client/bank')
