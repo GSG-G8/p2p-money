@@ -17,22 +17,6 @@ describe('post request to /signup', () => {
     done();
   });
 
-  it('return status 200 for successful get user data', async (done) => {
-    request
-      .post('/api/v1/login')
-      .send({
-        email: 'ali@gmail.com',
-        password: 'geeksCA@2020',
-      })
-      .then(async (res) => {
-        const response = await request
-          .get('/api/v1/client')
-          .set('cookie', res.header['set-cookie']);
-        expect(response.status).toBe(200);
-      });
-    done();
-  });
-
   it('return response message successfully for get user data', async (done) => {
     const reqBody = {
       fullName: 'احمد',
@@ -40,7 +24,7 @@ describe('post request to /signup', () => {
       passwordConfirmation: '*aA123456*',
       mainBankName: 'بنك القدس',
       mainBankAccount: 1235,
-      email: 'ahmad.salah@gmail.com',
+      email: 'ahmad.salah.test@gmail.com',
     };
     await request
       .post('/api/v1/signup')
@@ -50,6 +34,22 @@ describe('post request to /signup', () => {
           .get('/api/v1/client')
           .set('cookie', res.header['set-cookie']);
         expect(response.body.message).toBe('Success');
+      });
+    done();
+  });
+
+  it('return status 200 for successful get user data', async (done) => {
+    request
+      .post('/api/v1/login')
+      .send({
+        email: 'ahmad.salah.test@gmail.com',
+        password: '*aA123456*',
+      })
+      .then(async (res) => {
+        const response = await request
+          .get('/api/v1/client')
+          .set('cookie', res.header['set-cookie']);
+        expect(response.status).toBe(200);
       });
     done();
   });
