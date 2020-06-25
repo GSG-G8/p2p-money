@@ -71,6 +71,7 @@ describe('post request to delete /bank', () => {
       mainBankAccount: 963258,
       email: 'testdeletebank3@gmail.com',
     };
+
     request
       .post('/api/v1/signup')
       .send(reqBody)
