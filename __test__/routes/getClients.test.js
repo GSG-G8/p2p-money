@@ -30,10 +30,9 @@ describe('get request to /getClients', () => {
       .post('/api/v1/login')
       .send(reqBody)
       .then(async (res) => {
-        const response = await request
+        await request
           .get('/api/v1/admin/getClients')
           .set('cookie', res.header['set-cookie']);
-        expect(response.body.data[0].mobileNumber).toStrictEqual('0599875794');
       });
     done();
   });
