@@ -1,7 +1,6 @@
 const yup = require('yup');
 
 const schema = yup.object().shape({
-  fullName: yup.string().trim().required(),
   preferredContact: yup.string(),
   email: yup.string().when('preferredContact', {
     is: 'email',
@@ -24,14 +23,6 @@ const schema = yup.object().shape({
       'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
     )
     .required(),
-  passwordConfirmation: yup.mixed().oneOf([yup.ref('password')]),
-  mainBankName: yup
-    .mixed()
-    .oneOf(['بنك فلسطين', 'بنك الإسكان', 'بنك القدس'])
-    .required(),
-  mainBankAccount: yup.number().required(),
 });
-
-const signUpValidation = (obj) => schema.validate(obj, { abortEarly: false });
-
-module.exports = signUpValidation;
+const loginValidation = (obj) => schema.validate(obj, { abortEarly: false });
+module.exports = loginValidation;

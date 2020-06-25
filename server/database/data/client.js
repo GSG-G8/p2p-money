@@ -5,7 +5,7 @@ module.exports = async () => {
     {
       fullName: 'حسان النجار',
       email: 'hassan@gmail.com',
-      password: '$2b$10$gB8D2bI6/X7xTwsSRs5JQe2BvwOLEdMag8dinhfIY4Eu0tIEWVTr2',
+      password: '$2b$10$x4DEJ5nMKgowH6F554uUJ.TKOVjIPQzRjXg2SOmDMeb6chafCJ3u6',
       avatar:
         'https://cdn.shopify.com/s/files/1/0074/5432/6862/files/mongoose-envoy-0063-tested_grande.jpg?v=1585927855',
       mobileNumber: '0599875794',
@@ -60,7 +60,7 @@ module.exports = async () => {
     {
       fullName: 'علي الدحدوح',
       email: 'ali@gmail.com',
-      password: '$2b$10$gB8D2bI6/X7xTwsSRs5JQe2BvwOLEdMag8dinhfIY4Eu0tIEWVTr2',
+      password: '$2b$10$x4DEJ5nMKgowH6F554uUJ.TKOVjIPQzRjXg2SOmDMeb6chafCJ3u6',
       avatar:
         'https://cdn.shopify.com/s/files/1/0074/5432/6862/files/mongoose-envoy-0063-tested_grande.jpg?v=1585927855',
       mobileNumber: '0599875471',
