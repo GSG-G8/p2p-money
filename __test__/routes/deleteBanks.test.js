@@ -8,7 +8,7 @@ const dbConnection = require('../../server/database/dbConnection');
 const buildDB = require('../../server/database/index');
 
 describe('post request to delete /bank', () => {
-  // beforeAll(() => buildDB);
+  beforeAll(() => buildDB);
   afterAll(() => dbConnection.close());
 
   it('return status 401 for delete bank without auth', async (done) => {
