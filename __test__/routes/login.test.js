@@ -6,10 +6,12 @@ const app = require('../../server/app');
 const request = superTest(app);
 
 const dbConnection = require('../../server/database/dbConnection');
+// const buildDatabase = require('../../server/database/index');
 
-const loginTests = () => {
   describe('Login to the website', () => {
-
+    // beforeAll(() => buildDatabase);
+    afterAll(() => dbConnection.close());
+  
     it('login client by mobile number', async (done) => {
       const response = await request.post('/api/v1/login').send({
         mobileNumber: '0599875471',
@@ -63,6 +65,3 @@ const loginTests = () => {
       done();
     });
   });
-};
-
-module.exports = loginTests;
