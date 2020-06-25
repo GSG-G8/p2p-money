@@ -8,7 +8,7 @@ const dbConnection = require('../../server/database/dbConnection');
 const buildDB = require('../../server/database/index');
 
 describe('post request to /signup', () => {
-  beforeAll(() => buildDB);
+  // beforeAll(() => buildDB);
   afterAll(() => dbConnection.close());
 
   it('return status 200 for successful singup', async (done) => {
@@ -35,7 +35,10 @@ describe('post request to /signup', () => {
     };
 
     const response = await request.post('/api/v1/signup').send(reqBody);
-    expect(response.status).toBe(400);
+    expect(response.body).toStrictEqual({
+      status: 400,
+      message: `Bank account [${reqBody.mainBankAccount}] is already exists, please sign-in`,
+    });
     done();
   });
   it('return bad request with status 400 if mobile Number is already taken', async (done) => {
