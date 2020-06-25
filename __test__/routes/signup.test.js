@@ -35,10 +35,7 @@ describe('post request to /signup', () => {
     };
 
     const response = await request.post('/api/v1/signup').send(reqBody);
-    expect(response.body).toStrictEqual({
-      status: 400,
-      message: `Bank account [${reqBody.mainBankAccount}] is already exists, please sign-in`,
-    });
+    expect(response.status).toBe(400);
     done();
   });
   it('return bad request with status 400 if mobile Number is already taken', async (done) => {
