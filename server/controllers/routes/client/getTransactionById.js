@@ -5,12 +5,12 @@ const client = require('../../../database/models/client');
 
 const getTransactionById = async (req, res) => {
   try {
+    const result = [];
+    const exchangeDetail = [];
     let promise = Promise.resolve();
     const transactionTableData = await transactions.find({
       client_id: res.clientId,
     });
-    const result = [];
-    const exchangeDetail = [];
     const clientData = await client.findById(res.clientId);
     if (clientData.length === 0) throw new Error();
     result.push({ clientData });
