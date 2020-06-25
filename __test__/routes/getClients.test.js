@@ -5,10 +5,8 @@ const app = require('../../server/app');
 const request = superTest(app);
 
 const dbConnection = require('../../server/database/dbConnection');
-// const buildDB = require('../../server/database/index');
 
 describe('get request to /getClients', () => {
-  // beforeAll(() => buildDB);
   afterAll(() => dbConnection.close());
 
   it('test if you are unauthorized', async (done) => {
