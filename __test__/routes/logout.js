@@ -4,15 +4,11 @@ const app = require('../../server/app');
 
 const request = superTest(app);
 
-const dbConnection = require('../../server/database/dbConnection');
-
 const cookie =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6IjVlZjMwODBjNzQ3MDZhZmM1NDBjOGU5YSIsImlhdCI6MTU5Mjk4NTYxMn0.7YMAKvlyVSFuW3EpqO5DjYIWZp1Zpaa6OFvtH7iNW88';
 
 const logoutTests = () => {
   describe('post request to /logout', () => {
-    afterAll(() => dbConnection.close());
-
     it('return status 200 for successful logout client', async (done) => {
       const response = await request
         .post('/api/v1/logout')

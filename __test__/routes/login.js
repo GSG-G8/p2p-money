@@ -9,8 +9,6 @@ const dbConnection = require('../../server/database/dbConnection');
 
 const loginTests = () => {
   describe('Login to the website', () => {
-    beforeAll(() => {});
-    afterAll(() => dbConnection.close());
 
     it('login client by mobile number', async (done) => {
       const response = await request.post('/api/v1/login').send({

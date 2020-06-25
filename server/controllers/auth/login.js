@@ -15,15 +15,22 @@ const errResponse = {
 const login = async (req, res) => {
   const { email, password, mobileNumber } = req.body;
 
-  const loginFunc = async (value) => {
-    const clients = await Client.findOne(value);
+  let preferredContact = '';
+  if (mobileNumber) {
+    preferredContact = 'mobile';
+  } else {
+    preferredContact = 'email';
+  }
 
-    if (clients) {
-      await compare(password, clients.password, (err, result) => {
+  const loginFunc = async (value) => {
+    const client = await Client.findOne(value);
+
+    if (client) {
+      await compare(password, client.password, (err, result) => {
         if (err) {
-          res.status(400).send({ err: 'error compare' });
+          res.status(400).send({ err: 'error in password' });
         }
-        const clientToken = { clientId: clients.id };
+        const clientToken = { clientId: client.id };
         const cookie = sign(clientToken, process.env.SECRET_KEY);
         res.cookie('client', cookie).json({
           status: 'successfully',
@@ -31,21 +38,22 @@ const login = async (req, res) => {
           data: {
             email: value.email,
             mobileNumber: value.mobileNumber,
-            fullName: clients.fullName,
-            avatar: clients.avatar,
-            balance: clients.mainBalance,
+            fullName: client.fullName,
+            avatar: client.avatar,
+            balance: client.mainBalance,
+            mainBankName: client.mainBankName,
           },
         });
       });
     } else {
-      const admins = await Admin.findOne(value);
-      if (admins) {
-        await compare(password, admins.password, (err, result) => {
+      const admin = await Admin.findOne(value);
+      if (admin) {
+        await compare(password, admin.password, (err, result) => {
           if (err) {
             res.status(400).json(errResponse);
           }
 
-          const adminToken = { adminId: admins.id };
+          const adminToken = { adminId: admin.id };
           const cookie = sign(adminToken, process.env.SECRET_KEY);
           res.cookie('admin', cookie).json({
             status: 'successfully',
@@ -60,13 +68,6 @@ const login = async (req, res) => {
       }
     }
   };
-
-  let preferredContact = '';
-  if (mobileNumber) {
-    preferredContact = 'mobile';
-  } else {
-    preferredContact = 'email';
-  }
 
   try {
     await loginValidation({

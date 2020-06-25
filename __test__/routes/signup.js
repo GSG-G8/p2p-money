@@ -4,14 +4,8 @@ const app = require('../../server/app');
 
 const request = superTest(app);
 
-const dbConnection = require('../../server/database/dbConnection');
-const buildDB = require('../../server/database/index');
-
 const signupTests = () => {
   describe('post request to /signup', () => {
-    beforeAll(() => buildDB);
-    afterAll(() => dbConnection.close());
-
     it('return status 200 for successful singup', async (done) => {
       const reqBody = {
         fullName: 'حسان النجار',
