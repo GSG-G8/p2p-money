@@ -12,7 +12,7 @@ const loginTests = () => {
 
     it('login client by mobile number', async (done) => {
       const response = await request.post('/api/v1/login').send({
-        mobileNumber: '0599875794',
+        mobileNumber: '0599875471',
         password: 'geeksCA@2020',
       });
 
@@ -22,7 +22,7 @@ const loginTests = () => {
 
     it('login client by email', async (done) => {
       const response = await request.post('/api/v1/login').send({
-        email: 'hassan@gmail.com',
+        email: 'ali@gmail.com',
         password: 'geeksCA@2020',
       });
 
