@@ -18,17 +18,12 @@ describe('post request to /signup', () => {
   });
 
   it('return status 200 for successful update user data', async (done) => {
-    const reqBody = {
-      fullName: 'احمد صلاح',
-      password: '*aA123456*',
-      passwordConfirmation: '*aA123456*',
-      mainBankName: 'بنك فلسطين',
-      mainBankAccount: 63214,
-      email: 'ahmad@gmail.com',
-    };
     request
-      .post('/api/v1/signup')
-      .send(reqBody)
+      .post('/api/v1/login')
+      .send({
+        email: 'ali@gmail.com',
+        password: 'geeksCA@2020',
+      })
       .then(async (res) => {
         const response = await request
           .patch('/api/v1/client')
@@ -67,17 +62,12 @@ describe('post request to /signup', () => {
   });
 
   it('return status 200 and message when change password successfully validation', async (done) => {
-    const reqBody = {
-      fullName: 'test2',
-      password: '*aA123456*',
-      passwordConfirmation: '*aA123456*',
-      mainBankName: 'بنك فلسطين',
-      mainBankAccount: 99863,
-      email: 'ahmad.salah.test2@gmail.com',
-    };
     request
-      .post('/api/v1/signup')
-      .send(reqBody)
+      .post('/api/v1/login')
+      .send({
+        email: 'ali@gmail.com',
+        password: 'geeksCA@2020',
+      })
       .then(async (res) => {
         const response = await request
           .patch('/api/v1/client')

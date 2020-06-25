@@ -18,17 +18,12 @@ describe('post request to /signup', () => {
   });
 
   it('return status 200 for successful get user data', async (done) => {
-    const reqBody = {
-      fullName: 'احمد يوسف صلاح',
-      password: '*aA123456*',
-      passwordConfirmation: '*aA123456*',
-      mainBankName: 'بنك فلسطين',
-      mainBankAccount: 59869876,
-      email: 'ahmad@gmail.com',
-    };
-    await request
-      .post('/api/v1/signup')
-      .send(reqBody)
+    request
+      .post('/api/v1/login')
+      .send({
+        email: 'ali@gmail.com',
+        password: 'geeksCA@2020',
+      })
       .then(async (res) => {
         const response = await request
           .get('/api/v1/client')
