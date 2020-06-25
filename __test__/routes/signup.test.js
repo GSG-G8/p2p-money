@@ -8,7 +8,7 @@ const dbConnection = require('../../server/database/dbConnection');
 const buildDB = require('../../server/database/index');
 
 describe('post request to /signup', () => {
-  // beforeAll(() => buildDB);
+  beforeAll(() => buildDB);
   afterAll(() => dbConnection.close());
 
   it('return status 200 for successful singup', async (done) => {
