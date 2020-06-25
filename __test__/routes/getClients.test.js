@@ -30,9 +30,10 @@ describe('get request to /getClients', () => {
       .post('/api/v1/login')
       .send(reqBody)
       .then(async (res) => {
-        await request
+        const response = await request
           .get('/api/v1/admin/getClients')
           .set('cookie', res.header['set-cookie']);
+        expect(response.body.status).toBe('Successfully');
       });
     done();
   });

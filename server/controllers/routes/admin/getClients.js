@@ -5,7 +5,6 @@ const getClients = async (req, res) => {
     const Clients = await Client.find({});
     if (!Clients.length) {
       res.status(200).json({
-        status: 'Successfully',
         message: 'No clients existing',
       });
     } else {
