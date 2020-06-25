@@ -10,10 +10,10 @@ const autoUpdatePrices = (req, res) => {
     const tellerPrice = [];
     const appPrice = [];
     try {
-      await FROM.map(async (from, index) => {
+      FROM.map(async (from) => {
         if (from !== 'ILS') {
           const { data } = await axios.get(
-            `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${from}&to_currency=${TO[0]}&apikey=GS9SWZG9ZH5K4VB7`
+            `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${from}&to_currency=${TO[0]}&apikey=${process.env.API_KEY}`
           );
           const buy = data['Realtime Currency Exchange Rate']['8. Bid Price'];
           const sell = data['Realtime Currency Exchange Rate']['9. Ask Price'];
@@ -27,7 +27,7 @@ const autoUpdatePrices = (req, res) => {
           TO.map(async (element) => {
             if (element !== 'ILS') {
               const { data } = await axios.get(
-                `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${from}&to_currency=${element}&apikey=5Y9QH6FOSXB7OQ5O`
+                `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${from}&to_currency=${element}&apikey=${process.env.API_KEY}`
               );
               const buy =
                 data['Realtime Currency Exchange Rate']['8. Bid Price'];
@@ -43,39 +43,38 @@ const autoUpdatePrices = (req, res) => {
           });
         }
       });
-      await setTimeout(async () => {
+      setTimeout(async () => {
         // add bank price
-        await screenPrice.map(async (element) => {
-          element.buy -= 0.02;
-          element.sell += 0.03;
-          bankPrice.push(element);
+        screenPrice.map(({ from, to, buy, sell }) => {
+          bankPrice.push({ from, to, buy: buy - 0.02, sell: sell + 0.03 });
         });
         // add teller price
-        await screenPrice.map(async (element) => {
-          element.buy -= 0.015;
-          element.sell += 0.025;
-          tellerPrice.push(element);
+        screenPrice.map(({ from, to, buy, sell }) => {
+          tellerPrice.push({ from, to, buy: buy - 0.015, sell: sell + 0.025 });
         });
         // add app price
-        await screenPrice.map(async (element) => {
-          element.buy -= 0.005;
-          element.sell += 0.015;
-          appPrice.push(element);
+        screenPrice.map(({ from, to, buy, sell }) => {
+          appPrice.push({ from, to, buy: buy - 0.005, sell: sell + 0.015 });
         });
-
-        const price = await pricesModel.updateOne(
-          {},
-          {
-            screenPrice,
-            tellerPrice,
-            bankPrice,
-            appPrice,
-          }
-        );
-      }, 6000);
+        if (screenPrice.length > 0) {
+          await pricesModel.updateOne(
+            {},
+            {
+              screenPrice,
+              tellerPrice,
+              bankPrice,
+              appPrice,
+            }
+          );
+        } else {
+          throw new Error();
+        }
+      }, 5000);
+      // eslint-disable-next-line no-console
       console.log('prices Updated');
     } catch (error) {
-      res.json({ error });
+      // eslint-disable-next-line no-console
+      console.log('Error prices Updated');
     }
   }, 175000);
 };
