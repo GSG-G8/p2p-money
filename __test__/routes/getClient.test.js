@@ -8,7 +8,7 @@ const dbConnection = require('../../server/database/dbConnection');
 const buildDB = require('../../server/database/index');
 
 describe('post request to /signup', () => {
-  beforeEach(() => buildDB);
+  beforeAll(() => buildDB);
   afterAll(() => dbConnection.close());
 
   it('return status 401 for failed without auth get user data', async (done) => {
