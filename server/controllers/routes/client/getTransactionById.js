@@ -22,7 +22,7 @@ const getTransactionById = async (req, res) => {
     result.push({ exchangeDetail });
     promise.then(() => res.status(200).json({ result }));
   } catch (error) {
-    res.status(400).json({ message: "client doesn't exists" });
+    res.status(400).json({ message: 'The client is not exist' });
   }
 };
 module.exports = getTransactionById;
