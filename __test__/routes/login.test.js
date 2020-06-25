@@ -6,10 +6,8 @@ const app = require('../../server/app');
 const request = superTest(app);
 
 const dbConnection = require('../../server/database/dbConnection');
-// const buildDB = require('../../server/database/index');
 
   describe('Login to the website', () => {
-    // beforeAll(() => buildDB);
     afterAll(() => dbConnection.close());
   
     it('login client by mobile number', async (done) => {
