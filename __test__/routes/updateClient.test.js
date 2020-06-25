@@ -5,10 +5,8 @@ const app = require('../../server/app');
 const request = superTest(app);
 
 const dbConnection = require('../../server/database/dbConnection');
-const buildDB = require('../../server/database/index');
 
 describe('post request to /signup', () => {
-  beforeAll(() => buildDB);
   afterAll(() => dbConnection.close());
 
   it('return status 401 for failed update without auth', async (done) => {
@@ -19,20 +17,16 @@ describe('post request to /signup', () => {
 
   it('return status 200 for successful update user data', async (done) => {
     const reqBody = {
-      fullName: 'احمد صلاح',
-      password: '*aA123456*',
-      passwordConfirmation: '*aA123456*',
-      mainBankName: 'بنك فلسطين',
-      mainBankAccount: 63214,
-      email: 'ahmad@gmail.com',
+      email: 'hassan@gmail.com',
+      password: 'geeksCA@2020',
     };
-    request
-      .post('/api/v1/signup')
+    await request
+      .post('/api/v1/login')
       .send(reqBody)
       .then(async (res) => {
         const response = await request
           .patch('/api/v1/client')
-          .send({ fullName: 'احمد' })
+          .send({ fullName: 'خسان' })
           .set('cookie', res.header['set-cookie']);
         expect(response.status).toBe(200);
       });
