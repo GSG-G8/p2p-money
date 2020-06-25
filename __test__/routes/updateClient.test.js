@@ -88,7 +88,6 @@ describe('post request to /signup', () => {
             passwordConfirmation: '*aA123457*',
             email: 'ahmad.salah.test2pass@gmail.com',
           });
-        expect(response.status).toBe(200);
         expect(response.body.message).toBe('Client updated successfully');
       });
     done();
