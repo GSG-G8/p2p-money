@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "An app to help people exchange money online. without a middleman like a bank or exchange agency",
   "main": "index.js",
+ 
+  "jest": {
+    "testEnvironment": "node"
+  },
   "scripts": {
     "server": "cd server && npm run dev",
     "client": "cd client && npm start",
