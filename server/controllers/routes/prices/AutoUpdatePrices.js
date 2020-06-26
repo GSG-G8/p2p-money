@@ -3,45 +3,25 @@ const pricesModel = require('../../../database/models/prices');
 
 const autoUpdatePrices = (req, res) => {
   setInterval(async () => {
-    const FROM = ['USD', 'JOD', 'EUR', 'ILS'];
-    const TO = ['ILS', 'USD', 'JOD'];
+    const FROM = ['USD', 'JOD', 'EUR', 'EGP'];
+    const TO = 'ILS';
     const screenPrice = [];
     const bankPrice = [];
     const tellerPrice = [];
     const appPrice = [];
     try {
       FROM.map(async (from) => {
-        if (from !== 'ILS') {
-          const { data } = await axios.get(
-            `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${from}&to_currency=${TO[0]}&apikey=${process.env.API_KEY}`
-          );
-          const buy = data['Realtime Currency Exchange Rate']['8. Bid Price'];
-          const sell = data['Realtime Currency Exchange Rate']['9. Ask Price'];
-          screenPrice.push({
-            from,
-            to: TO[0],
-            buy: Number(buy),
-            sell: Number(sell),
-          });
-        } else {
-          TO.map(async (element) => {
-            if (element !== 'ILS') {
-              const { data } = await axios.get(
-                `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${from}&to_currency=${element}&apikey=${process.env.API_KEY}`
-              );
-              const buy =
-                data['Realtime Currency Exchange Rate']['8. Bid Price'];
-              const sell =
-                data['Realtime Currency Exchange Rate']['9. Ask Price'];
-              screenPrice.push({
-                from,
-                to: element,
-                buy: Number(buy),
-                sell: Number(sell),
-              });
-            }
-          });
-        }
+        const { data } = await axios.get(
+          `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${from}&to_currency=${TO}&apikey=${process.env.API_KEY}`
+        );
+        const buy = data['Realtime Currency Exchange Rate']['8. Bid Price'];
+        const sell = data['Realtime Currency Exchange Rate']['9. Ask Price'];
+        screenPrice.push({
+          from,
+          to: TO,
+          buy: Number(buy),
+          sell: Number(sell),
+        });
       });
       setTimeout(async () => {
         // add bank price
@@ -56,7 +36,7 @@ const autoUpdatePrices = (req, res) => {
         screenPrice.map(({ from, to, buy, sell }) => {
           appPrice.push({ from, to, buy: buy - 0.005, sell: sell + 0.015 });
         });
-        if (screenPrice.length > 0) {
+        if (screenPrice.length >= 4) {
           await pricesModel.updateOne(
             {},
             {
@@ -66,15 +46,16 @@ const autoUpdatePrices = (req, res) => {
               appPrice,
             }
           );
+          // eslint-disable-next-line no-console
+          console.log('prices Updated');
         } else {
-          throw new Error();
+          // eslint-disable-next-line no-console
+          console.log('Error request to api');
         }
-      }, 5000);
-      // eslint-disable-next-line no-console
-      console.log('prices Updated');
+      }, 8000);
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.log('Error prices Updated');
+      console.log(error);
     }
   }, 175000);
 };
