@@ -27,9 +27,11 @@ database
   .on('error', () => process.exit(1));
 
 app.use(express.static(join(__dirname, '..', 'client', 'build')));
-app.use('/api/v1', router);
 
-autoUpdatePrices();
+app.use('/api/v1', router);
+if (process.env.NODE_ENV !== 'test') {
+  autoUpdatePrices();
+}
 
 app.get('*', (req, res) => {
   res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
