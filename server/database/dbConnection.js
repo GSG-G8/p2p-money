@@ -13,6 +13,9 @@ switch (process.env.NODE_ENV) {
     dbURI = process.env.DEV_URI;
 }
 mongoose.connect(dbURI, {
+  poolSize: 20,
+  socketTimeoutMS: 480000,
+  keepAlive: 500000,
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
