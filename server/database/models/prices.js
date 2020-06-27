@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { date } = require('yup');
 
 const { Schema } = mongoose;
 
@@ -18,6 +19,10 @@ const pricesSchema = new Schema({
   appPrice: {
     type: Array,
     required: true,
+  },
+  lastUpdate: {
+    type: Date,
+    default: Date.now,
   },
 });
 

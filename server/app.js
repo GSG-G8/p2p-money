@@ -19,7 +19,6 @@ const middleware = [
   express.urlencoded({ extended: false }),
 ];
 app.use(middleware);
-// setInterval(() => console.log(i++), 1000);
 
 database
   // eslint-disable-next-line no-console
@@ -31,6 +30,7 @@ app.use(express.static(join(__dirname, '..', 'client', 'build')));
 app.use('/api/v1', router);
 if (process.env.NODE_ENV !== 'test') {
   autoUpdatePrices();
+  setInterval(autoUpdatePrices, 80 * 1000);
 }
 
 app.get('*', (req, res) => {
