@@ -31,7 +31,7 @@ describe('get request to /transactions', () => {
         const response = await request
           .get('/api/v1/admin/transactions')
           .set('cookie', res.header['set-cookie']);
-        expect(response.body.status).toBe('Successfully');
+        expect(response.status).toBe(200);
       });
     done();
   });
