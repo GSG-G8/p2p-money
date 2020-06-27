@@ -45,8 +45,8 @@ const signUp = async (req, res, next) => {
         mainBalance: [{ type: 'USD', total: 1000 }],
         avatar,
       });
-      const userToken = { clientId: _id };
-      const cookie = sign(userToken, process.env.SECRET_KEY);
+      const clientToken = { clientId: _id };
+      const cookie = sign(clientToken, process.env.SECRET_KEY);
       res.cookie('client', cookie).json({
         status: 'successfully',
         role: 'client',

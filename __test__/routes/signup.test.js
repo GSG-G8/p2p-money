@@ -3,9 +3,8 @@ const superTest = require('supertest');
 const app = require('../../server/app');
 
 const request = superTest(app);
-
-const dbConnection = require('../../server/database/dbConnection');
 const buildDB = require('../../server/database/index');
+const dbConnection = require('../../server/database/dbConnection');
 
 describe('post request to /signup', () => {
   beforeAll(() => buildDB);
@@ -18,7 +17,7 @@ describe('post request to /signup', () => {
       passwordConfirmation: '*hassan123*',
       mainBankName: 'بنك القدس',
       mainBankAccount: 111798451,
-      email: 'ali@hotmail.com',
+      email: 'ali2@hotmail.com',
     };
     const response = await request.post('/api/v1/signup').send(reqBody);
     expect(response.status).toBe(200);
@@ -31,7 +30,7 @@ describe('post request to /signup', () => {
       passwordConfirmation: '*hassan123*',
       mainBankName: 'بنك القدس',
       mainBankAccount: 7895648237,
-      email: 'hassan1@hotmail.com',
+      email: 'ali3@hotmail.com',
     };
 
     const response = await request.post('/api/v1/signup').send(reqBody);
@@ -64,7 +63,7 @@ describe('post request to /signup', () => {
       password: '*hassan123*',
       passwordConfirmation: '*hassan123*',
       mainBankName: 'بنك القدس',
-      mainBankAccount: 7895864822387,
+      mainBankAccount: 9876542,
       email: 'ahmed@gmail.com',
     };
 

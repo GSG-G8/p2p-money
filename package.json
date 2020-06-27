@@ -5,7 +5,7 @@
   "main": "index.js",
   "jest": {
     "testEnvironment": "node"
-  }, 
+  },  
   "scripts": {
     "server": "cd server && npm run dev",
     "client": "cd client && npm start",
