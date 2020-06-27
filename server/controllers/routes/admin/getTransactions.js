@@ -5,7 +5,6 @@ const exchangeMoney = require('../../../database/models/exchangeMoney');
 const getClients = async (req, res) => {
   try {
     const clientsTransactions = await transactions.find({});
-
     if (clientsTransactions.length) {
       let promise = Promise.resolve();
       const data = [];
@@ -20,18 +19,17 @@ const getClients = async (req, res) => {
       });
       promise.then(() =>
         res.status(200).json({
-          status: 'Successfully',
           count: clientsTransactions.length,
           data,
         })
       );
     } else {
       res.status(200).json({
-        message: 'No transactions existing',
+        message: 'No transactions found',
       });
     }
   } catch (error) {
-    res.status(400).send(error);
+    res.status(500).send({ error: 'Something failed!' });
   }
 };
 
