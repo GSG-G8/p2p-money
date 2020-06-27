@@ -12,7 +12,8 @@ const getTransactionById = async (req, res) => {
       client_id: res.clientId,
     });
     const clientData = await client.findById(res.clientId);
-    if (clientData.length === 0) throw new Error();
+    if (clientData.length === 0)
+      res.status(400).json({ message: 'The client is not exist' });
     result.push({ clientData });
     transactionTableData.forEach(({ exchange_id }) => {
       promise = exchangeMoney.findById(exchange_id).then((exchangeData) => {
