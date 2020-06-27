@@ -21,7 +21,9 @@ const getTransactionById = async (req, res) => {
       });
     });
     result.push({ exchangeDetail });
-    promise.then(() => res.status(200).json({ result }));
+    promise
+      .then(() => res.status(200).json({ result }))
+      .catch((err) => res.status(400).json({ message: err.message }));
   } catch (error) {
     res.status(400).json({ message: 'The client is not exist' });
   }
