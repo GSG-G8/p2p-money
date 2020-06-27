@@ -22,6 +22,12 @@ const autoUpdatePrices = (req, res) => {
           buy: Number(buy),
           sell: Number(sell),
         });
+        screenPrice.push({
+          from: TO,
+          to: from,
+          buy: 1 / Number(buy),
+          sell: 1 / Number(sell),
+        });
       });
       setTimeout(async () => {
         // add bank price
