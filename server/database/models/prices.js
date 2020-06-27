@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { date } = require('yup');
 
 const { Schema } = mongoose;
 

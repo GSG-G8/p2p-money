@@ -4,7 +4,7 @@ const pricesModel = require('../../../database/models/prices');
 
 const autoUpdatePrices = () => {
   const FROM = ['USD', 'JOD', 'EUR', 'EGP'];
-  const TO = 'ILS';
+  const to = 'ILS';
   const screenPrice = [];
   const bankPrice = [];
   const tellerPrice = [];
@@ -13,7 +13,7 @@ const autoUpdatePrices = () => {
   FROM.map(async (from) => {
     promise = axios
       .get(
-        `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${from}&to_currency=${TO}&apikey=${process.env.API_KEY}`
+        `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${from}&to_currency=${to}&apikey=${process.env.API_KEY}`
       )
       .then(({ data }) => {
         const buy = Number(
@@ -23,63 +23,59 @@ const autoUpdatePrices = () => {
           data['Realtime Currency Exchange Rate']['9. Ask Price']
         );
         screenPrice.push(
-          { from, TO, buy, sell },
-          { from: TO, TO: from, buy: 1 / buy, sell: 1 / sell }
+          { from, to, buy, sell },
+          { from: to, to: from, buy: 1 / buy, sell: 1 / sell }
         );
         bankPrice.push(
-          { from, TO, buy: buy - 0.02, sell: sell + 0.03 },
-          { from: TO, TO: from, buy: 1 / (buy - 0.02), sell: 1 / (sell + 0.03) }
+          { from, to, buy: buy - 0.02, sell: sell + 0.03 },
+          { from: to, to: from, buy: 1 / (buy - 0.02), sell: 1 / (sell + 0.03) }
         );
         tellerPrice.push(
+          { from, to, buy: buy - 0.015, sell: sell + 0.025 },
           {
-            from,
-            TO,
-            buy: buy - 0.015,
-            sell: sell + 0.025,
-          },
-          {
-            from: TO,
-            TO: from,
+            from: to,
+            to: from,
             buy: 1 / (buy - 0.015),
             sell: 1 / (sell + 0.025),
           }
         );
         appPrice.push(
-          { from, TO, buy: buy - 0.005, sell: sell + 0.015 },
+          { from, to, buy: buy - 0.005, sell: sell + 0.015 },
           {
-            from: TO,
-            TO: from,
+            from: to,
+            to: from,
             buy: 1 / (buy - 0.015),
             sell: 1 / (sell + 0.025),
           }
         );
       })
-      .catch(() => {
-        console.warn('1- Error request to api');
-      });
+      .catch(() => console.error('Error : request to api'));
   });
 
   promise.then(() => {
-    if (screenPrice.length >= 4) {
-      pricesModel.updateOne(
-        {},
-        {
-          screenPrice,
-          tellerPrice,
-          bankPrice,
-          appPrice,
-        },
-        (error) => {
-          if (!error)
-            console.info(
-              ' ******************** \n ** prices Updated ** \n ********************'
-            );
-          else console.log('Database Error');
-        }
-      );
-    } else {
-      console.error('2- Error request to api');
-    }
+    setTimeout(() => {
+      if (screenPrice.length >= 8) {
+        pricesModel.updateOne(
+          {},
+          {
+            screenPrice,
+            tellerPrice,
+            bankPrice,
+            appPrice,
+            lastUpdate: new Date().toString(),
+          },
+          (error) => {
+            if (!error)
+              console.info(
+                ' ******************** \n ** prices Updated ** \n ********************'
+              );
+            else console.log('Database Error');
+          }
+        );
+      } else {
+        console.error('Error: Data not completed ');
+      }
+    }, 6000);
   });
 };
 

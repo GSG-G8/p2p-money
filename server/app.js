@@ -28,9 +28,9 @@ database
 app.use(express.static(join(__dirname, '..', 'client', 'build')));
 
 app.use('/api/v1', router);
+
 if (process.env.NODE_ENV !== 'test') {
-  autoUpdatePrices();
-  setInterval(autoUpdatePrices, 80 * 1000);
+  setInterval(autoUpdatePrices, 175000);
 }
 
 app.get('*', (req, res) => {
