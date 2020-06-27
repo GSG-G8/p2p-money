@@ -19,17 +19,13 @@ describe('test get transaction router', () => {
   });
 
   it('return status 200 for success', async (done) => {
-    const reqBody = {
-      fullName: 'محمد أحمد ',
-      password: '*aA123456*',
-      passwordConfirmation: '*aA123456*',
-      mainBankName: 'بنك فلسطين',
-      mainBankAccount: 1237548465,
-      email: 'moh@ahm.com',
-    };
-    await request
-      .post('/api/v1/signup')
-      .send(reqBody)
+    await request;
+    request
+      .post('/api/v1/login')
+      .send({
+        email: 'ali@gmail.com',
+        password: 'geeksCA@2020',
+      })
       .then(async (res) => {
         const response = await request
           .get('/api/v1/transaction')
