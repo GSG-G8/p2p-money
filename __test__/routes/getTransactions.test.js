@@ -6,11 +6,11 @@ const request = superTest(app);
 
 const dbConnection = require('../../server/database/dbConnection');
 
-describe('get request to /clients', () => {
+describe('get request to /transactions', () => {
   afterAll(() => dbConnection.close());
 
   it('test if you are unauthorized', async (done) => {
-    const response = await request.get('/api/v1/admin/clients');
+    const response = await request.get('/api/v1/admin/transactions');
     expect(response.body).toStrictEqual({
       auth: false,
       message: 'you are Unauthorized',
@@ -19,7 +19,7 @@ describe('get request to /clients', () => {
     done();
   });
 
-  it('test if get all clients', async (done) => {
+  it('test if get all transactions', async (done) => {
     const reqBody = {
       email: 'eyad@p2pmoney.com',
       password: 'geeksCA@2020',
@@ -29,7 +29,7 @@ describe('get request to /clients', () => {
       .send(reqBody)
       .then(async (res) => {
         const response = await request
-          .get('/api/v1/admin/clients')
+          .get('/api/v1/admin/transactions')
           .set('cookie', res.header['set-cookie']);
         expect(response.body.status).toBe('Successfully');
       });
