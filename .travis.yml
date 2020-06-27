@@ -19,6 +19,7 @@ install:
   - ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod --version
   - mongo --version
   - npm install
+  - travis_wait 15 mvn install
 
 
 before_script:
