@@ -2,8 +2,9 @@ const express = require('express');
 
 const adminRouter = express.Router();
 
-const getClients = require('../controllers/routes/admin');
+const { getClients, getTransactions } = require('../controllers/routes/admin');
 
-adminRouter.get('/getClients', getClients);
+adminRouter.get('/clients', getClients);
+adminRouter.get('/transactions', getTransactions);
 
 module.exports = adminRouter;
