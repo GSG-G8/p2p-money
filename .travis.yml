@@ -14,12 +14,12 @@ matrix:
   fast_finish: true
 
 install:
+  - travis_wait 15 mvn install
   - wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-${MONGODB}.tgz
   - tar xzf mongodb-linux-x86_64-${MONGODB}.tgz
   - ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod --version
   - mongo --version
   - npm install
-  - travis_wait 15 mvn install
 
 
 before_script:
