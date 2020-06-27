@@ -10,7 +10,7 @@ const addClientBank = async (req, res) => {
     'bankAccounts.accountNumber': req.body.accountNumber,
   });
   if (checkBankAccount.length === 0 && isBankValidate) {
-    client.findByIdAndUpdate(
+    await client.findByIdAndUpdate(
       clientId,
       {
         $push: { bankAccounts: req.body },
