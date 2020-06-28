@@ -69,7 +69,6 @@ const createTransaction = async (req, res) => {
           });
           if (clientBalanceToConvertToArray.length === 0) {
             clientBalance.push({ type: to, total: appPrice[0].sell });
-            console.log(clientBalance, appPrice[0].sell);
           }
           await client.updateOne(
             { _id: client_id },
