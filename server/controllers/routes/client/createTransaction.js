@@ -10,72 +10,69 @@ const createTransaction = async (req, res) => {
   try {
     const client_id = res.clientId;
     const { amount, from, to } = req.body;
-    const latestPrices = await prices.find({}).sort({ _id: -1 }).limit(1);
+    const latestPrices = await prices.find({});
     const appPrice = latestPrices[0].appPrice.filter(
-      (e) => e.from === from && e.To === to
+      (e) => e.from === from && e.to === to
     );
     const bankPrice = latestPrices[0].bankPrice.filter(
-      (e) => e.from === from && e.To === to
+      (e) => e.from === from && e.to === to
     );
     const agencyPrice = latestPrices[0].tellerPrice.filter(
-      (e) => e.from === from && e.To === to
+      (e) => e.from === from && e.to === to
     );
-    // console.log(appPrice[0].sell);
-    const clientData = await client.findById(res.clientId);
-    const clientBalance = clientData.mainBalance;
-    // get the client currency balance which he wants to convert from
-    const clientBalanceToConvertFromArray = clientBalance.filter(
-      (element) => element.type === from
-    );
-    const clientBalanceToConvertToArray = clientBalance.filter(
-      (element) => element.type === to
-    );
-    // check if there is enough balance to complete the transaction
-    if (
-      clientBalanceToConvertFromArray.length === 0 ||
-      clientBalanceToConvertFromArray[0].total < amount
-    ) {
-      throw new Error("Sorry, but you don't have enough balance to continue.");
-    } else {
-      await createTransactionValidation({ from, to, amount });
-      exchangeMoney
-        .create({
+    const clientData = await client.findById(client_id);
+    if (clientData) {
+      const { mainBalance, mainBankAccount, bankAccounts } = clientData;
+      if (
+        !mainBalance[from] ||
+        mainBalance[from] < amount ||
+        mainBalance[from] === 0
+      ) {
+        res.send({
+          message: "Sorry, but you don't have enough balance to continue.",
+        });
+      } else {
+        await createTransactionValidation({ from, to, amount });
+        const { _id } = await exchangeMoney.create({
           amount,
           from,
           to,
-          app_price_sell: appPrice[0].sell * amount, // this will added to client
+          app_price_sell: appPrice[0].sell * amount,
           app_price_buy: appPrice[0].buy * amount,
           app_saved_money:
-            appPrice[0].sell * amount - bankPrice[0].sell * amount, // need review
-          spread: appPrice[0].buy * amount - appPrice[0].sell * amount, // need review
+            appPrice[0].sell * amount - bankPrice[0].sell * amount,
+          spread: appPrice[0].buy * amount - appPrice[0].sell * amount,
           bank_price_sell: bankPrice[0].sell * amount,
           bank_price_buy: bankPrice[0].buy * amount,
           agency_price_sell: agencyPrice[0].sell * amount,
           agency_price_buy: agencyPrice[0].buy * amount,
           agency_saved_money:
             agencyPrice[0].sell * amount - bankPrice[0].sell * amount, // need review
-        })
-        .then((data) => {
-          transactions.create({ client_id, exchange_id: data._id });
-        })
-        .then(async () => {
-          clientBalance.forEach((e) => {
-            if (e.type === from) {
-              e.total -= amount;
-            }
-            if (e.type === to) {
-              e.total += appPrice[0].sell;
-            }
-          });
-          if (clientBalanceToConvertToArray.length === 0) {
-            clientBalance.push({ type: to, total: appPrice[0].sell });
+        });
+        await transactions.create({ client_id, exchange_id: _id });
+        mainBalance[from] -= amount;
+        if (mainBalance[to]) {
+          mainBalance[to] = appPrice[0].sell * amount + mainBalance[to];
+        } else {
+          mainBalance[to] = appPrice[0].sell * amount;
+        }
+        const bankAccountsArray = [];
+        bankAccounts.forEach((element) => {
+          if (Number(element.accountNumber) === mainBankAccount) {
+            // eslint-disable-next-line no-param-reassign
+            element.balance = mainBalance;
           }
-          await client.updateOne(
-            { _id: client_id },
-            { mainBalance: clientBalance }
-          );
-        })
-        .then(() => res.status(200).json({ message: 'Transaction Completed' }));
+          bankAccountsArray.push(element);
+        });
+        await client.findByIdAndUpdate(
+          { _id: client_id },
+          { mainBalance, bankAccounts: bankAccountsArray },
+          { useFindAndModify: false }
+        );
+        res.send({ mainBalance });
+      }
+    } else {
+      res.send({ message: 'client not exist' });
     }
   } catch (error) {
     res.status(400).json({ message: error.message });
