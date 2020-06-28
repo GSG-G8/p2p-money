@@ -1,8 +1,13 @@
 import React from 'react';
 import './style.css';
+import Ty from '../Common/Typography';
 
 function App() {
-  return <div>Welcome in P2P Exchange Money App</div>;
+  return (
+    <div>
+      <Ty />
+    </div>
+  );
 }
 
 export default App;
