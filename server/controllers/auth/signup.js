@@ -39,10 +39,10 @@ const signUp = async (req, res, next) => {
           {
             bankName: mainBankName,
             accountNumber: mainBankAccount,
-            balance: [{ type: 'USD', total: 1000 }],
+            balance: { USD: 1000 },
           },
         ],
-        mainBalance: [{ type: 'USD', total: 1000 }],
+        mainBalance: { USD: 1000 },
         avatar,
       });
       const clientToken = { clientId: _id };
