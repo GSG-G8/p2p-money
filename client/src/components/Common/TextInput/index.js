@@ -22,7 +22,6 @@ const TextInput = ({
         type={type}
         disabled={disabled}
         placeholder={placeholder}
-        optionFilterProp="children"
         onChange={handlleChange}
         onFocus={onFocus}
         value={value}
