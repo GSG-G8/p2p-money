@@ -3,3 +3,17 @@
   height: 100vh;
   background: white;
 }
+
+.wrap-layout{
+  margin: 24px 16px 0;
+  overflow: initial;
+}
+
+.wrap-layout__content{
+  padding: 24;
+  text-align: center;
+}
+
+.sider-logo{
+  margin: 22px;
+}

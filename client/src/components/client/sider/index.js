@@ -1,8 +1,14 @@
 import React from 'react';
+import { Layout, Menu, ConfigProvider } from 'antd';
+import {
+  WalletFilled,
+  BankFilled,
+  SettingFilled,
+  MoneyCollectFilled,
+} from '@ant-design/icons';
+
 import 'antd/dist/antd.css';
 import './index.css';
-import { Layout, Menu, ConfigProvider } from 'antd';
-import { WalletFilled, BankFilled, SettingFilled } from '@ant-design/icons';
 
 const { Content, Sider } = Layout;
 const SiderMenu = () => (
@@ -10,30 +16,24 @@ const SiderMenu = () => (
     <div className="sider-wrapper">
       <Layout dir="rtl">
         <Sider dir="rtl" className="sider-rtl">
-          <Menu
-            theme="light"
-            className="side-menu"
-            mode="inline"
-            defaultSelectedKeys={['4']}
-          >
+          <div className="sider-logo">
+            <MoneyCollectFilled /> اكستشانج موني
+          </div>
+          <Menu theme="light" mode="inline" defaultSelectedKeys={['4']}>
             <Menu.Item key="1" icon={<WalletFilled />}>
-              المحفظة
+              محفظتي
             </Menu.Item>
             <Menu.Item key="2" icon={<BankFilled />}>
-              حساب البنك
+              تفاصيل البنك
             </Menu.Item>
             <Menu.Item key="3" icon={<SettingFilled />}>
-              إعدادت
+              الإعدادات
             </Menu.Item>
           </Menu>
         </Sider>
-        <Layout className="site-layout">
-          <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-            <div
-              className="site-layout-background"
-              style={{ padding: 24, textAlign: 'center' }}
-            >
-              ...
+        <Layout className="wrap-layout">
+          <Content>
+            <div className="wrap-layout__content">
               <br />
               content
             </div>
