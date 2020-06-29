@@ -3,11 +3,7 @@ import './style.css';
 import SiderMenu from '../client/sider';
 
 function App() {
-  return (
-    <div>
-      <SiderMenu />
-    </div>
-  );
+  return <div>Welcome in P2P Exchange Money App</div>;
 }
 
 export default App;
