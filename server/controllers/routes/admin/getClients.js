@@ -2,7 +2,7 @@ const Client = require('../../../database/models/client');
 
 const getClients = async (req, res) => {
   try {
-    const Clients = await Client.find({});
+    const Clients = await Client.find({}).limit(5);
     if (!Clients.length) {
       res.status(200).json({
         message: 'No clients existing',
