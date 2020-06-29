@@ -1,13 +1,8 @@
 import React from 'react';
 import './style.css';
-import SelectBox from '../Common/selectBox';
 
 function App() {
-  return (
-    <div>
-      <SelectBox placeholder="select an item" elements={['ali', 'dahdouh']} />
-    </div>
-  );
+  return <div>Welcome in P2P Exchange Money App</div>;
 }
 
 export default App;
