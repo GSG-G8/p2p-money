@@ -1,13 +1,14 @@
 import React from 'react';
-import 'antd/dist/antd.css';
-import './index.css';
 import { Select, ConfigProvider } from 'antd';
 import PropTypes from 'prop-types';
+
+import 'antd/dist/antd.css';
+import './index.css';
 
 const { Option } = Select;
 
 const SelectBox = ({
-  handlleChange,
+  handleChange,
   elements,
   placeholder,
   onFocus,
@@ -22,9 +23,10 @@ const SelectBox = ({
         disabled={disabled}
         placeholder={placeholder}
         optionFilterProp="children"
-        onChange={handlleChange}
+        onChange={handleChange}
         onFocus={onFocus}
         value={value}
+        labe
       >
         {elements.map((elm) => (
           <Option key={elm} value={elm}>
@@ -38,7 +40,7 @@ const SelectBox = ({
 
 SelectBox.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.string).isRequired,
-  handlleChange: PropTypes.func,
+  handleChange: PropTypes.func,
   placeholder: PropTypes.string.isRequired,
   className: PropTypes.string,
   value: PropTypes.string.isRequired,
@@ -47,7 +49,7 @@ SelectBox.propTypes = {
 };
 
 SelectBox.defaultProps = {
-  handlleChange: () => {},
+  handleChange: () => {},
   onFocus: () => {},
   className: '',
   disabled: false,
