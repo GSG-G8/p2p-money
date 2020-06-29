@@ -15,19 +15,16 @@ const SelectBox = ({
   value,
   disabled,
 }) => (
-  <div className="inputSpecs">
+  <div className="custom-select">
     <ConfigProvider direction="rtl">
       <Select
-        className={className}
+        className={`${className} full-width`}
         disabled={disabled}
         placeholder={placeholder}
         optionFilterProp="children"
         onChange={handlleChange}
         onFocus={onFocus}
         value={value}
-        filterOption={(input, option) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
       >
         {elements.map((elm) => (
           <Option key={elm} value={elm}>
