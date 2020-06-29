@@ -1,7 +1,4 @@
-const pricesModel = require('../../../database/models/prices');
+const getPrices = require('./getPrices');
+const updatePrices = require('./updatePrices');
 
-const prices = async (req, res, next) => {
-  const Prices = await pricesModel.findOne();
-  res.send({ Prices });
-};
-module.exports = prices;
+module.exports = { getPrices, updatePrices };

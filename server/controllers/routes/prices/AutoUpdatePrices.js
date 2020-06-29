@@ -59,9 +59,9 @@ const autoUpdatePrices = () => {
           {},
           {
             screenPrice,
-            tellerPrice,
-            bankPrice,
-            appPrice,
+            // tellerPrice,
+            // bankPrice,
+            // appPrice,
             lastUpdate: new Date().toString(),
           },
           (error) => {
