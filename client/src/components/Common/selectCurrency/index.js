@@ -13,9 +13,9 @@ const SelectCurrency = ({ className, onChange }) => (
     defaultValue={
       <div dir="ltr" className="flagSpan">
         <span role="img" aria-label="USA">
-          🇺🇸
+          {flagOptions[0].flag}
         </span>
-        <div> دولار امريكي</div>
+        <div> {flagOptions[0].text}</div>
       </div>
     }
     className={className}
