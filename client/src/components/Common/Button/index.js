@@ -19,6 +19,8 @@ const ButtonComponent = ({
       size={size}
       block={block}
       onClick={onClick}
+      className="button-component"
+      style={{ backgroundColor: '#126fc9', borderColor: '#126fc9' }}
     >
       {Content}
     </Button>
@@ -37,7 +39,7 @@ ButtonComponent.defaultProps = {
   Content: 'تسجيل الدخول',
   disabled: false,
   loading: false,
-  size: 'all', // large,middle,sm
+  size: 'all', // other sizes: large,middle,sm
   block: false, // make the button block element with full div width
   onClick: null,
 };
