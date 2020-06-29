@@ -6,8 +6,8 @@ import 'antd/dist/antd.css';
 import clientsImg from '../../../assets/icons/clients.svg';
 import transactionImg from '../../../assets/icons/transactionImg.svg';
 import addImg from '../../../assets/icons/addImg.svg';
+
 import './style.css';
-// const { Meta } = Card;
 
 const AdminCard = ({
   loading,
