@@ -1,3 +1,5 @@
-.sider-wrapper .ant-layout-sider{
-  background: none;
+.sider-rtl{
+  overflow: auto;
+  height: 100vh;
+  background: white;
 }
