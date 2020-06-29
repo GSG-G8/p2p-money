@@ -1,19 +1,18 @@
 import React from 'react';
-import 'antd/dist/antd.css';
-import './index.css';
 import { Input, ConfigProvider } from 'antd';
 import PropTypes from 'prop-types';
+
+import 'antd/dist/antd.css';
+import './index.css';
 
 const TextInput = ({
   className,
   type,
   disabled,
   placeholder,
-  handlleChange,
+  handleChange,
   onFocus,
   value,
-  prefix,
-  suffix,
 }) => (
   <div className="inputSpecs">
     <ConfigProvider direction="rtl">
@@ -22,11 +21,9 @@ const TextInput = ({
         type={type}
         disabled={disabled}
         placeholder={placeholder}
-        onChange={handlleChange}
+        onChange={handleChange}
         onFocus={onFocus}
         value={value}
-        prefix={prefix}
-        suffix={suffix}
       />
     </ConfigProvider>
   </div>
@@ -37,21 +34,17 @@ TextInput.propTypes = {
   type: PropTypes.string,
   disabled: PropTypes.bool,
   placeholder: PropTypes.string.isRequired,
-  handlleChange: PropTypes.func,
+  handleChange: PropTypes.func,
   onFocus: PropTypes.func,
   value: PropTypes.string.isRequired,
-  prefix: PropTypes.element,
-  suffix: PropTypes.element,
 };
 
 TextInput.defaultProps = {
   className: '',
   type: 'text',
   disabled: false,
-  handlleChange: () => {},
+  handleChange: () => {},
   onFocus: () => {},
-  prefix: <></>,
-  suffix: <></>,
 };
 
 export default TextInput;
