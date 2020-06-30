@@ -15,5 +15,11 @@
 }
 
 .sider-logo{
+  border-radius: 50%;
+  width: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.user-wrapper{
   margin: 1.375rem;
 }
