@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select } from 'antd';
+import { Select, ConfigProvider } from 'antd';
 import PropTypes from 'prop-types';
 
 import 'antd/dist/antd.css';
@@ -16,26 +16,28 @@ const SelectBox = ({
   disabled,
 }) => (
   <div className="custom-select">
-    <Select
-      direction="rtl"
-      className={`full-width ${className}`}
-      disabled={disabled}
-      placeholder={placeholder}
-      onChange={onChange}
-      value={value}
-    >
-      {elements.map((elm) => (
-        <Option key={elm} value={elm}>
-          {elm}
-        </Option>
-      ))}
-    </Select>
+    <ConfigProvider direction="rtl">
+      <Select
+        direction="rtl"
+        className={`full-width ${className}`}
+        disabled={disabled}
+        placeholder={placeholder}
+        onChange={onChange}
+        value={value}
+      >
+        {elements.map((elm) => (
+          <Option key={elm} value={elm}>
+            {elm}
+          </Option>
+        ))}
+      </Select>
+    </ConfigProvider>
   </div>
 );
 
 SelectBox.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.string),
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   placeholder: PropTypes.string.isRequired,
   className: PropTypes.string,
   value: PropTypes.string.isRequired,
@@ -43,6 +45,7 @@ SelectBox.propTypes = {
 };
 
 SelectBox.defaultProps = {
+  onChange: () => {},
   className: '',
   elements: [],
   disabled: false,
