@@ -1,0 +1,9 @@
+.button-component{
+  background-color: #126fc9;
+   border-color: #126fc9
+}
+
+.button-component:hover{
+  background-color: #0e5399;
+   border-color: #0e5399
+}

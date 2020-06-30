@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, ConfigProvider } from 'antd';
 import 'antd/dist/antd.css';
+import './style.css';
 
 const ButtonComponent = ({
   Content,
@@ -20,7 +21,6 @@ const ButtonComponent = ({
       block={block}
       onClick={onClick}
       className="button-component"
-      style={{ backgroundColor: '#126fc9', borderColor: '#126fc9' }}
     >
       {Content}
     </Button>
