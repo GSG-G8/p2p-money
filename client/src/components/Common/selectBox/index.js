@@ -11,7 +11,6 @@ const SelectBox = ({
   handleChange,
   elements,
   placeholder,
-  onFocus,
   className,
   value,
   disabled,
@@ -22,11 +21,8 @@ const SelectBox = ({
         className={`${className} full-width`}
         disabled={disabled}
         placeholder={placeholder}
-        optionFilterProp="children"
         onChange={handleChange}
-        onFocus={onFocus}
         value={value}
-        labe
       >
         {elements.map((elm) => (
           <Option key={elm} value={elm}>
@@ -44,13 +40,11 @@ SelectBox.propTypes = {
   placeholder: PropTypes.string.isRequired,
   className: PropTypes.string,
   value: PropTypes.string.isRequired,
-  onFocus: PropTypes.func,
   disabled: PropTypes.bool,
 };
 
 SelectBox.defaultProps = {
   handleChange: () => {},
-  onFocus: () => {},
   className: '',
   disabled: false,
 };
