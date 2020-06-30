@@ -30,7 +30,7 @@ const SelectCurrency = ({ className, onChange }) => (
         value={value}
         label={
           <div className="flagSpan">
-            <span role="img" aria-label="USA">
+            <span role="img" aria-label={text}>
               {flag}
             </span>
             <div> {text}</div>

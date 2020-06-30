@@ -1,12 +1,11 @@
 .selectCurrency {
   margin: .5rem;
-  width: 11rem;
+  width: 12rem;
   font-weight: 400;
 }
 
 .ant-select-selector {
   border: none !important;
-  ;
   font-size: 1rem;
   padding: .5rem !important;
   height: 3rem !important;
