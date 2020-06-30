@@ -5,7 +5,7 @@
 }
 
 .wrap-layout{
-  margin: 24px 16px 0;
+  margin: 1.5rem 1rem 0;
   overflow: initial;
 }
 
@@ -15,5 +15,5 @@
 }
 
 .sider-logo{
-  margin: 22px;
+  margin: 1.375rem;
 }

@@ -4,7 +4,7 @@ import { WalletFilled, BankFilled, SettingFilled } from '@ant-design/icons';
 import logo from '../../../assets/icons/icon.svg';
 
 import 'antd/dist/antd.css';
-import './index.css';
+import './style.css';
 
 const { Content, Sider } = Layout;
 const SiderMenu = () => (
