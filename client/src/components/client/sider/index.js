@@ -6,6 +6,7 @@ import {
   SettingFilled,
   MoneyCollectFilled,
 } from '@ant-design/icons';
+import logo from '../../../assets/icons/icon.svg';
 
 import 'antd/dist/antd.css';
 import './index.css';
@@ -17,7 +18,7 @@ const SiderMenu = () => (
       <Layout dir="rtl">
         <Sider dir="rtl" className="sider-rtl">
           <div className="sider-logo">
-            <MoneyCollectFilled /> اكستشانج موني
+            <img src={logo} alt="logo" /> موني اكستشانج
           </div>
           <Menu theme="light" mode="inline" defaultSelectedKeys={['4']}>
             <Menu.Item key="1" icon={<WalletFilled />}>
