@@ -1,0 +1,9 @@
+.container__center{
+  display:flex;
+  justify-content: center;
+}
+.admin-card--content{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
