@@ -8,20 +8,20 @@
   height: 7rem;
 }
 
-.admin-card--content{
+.admin-card__content{
   display:flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.admin-card--img{
+.admin-card__img{
   width:2rem;
   height: auto;
   align-self: center;
 }
 
-.admin-card--paragraph{
+.admin-card__paragraph{
   font-size: 1rem;
   margin:0.2rem; 
 }

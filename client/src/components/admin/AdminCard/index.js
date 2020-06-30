@@ -9,7 +9,7 @@ import addImg from '../../../assets/icons/addImg.svg';
 
 import './style.css';
 
-const AdminCard = ({ loading, type, description, description1 }) => {
+const AdminCard = ({ loading, type, title, description }) => {
   let imgSource;
   switch (type) {
     case type === 'transaction':
@@ -24,15 +24,15 @@ const AdminCard = ({ loading, type, description, description1 }) => {
   }
   return (
     <Card className="admin-card-container" hoverable loading={loading}>
-      <div className="admin-card--content">
+      <div className="admin-card__content">
         <img
-          className="admin-card--img"
+          className="admin-card__img"
           alt="admin-dashboard-icon"
           src={imgSource}
         />
         <ConfigProvider direction="rtl">
-          <p className="admin-card--paragraph">{description}</p>
-          <p>{description1}</p>
+          <p className="admin-card__paragraph">{title}</p>
+          <p>{description}</p>
         </ConfigProvider>
       </div>
     </Card>
@@ -42,14 +42,14 @@ const AdminCard = ({ loading, type, description, description1 }) => {
 AdminCard.propTypes = {
   loading: PropTypes.bool,
   type: PropTypes.string,
+  title: PropTypes.string,
   description: PropTypes.string,
-  description1: PropTypes.string,
 };
 
 AdminCard.defaultProps = {
   loading: false,
   type: 'add', // another option is 'clients' and 'transaction' to change the icon
-  description: 'إضافة',
-  description1: 'الأسعار الحالية',
+  title: 'إضافة',
+  description: 'الأسعار الحالية',
 };
 export default AdminCard;
