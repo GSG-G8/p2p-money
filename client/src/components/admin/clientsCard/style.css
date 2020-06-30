@@ -1,7 +1,9 @@
   .clientsCard {
     width: 20rem;
+    margin: 1rem;
+    height: 23rem;
   }
-
+  
   .listItems{
-    margin-left: 1rem !important;
+   margin-left: 1rem 
   }

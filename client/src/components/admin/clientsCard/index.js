@@ -3,8 +3,8 @@ import { List, Avatar, Card } from 'antd';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-import './style.css';
 import 'antd/dist/antd.css';
+import './style.css';
 
 const getClients = async () => {
   const {
@@ -24,9 +24,11 @@ const ClientsCard = ({ className }) => {
     <Card
       dir="rtl"
       hoverable
-      className={className}
+      className={`clientsCard ${className}`}
       cover={
         <List
+          loading={!(data && data.length)}
+          className="listItems"
           itemLayout="horizontal"
           dataSource={data}
           renderItem={(item) => (
@@ -48,7 +50,7 @@ ClientsCard.propTypes = {
   className: PropTypes.string,
 };
 ClientsCard.defaultProps = {
-  className: 'clientsCard',
+  className: '',
 };
 
 export default ClientsCard;
