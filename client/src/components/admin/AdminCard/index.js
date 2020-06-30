@@ -12,14 +12,14 @@ import './style.css';
 const AdminCard = ({ loading, type, description, description1 }) => {
   let imgSource;
   switch (type) {
-    case type === 'add':
-      imgSource = addImg;
+    case type === 'transaction':
+      imgSource = transactionImg;
       break;
     case type === 'clients':
       imgSource = clientsImg;
       break;
     default:
-      imgSource = transactionImg;
+      imgSource = addImg;
       break;
   }
   return (
@@ -48,7 +48,7 @@ AdminCard.propTypes = {
 
 AdminCard.defaultProps = {
   loading: false,
-  type: 'add',
+  type: 'add', // another option is 'clients' and 'transaction' to change the icon
   description: 'إضافة',
   description1: 'الأسعار الحالية',
 };
