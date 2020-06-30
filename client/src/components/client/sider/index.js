@@ -1,11 +1,6 @@
 import React from 'react';
 import { Layout, Menu, ConfigProvider } from 'antd';
-import {
-  WalletFilled,
-  BankFilled,
-  SettingFilled,
-  MoneyCollectFilled,
-} from '@ant-design/icons';
+import { WalletFilled, BankFilled, SettingFilled } from '@ant-design/icons';
 import logo from '../../../assets/icons/icon.svg';
 
 import 'antd/dist/antd.css';
@@ -18,7 +13,7 @@ const SiderMenu = () => (
       <Layout dir="rtl">
         <Sider dir="rtl" className="sider-rtl">
           <div className="sider-logo">
-            <img src={logo} alt="logo" /> موني اكستشانج
+            <img src={logo} alt="logo" /> P2P Money
           </div>
           <Menu theme="light" mode="inline" defaultSelectedKeys={['4']}>
             <Menu.Item key="1" icon={<WalletFilled />}>
