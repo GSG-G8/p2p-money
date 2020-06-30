@@ -79,7 +79,7 @@ const App = () => {
     });
   };
 
-  const Routes = ['/wallet', '/bank', '/setting', '/dashboard'];
+  const Routes = ['/wallet', '/bank', '/setting'];
   const staticRoutes = ['/login', '/signup'];
 
   if (loading) {
@@ -99,11 +99,11 @@ const App = () => {
           // we will tell the Client you already login and the redirect their to wallet
           <>{window.location.replace('/wallet')}</>
         )}
-        {!Routes.includes(pathname) && <Redirect to="/404" />}
-        {pathname === '/dashboard' && (
-          // when we finish the alert component
+        {pathname === '/dashboard' ? ( // when we finish the alert component
           // we will tell the client you can't see this routes
           <>{window.location.replace('/wallet')}</>
+        ) : (
+          <Redirect to="/404" />
         )}
       </Switch>
     );
@@ -126,11 +126,11 @@ const App = () => {
           // we will tell the admin you already login and the redirect their to dashboard
           <>{window.location.replace('/dashboard')}</>
         )}
-        {!Routes.includes(pathname) && <Redirect to="/404" />}
-        {pathname !== '/dashboard' && (
-          // when we finish the alert component
+        {Routes.includes(pathname) ? ( // when we finish the alert component
           // we will tell the admin you can't see this routes
           <>{window.location.replace('/dashboard')}</>
+        ) : (
+          <Redirect to="/404" />
         )}
       </Switch>
     );
@@ -141,7 +141,7 @@ const App = () => {
       <Route exact path="/" render={() => <Home prices={prices} />} />
       <Route exact path="/login" render={() => <Login />} />
       <Route exact path="/signup" render={() => <SignUp />} />
-      {Routes.includes(pathname) ? (
+      {Routes.includes(pathname) || pathname === '/dashboard' ? (
         // when we finish the alert component
         // we will add alert to tell the client, you are unauthorized, you must to signup or login
         // and redirect there to signup page
