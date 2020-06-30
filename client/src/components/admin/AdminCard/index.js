@@ -9,14 +9,7 @@ import addImg from '../../../assets/icons/addImg.svg';
 
 import './style.css';
 
-const AdminCard = ({
-  loading,
-  width,
-  height,
-  type,
-  description,
-  description1,
-}) => {
+const AdminCard = ({ loading, type, description, description1 }) => {
   let imgSource;
   switch (type) {
     case type === 'add':
@@ -30,17 +23,15 @@ const AdminCard = ({
       break;
   }
   return (
-    <Card
-      className="container__center"
-      hoverable
-      loading={loading}
-      style={{ width, height }}
-    >
+    <Card className="admin-card-container" hoverable loading={loading}>
       <div className="admin-card--content">
-        <img alt="example" src={imgSource} />
-        <br />
+        <img
+          className="admin-card--img"
+          alt="admin-dashboard-icon"
+          src={imgSource}
+        />
         <ConfigProvider direction="rtl">
-          <p>{description}</p>
+          <p className="admin-card--paragraph">{description}</p>
           <p>{description1}</p>
         </ConfigProvider>
       </div>
@@ -50,8 +41,6 @@ const AdminCard = ({
 
 AdminCard.propTypes = {
   loading: PropTypes.bool,
-  width: PropTypes.number,
-  height: PropTypes.number,
   type: PropTypes.string,
   description: PropTypes.string,
   description1: PropTypes.string,
@@ -59,8 +48,6 @@ AdminCard.propTypes = {
 
 AdminCard.defaultProps = {
   loading: false,
-  width: 200,
-  height: 'auto',
   type: 'add',
   description: 'إضافة',
   description1: 'الأسعار الحالية',

@@ -1,9 +1,27 @@
-.container__center{
-  display:flex;
-  justify-content: center;
+.ant-card-body {
+  padding: 0.5rem;
 }
+
+.admin-card-container{
+  margin: 1rem;
+  width: 7rem;
+  height: 7rem;
+}
+
 .admin-card--content{
   display:flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+.admin-card--img{
+  width:2rem;
+  height: auto;
+  align-self: center;
+}
+
+.admin-card--paragraph{
+  font-size: 1rem;
+  margin:0.2rem; 
 }
