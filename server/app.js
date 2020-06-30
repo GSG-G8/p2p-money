@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 
 const database = require('./database/dbConnection');
 const router = require('./router');
+const autoUpdatePrices = require('./controllers/routes/prices/AutoUpdatePrices');
 
 const app = express();
 
@@ -27,6 +28,10 @@ database
 app.use(express.static(join(__dirname, '..', 'client', 'build')));
 
 app.use('/api/v1', router);
+
+if (process.env.NODE_ENV !== 'test') {
+  setInterval(autoUpdatePrices, 175000);
+}
 
 app.get('*', (req, res) => {
   res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));

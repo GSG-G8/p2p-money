@@ -19,6 +19,10 @@ const pricesSchema = new Schema({
     type: Array,
     required: true,
   },
+  lastUpdate: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model('price', pricesSchema);
