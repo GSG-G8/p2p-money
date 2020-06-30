@@ -1,6 +1,6 @@
 import React from 'react';
-import { Input, ConfigProvider } from 'antd';
 import PropTypes from 'prop-types';
+import { Input, ConfigProvider } from 'antd';
 
 import 'antd/dist/antd.css';
 import './index.css';
