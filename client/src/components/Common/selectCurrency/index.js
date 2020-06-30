@@ -3,8 +3,8 @@ import { Select } from 'antd';
 import PropTypes from 'prop-types';
 import flagOptions from './currencies';
 
-import './style.css';
 import 'antd/dist/antd.css';
+import './style.css';
 
 const { Option } = Select;
 
@@ -18,7 +18,7 @@ const SelectCurrency = ({ className, onChange }) => (
         <div> {flagOptions[0].text}</div>
       </div>
     }
-    className={className}
+    className={`selectCurrency ${className}`}
     optionFilterProp="children"
     onChange={onChange}
     optionLabelProp="label"
@@ -54,7 +54,7 @@ SelectCurrency.propTypes = {
 };
 
 SelectCurrency.defaultProps = {
-  className: 'selectCurrency',
+  className: '',
 };
 
 export default SelectCurrency;
