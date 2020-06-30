@@ -1,0 +1,13 @@
+.footer-component{
+  background-color:transparent;
+  border-top: 1px solid #E7E7E7;
+  padding: 0.5rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2rem;
+  display:Flex; 
+  justify-content: center;
+  align-items: center;
+}
