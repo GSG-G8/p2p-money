@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Input, ConfigProvider } from 'antd';
 
 import 'antd/dist/antd.css';
-import './index.css';
+import './style.css';
 
 const TextInput = ({
   className,
@@ -34,7 +34,7 @@ TextInput.propTypes = {
   type: PropTypes.string,
   disabled: PropTypes.bool,
   placeholder: PropTypes.string.isRequired,
-  handleChange: PropTypes.func,
+  handleChange: PropTypes.func.isRequired,
   onFocus: PropTypes.func,
   value: PropTypes.string.isRequired,
 };
@@ -43,7 +43,6 @@ TextInput.defaultProps = {
   className: '',
   type: 'text',
   disabled: false,
-  handleChange: () => {},
   onFocus: () => {},
 };
 
