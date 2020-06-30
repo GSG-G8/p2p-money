@@ -35,7 +35,7 @@ const SelectBox = ({
 );
 
 SelectBox.propTypes = {
-  elements: PropTypes.arrayOf(PropTypes.string).isRequired,
+  elements: PropTypes.arrayOf(PropTypes.string),
   handleChange: PropTypes.func,
   placeholder: PropTypes.string.isRequired,
   className: PropTypes.string,
@@ -46,6 +46,7 @@ SelectBox.propTypes = {
 SelectBox.defaultProps = {
   handleChange: () => {},
   className: '',
+  elements: [],
   disabled: false,
 };
 
