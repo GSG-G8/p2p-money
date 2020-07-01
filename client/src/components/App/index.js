@@ -20,7 +20,7 @@ const checkAdmin = async () => {
 };
 
 const checkClient = async () => {
-  const data = await axios.get('/api/v1/client');
+  const { data } = await axios.get('/api/v1/transaction');
   return data;
 };
 
@@ -47,9 +47,9 @@ const App = () => {
     getPrices().then((Prices) => setPrices(Prices));
     if (Cookies.get('client')) {
       checkClient()
-        .then(({ data: { clientData } }) => {
+        .then((data) => {
           setClient(true);
-          setClientData(clientData);
+          setClientData(data);
           setLoading(false);
         })
         .catch(() => {

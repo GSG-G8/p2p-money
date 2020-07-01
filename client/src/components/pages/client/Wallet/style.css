@@ -1,0 +1,19 @@
+.card-balance{
+  font-family: Almarai;
+  font-size: 65px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  max-width: 675px;
+  margin-bottom: 12px;
+  font-weight: 800;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.card-balance__label{
+  color: #a29c9c;
+  font-size: 26px;
+}

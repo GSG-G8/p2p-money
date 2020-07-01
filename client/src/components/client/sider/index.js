@@ -14,6 +14,8 @@ import './style.css';
 
 const { Content, Sider } = Layout;
 const SiderMenu = ({ ClientData }) => {
+  // console.log(ClientData.result[0].clientData);
+  const { avatar, fullName } = ClientData.result[0].clientData;
   const routeName = window.location.pathname.split('/')[1];
   return (
     <ConfigProvider direction="rtl">
@@ -21,15 +23,8 @@ const SiderMenu = ({ ClientData }) => {
         <Layout dir="rtl">
           <Sider dir="rtl" className="sider-rtl">
             <div className="user-wrapper">
-              <img
-                className="sider-logo"
-                src={ClientData.avatar}
-                alt="user-name"
-              />
-              <Typography
-                className="user-title"
-                Content={ClientData.fullName}
-              />
+              <img className="sider-logo" src={avatar} alt="user-name" />
+              <Typography className="user-title" Content={fullName} />
             </div>
             <Menu theme="light" mode="inline" defaultSelectedKeys={routeName}>
               <Menu.Item key="wallet" icon={<WalletFilled />}>
@@ -49,7 +44,7 @@ const SiderMenu = ({ ClientData }) => {
           <Layout className="wrap-layout">
             <Content>
               <div className="wrap-layout__content" />
-              {routeName === 'wallet' && <Wallet />}
+              {routeName === 'wallet' && <Wallet ClientData={ClientData} />}
               {routeName === 'bank' && <Bank />}
               {routeName === 'settings' && <Settings />}
             </Content>
