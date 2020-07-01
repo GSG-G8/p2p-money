@@ -28,7 +28,7 @@ const ButtonComponent = ({
   </ConfigProvider>
 );
 ButtonComponent.propTypes = {
-  content: PropTypes.string,
+  content: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
   size: PropTypes.string,
@@ -38,12 +38,11 @@ ButtonComponent.propTypes = {
 };
 
 ButtonComponent.defaultProps = {
-  content: 'تسجيل الدخول',
   disabled: false,
   loading: false,
   size: 'all', // other sizes: large,middle,sm
   block: false, // make the button block element with full div width
-  onClick: null,
+  onClick: () => {},
   cssClass: 'blue', // options:blue blue-border green
 };
 

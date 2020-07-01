@@ -3,7 +3,7 @@ import { ConfigProvider } from 'antd';
 
 import headerIcon from '../../../assets/icons/headerIcon.svg';
 import Button from '../Button';
-// import 'antd/dist/antd.css';
+
 import './style.css';
 
 const Header = () => (
@@ -14,7 +14,7 @@ const Header = () => (
         <p className=" logo-text">P2P</p>
       </div>
       <div className="header-left flex-row">
-        <Button className="header-btn btn-login" />
+        <Button className="header-btn btn-login" content="تسجيل الدخول" />
         <Button
           cssClass="blue-border"
           className="header-btn btn-signup"
