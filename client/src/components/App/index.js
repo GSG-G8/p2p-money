@@ -9,6 +9,7 @@ import Dashboard from '../pages/admin/dashboard';
 import Home from '../pages/common/Login';
 import Login from '../pages/common/Home';
 import SignUp from '../pages/client/Signup';
+import SiderMenu from '../client/sider';
 
 import './style.css';
 
@@ -91,9 +92,10 @@ const App = () => {
         <Route exact path="/404" render={() => <Error404 />} />
         <Route exact path="/" render={() => <Home prices={prices} />} />
         <Route
-          path="/wallet"
-          render={() => <Wallet ClientData={ClientData} />}
+          path={['/wallet', '/bank', '/settings']}
+          render={() => <SiderMenu content={Wallet} ClientData={ClientData} />}
         />
+
         {staticRoutes.includes(pathname) && (
           // when we finish the alert component
           // we will tell the Client you already login and the redirect their to wallet

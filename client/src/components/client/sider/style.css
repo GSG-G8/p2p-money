@@ -1,4 +1,5 @@
 .sider-rtl{
+  font-family: Almarai;
   overflow: auto;
   height: 100vh;
   background: white;
@@ -17,6 +18,7 @@
 .sider-logo{
   border-radius: 50%;
   width: 2.5rem;
+  height: 2.5rem;
   margin-bottom: 10px;
 }
 
