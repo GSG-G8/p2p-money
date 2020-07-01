@@ -1,89 +1,172 @@
 import React, { useState } from 'react';
-import { Form, InputNumber, Button, ConfigProvider, Input } from 'antd';
+import { Form, InputNumber, Button, ConfigProvider, Input, Select } from 'antd';
+import { Link } from 'react-router-dom';
 import Typography from '../../../Common/Typography';
+import antConfigurations from './AntFormantConfigurations';
 
-const layout = {
-  labelCol: { span: 16 },
-  wrapperCol: { span: 16 },
-};
+const { Option } = Select;
 
-const validateMessages = {
-  required: '${label} مطلوب!',
-  types: {
-    email: '${label} is not validate email!',
-    number: '${label} is not a validate number!',
-  },
-  number: {
-    range: '${label} must be between ${min} and ${max}',
-  },
-};
-
+const prefixSelector = (
+  <Form.Item name="prefix" noStyle>
+    <Select defaultValue="+970" style={{ width: 75 }}>
+      <Option value="+970">970+</Option>
+      <Option value="+972">972+</Option>
+    </Select>
+  </Form.Item>
+);
 const SignupForm = () => {
+  const [LogMobile, setMobile] = useState();
+  const [loading, setLoading] = useState(false);
+  const [form] = Form.useForm();
+
   const onFinish = (values) => {
+    setLoading(true);
     console.log(values);
   };
   return (
     <ConfigProvider direction="rtl">
+      <Typography type="title" level={4} Content="تسجيل الدخول" />
       <Form
+        {...antConfigurations.formItemLayout}
+        form={form}
         className="signUp__form"
-        {...layout}
+        {...antConfigurations.layout}
         name="nest-messages"
         onFinish={onFinish}
-        validateMessages={validateMessages}
+        validateMessages={antConfigurations.validateMessages}
       >
-        <Typography type="title" level={4} Content="تسجيل الدخول" />
         <Form.Item
-          className="signUp__item"
           name={['user', 'name']}
           label="الاسم الكامل"
           rules={[{ required: true }]}
         >
           <Input className="signUp__input" />
         </Form.Item>
+        {LogMobile ? (
+          <Form.Item
+            name={['user', 'mobileNumber']}
+            label="رقم الموبايل"
+            rules={[
+              {
+                types: 'number',
+                required: true,
+                validator: (role, val) =>
+                  antConfigurations.checkMobileNumber(val),
+              },
+            ]}
+          >
+            <Input addonAfter={prefixSelector} className="signUp__input" />
+          </Form.Item>
+        ) : (
+          <Form.Item
+            name={['user', 'email']}
+            label="البريد الالكتروني"
+            rules={[{ type: 'email', required: true }]}
+          >
+            <Input className="signUp__input" />
+          </Form.Item>
+        )}
         <Form.Item
-          className="signUp__item"
-          name={['user', 'email']}
-          label="البريد الالكتروني"
-          rules={[{ type: 'email' }]}
+          name={['user', 'password']}
+          label="كلمة المرور "
+          rules={[
+            {
+              types: 'password',
+              required: true,
+              validator: (role, val) => antConfigurations.validatePassword(val),
+            },
+          ]}
         >
-          <Input className="signUp__input" />
+          <Input.Password className="signUp__input" />
         </Form.Item>
+
         <Form.Item
-          className="signUp__item"
-          name={['user', 'email']}
-          label="كلمة المرور"
-          rules={[{ type: 'password' }]}
-        >
-          <Input className="signUp__input" />
-        </Form.Item>
-        <Form.Item
-          className="signUp__item"
-          name={['user', 'email']}
+          name={['user', 'passwordConfirmation']}
           label="تاكيد كلمة المرور"
-          rules={[{ type: 'rePassword' }]}
+          dependencies={['user', 'password']}
+          rules={[
+            {
+              types: 'password',
+              required: true,
+            },
+            ({ getFieldValue }) => ({
+              validator(rule, value) {
+                if (!value || getFieldValue(['user', 'password']) === value) {
+                  return Promise.resolve();
+                }
+                const message = 'تاكيد كلمة المرور غير صحيح';
+                return Promise.reject(message);
+              },
+            }),
+          ]}
         >
-          <Input className="signUp__input" />
+          <Input.Password className="signUp__input" />
         </Form.Item>
         <Form.Item
-          className="signUp__item"
-          name={['user', 'email']}
+          name={['user', 'mainBankName']}
           label="حساب البنك"
-          rules={[{ type: 'rePassword' }]}
+          rules={[{ required: true }]}
         >
-          <Input className="signUp__input" />
+          <Select style={{ width: '20rem', height: '2rem' }}>
+            <Option value="بنك فلسطين">بنك فلسطين </Option>
+            <Option value="بنك الإسكان">بنك الإسكان</Option>
+            <Option value="بنك القدس">بنك القدس</Option>
+          </Select>
         </Form.Item>
         <Form.Item
-          className="signUp__item"
-          name={['user', 'email']}
+          name={['user', 'mainBankAccount']}
           label="رقم الحساب"
-          rules={[{ type: 'rePassword' }]}
+          rules={[{ required: true }]}
         >
-          <Input className="signUp__input" />
+          <InputNumber min={1} className="signUp__input" />
         </Form.Item>
-        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 0 }}>
-          <Button type="primary" htmlType="submit" className="signUp__submit">
+        <Form.Item
+          wrapperCol={{ ...antConfigurations.layout.wrapperCol, offset: 7 }}
+        >
+          <Button
+            loading={loading}
+            type="primary"
+            htmlType="submit"
+            className="signUp__submit"
+          >
             تسجيل
           </Button>
+          <Typography
+            level=".6rem"
+            className="signUp__privacy"
+            Content="بالنقر فوق تسجيل ، فإنك توافق على الشروط والأحكام وسياسة الخصوصية"
+          />
+          <Typography
+            align="center"
+            className="signUp__link"
+            Content={
+              <p>
+                هل لديك حساب؟
+                <Link to="/login"> تسجيل الدخول </Link> أو
+                {!LogMobile ? (
+                  <Link
+                    to="/signup"
+                    onClick={() => {
+                      setLoading(false);
+                      setMobile(true);
+                    }}
+                  >
+                    &nbsp; التسجيل برقم الهاتف
+                  </Link>
+                ) : (
+                  <Link
+                    to="/signup"
+                    onClick={() => {
+                      setLoading(false);
+                      setMobile(false);
+                    }}
+                  >
+                    &nbsp; بالبريد الالكتروني
+                  </Link>
+                )}
+              </p>
+            }
+          />
         </Form.Item>
       </Form>
     </ConfigProvider>

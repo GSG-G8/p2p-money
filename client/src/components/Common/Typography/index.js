@@ -8,7 +8,7 @@ import './style.css';
 
 const { Title, Paragraph } = Typography;
 
-const typography = ({ type, level, Content, className }) => (
+const typography = ({ type, level, Content, className, align }) => (
   <ConfigProvider direction="rtl">
     {type === 'title' ? (
       // this Title have 4 level h1:1,  h2:2, h3:3, h4:4
@@ -16,7 +16,13 @@ const typography = ({ type, level, Content, className }) => (
         {Content}
       </Title>
     ) : (
-      <Paragraph className={`Typography ${className}`}> {Content}</Paragraph>
+      <Paragraph
+        style={{ fontSize: level }}
+        align={align}
+        className={`Typography ${className}`}
+      >
+        {Content}
+      </Paragraph>
     )}
   </ConfigProvider>
 );
@@ -31,5 +37,5 @@ typography.propTypes = {
 
 typography.defaultProps = {
   type: '',
-  level: 1,
+  level: '.8rem',
 };
