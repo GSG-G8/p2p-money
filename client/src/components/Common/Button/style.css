@@ -1,6 +1,7 @@
 .blue {
   background-color: #126fc9 !important;
   border-color: #126fc9 !important;
+  box-shadow: 0 0;
 }
 
 .blue:hover {
@@ -12,6 +13,7 @@
 .blue-border {
   background-color: #126fc9 !important;
   border-color: white !important;
+  box-shadow: 0 0;
 }
 
 .blue-border:hover {
@@ -22,6 +24,8 @@
 .green {
   background-color: #007a3d;
   border-color: #007a3d;
+  box-shadow: 0 0;
+
 }
 
 .green:hover {
@@ -33,4 +37,5 @@
 .green:focus {
   background-color: #007a3d;
   border-color: #007a3d;
+  box-shadow: 0 0;
 }
