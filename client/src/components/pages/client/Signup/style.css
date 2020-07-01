@@ -1,0 +1,63 @@
+* {
+  margin: 0;
+}
+
+.signUp__container {
+  display: flex;
+  min-width: 100%;
+  max-height: 100vh;
+  justify-content: space-between;
+}
+
+.signUp__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  background-image: url('../../../../assets/images/signUpImg.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 50%;
+}
+
+.signUp__title {
+  width: 55%;
+  color: #FFFFFF !important;
+}
+
+.signUp__description {
+  width: 55%;
+  padding-bottom: 2rem;
+  line-height: 157.9%;
+  color: #FFFFFF !important;
+}
+
+.signUp__left {
+  margin: 0 auto;
+  align-self: center;
+}
+
+.signUp__form {
+  align-items: start;
+  font-family: 'Almarai' !important;
+  text-align: right;
+}
+
+.signUp__item {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.signUp__input {
+  width: 20rem;
+  height: 2rem;
+}
+
+.ant-form-rtl .ant-form-item-label {
+  text-align: right;
+}
+.signUp__submit{
+ width: 20rem;
+}
