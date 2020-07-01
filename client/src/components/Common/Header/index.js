@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import axios from 'axios';
@@ -10,6 +10,14 @@ import './style.css';
 
 const Header = () => {
   const history = useHistory();
+  const [isLogin, setIsLogin] = useState(false);
+  useEffect(() => {
+    if (Cookies.get('client') || Cookies.get('admin')) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, [isLogin]);
   return (
     <ConfigProvider direction="rtl">
       <header className="header-component">
@@ -18,13 +26,14 @@ const Header = () => {
           <p className=" logo-text">P2P Money</p>
         </div>
         <div className="header-left flex-row">
-          {Cookies.get('client') || Cookies.get('admin') ? (
+          {isLogin ? (
             <Button
               cssClass="blue-border"
               className="header-btn btn-signup"
               content="خروج"
               onClick={async () => {
                 await axios.post('/api/v1/logout');
+                setIsLogin(false);
               }}
             />
           ) : (
