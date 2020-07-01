@@ -1,0 +1,39 @@
+.header-component{
+  background-color: #126fc9;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  height:3rem;
+}
+.flex-row{
+  display:flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+}
+.header-btn{
+  color:white;
+}
+
+.header-btn:hover{
+  color:white
+}
+
+.btn-signup{
+  border:1px solid white;
+}
+
+.header-left{
+  margin-left:3rem;
+}
+
+.header-right {
+  margin-right:3rem;
+}
+
+.text--white{
+font-size: 20rem !important;
+}
