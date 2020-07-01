@@ -1,9 +1,36 @@
-.button-component{
-  background-color: #126fc9;
-   border-color: #126fc9
+.blue {
+  background-color: #126fc9 !important;
+  border-color: #126fc9 !important;
 }
 
-.button-component:hover{
-  background-color: #0e5399;
-   border-color: #0e5399
+.blue:hover {
+  background-color: #126fc9;
+  border-color: #126fc9;
+  font-weight: bolder;
+}
+
+.blue-border {
+  background-color: #126fc9 !important;
+  border-color: white !important;
+}
+
+.blue-border:hover {
+  background-color: #126fc9;
+  border-color: white;
+  font-weight: bolder;
+}
+.green {
+  background-color: #007a3d;
+  border-color: #007a3d;
+}
+
+.green:hover {
+  background-color: #007a3d;
+  border-color: #007a3d;
+  font-weight: bolder;
+}
+
+.green:focus {
+  background-color: #007a3d;
+  border-color: #007a3d;
 }
