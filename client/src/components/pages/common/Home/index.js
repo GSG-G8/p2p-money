@@ -2,6 +2,6 @@ import React from 'react';
 
 import './style.css';
 
-const Login = () => <>Login</>;
+const Home = () => <>Home</>;
 
-export default Login;
+export default Home;

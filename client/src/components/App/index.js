@@ -6,8 +6,8 @@ import Cookies from 'js-cookie';
 import Error404 from '../pages/common/Error404';
 import Wallet from '../pages/client/Wallet';
 import Dashboard from '../pages/admin/dashboard';
-import Home from '../pages/common/Login';
-import Login from '../pages/common/Home';
+import Home from '../pages/common/Home';
+import Login from '../pages/common/Login';
 import SignUp from '../pages/client/Signup';
 
 import './style.css';
