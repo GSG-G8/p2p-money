@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Form, InputNumber, Button, ConfigProvider, Input, Select } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 import Typography from '../../../Common/Typography';
 import antConfigurations from './AntFormantConfigurations';
+import Alert from '../../../Common/Alert';
 
 const { Option } = Select;
 
@@ -17,14 +19,41 @@ const prefixSelector = (
 const SignupForm = () => {
   const [LogMobile, setMobile] = useState();
   const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState();
   const [form] = Form.useForm();
+  const history = useHistory();
 
-  const onFinish = (values) => {
+  const onFinish = ({ user }) => {
     setLoading(true);
-    console.log(values);
+    axios
+      .post('/api/v1/signup', user)
+      .then(() => {
+        form.resetFields();
+        setTimeout(() => {
+          history.push('/');
+        }, 5 * 1000);
+        setAlert({
+          type: 'success',
+          message:
+            'تم تسجيل دخولك بنجاح, سيتم توجيهك الى الصفحة الرئيسية خلال 5 ثواني..',
+        });
+      })
+      .catch(() =>
+        setAlert({
+          type: 'error',
+          message: 'تاكد من البريد الالكتروني,رقم الهاتف ورقم الحساب',
+        })
+      );
   };
   return (
     <ConfigProvider direction="rtl">
+      {alert && (
+        <Alert
+          type={alert.type}
+          message={alert.message}
+          className="signUp__alert"
+        />
+      )}
       <Typography type="title" level={4} Content="تسجيل الدخول" />
       <Form
         {...antConfigurations.formItemLayout}
@@ -36,7 +65,7 @@ const SignupForm = () => {
         validateMessages={antConfigurations.validateMessages}
       >
         <Form.Item
-          name={['user', 'name']}
+          name={['user', 'fullName']}
           label="الاسم الكامل"
           rules={[{ required: true }]}
         >
@@ -124,7 +153,7 @@ const SignupForm = () => {
           wrapperCol={{ ...antConfigurations.layout.wrapperCol, offset: 7 }}
         >
           <Button
-            loading={loading}
+            // loading={loading}
             type="primary"
             htmlType="submit"
             className="signUp__submit"

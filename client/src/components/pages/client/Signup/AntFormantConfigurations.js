@@ -42,7 +42,7 @@ const antConfigurations = {
   checkMobileNumber: (mobile) => {
     let message = 'رقم الهاتف مطلوب!';
     if (!mobile) return Promise.reject(message);
-    const validation = /^[0-9]{9}$/;
+    const validation = /^[0-9]{10}$/;
     if (mobile.match(validation)) {
       return Promise.resolve();
     }

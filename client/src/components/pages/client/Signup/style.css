@@ -51,12 +51,20 @@
 .ant-form-rtl .ant-form-item-label {
   text-align: right;
 }
-.signUp__submit{
-background-color: #126FC9;
- width: 20rem;
+
+.signUp__submit {
+  background-color: #126FC9;
+  width: 20rem;
 }
-.signUp__privacy{
+
+.signUp__privacy {
   padding: 1rem;
   font-size: .7rem;
   text-align: center;
+}
+
+.signUp__alert {
+  width: 19rem;
+  position: absolute;
+  /* padding: 10rem; */
 }

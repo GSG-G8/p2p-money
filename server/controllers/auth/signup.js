@@ -27,31 +27,34 @@ const signUp = async (req, res, next) => {
         } is already exists, please sign-in`,
       });
     } else {
-      const hashedPassword = await hash(password, 10);
-      const { _id } = await client.create({
-        fullName,
-        email: value.email,
-        mobileNumber: value.mobileNumber,
-        password: hashedPassword,
-        mainBankName,
-        mainBankAccount,
-        bankAccounts: [
-          {
-            bankName: mainBankName,
-            accountNumber: mainBankAccount,
-            balance: [{ type: 'USD', total: 1000 }],
-          },
-        ],
-        mainBalance: [{ type: 'USD', total: 1000 }],
-        avatar,
-      });
-      const clientToken = { clientId: _id };
-      const cookie = sign(clientToken, process.env.SECRET_KEY);
-      res.cookie('client', cookie).json({
-        status: 'successfully',
-        role: 'client',
-        _id,
-      });
+      try {
+        const hashedPassword = await hash(password, 10);
+        const { _id } = await client.create({
+          fullName,
+          ...value,
+          password: hashedPassword,
+          mainBankName,
+          mainBankAccount,
+          bankAccounts: [
+            {
+              bankName: mainBankName,
+              accountNumber: mainBankAccount,
+              balance: [{ type: 'USD', total: 1000 }],
+            },
+          ],
+          mainBalance: [{ type: 'USD', total: 1000 }],
+          avatar,
+        });
+        const clientToken = { clientId: _id };
+        const cookie = sign(clientToken, process.env.SECRET_KEY);
+        res.cookie('client', cookie).json({
+          status: 'successfully',
+          role: 'client',
+          _id,
+        });
+      } catch (error) {
+        res.status(400).json(error);
+      }
     }
   };
 
