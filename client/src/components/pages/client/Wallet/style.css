@@ -1,19 +1,46 @@
+.wallet-head{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 2rem
+}
+
+.exchange-btn{
+  float: right;
+}
 .card-balance{
   font-family: Almarai;
-  font-size: 65px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
-  align-items: center;
   width: 100%;
-  max-width: 675px;
-  margin-bottom: 12px;
-  font-weight: 800;
-  background-color: white;
-  border-radius: 4px;
+  max-width: 14rem;
+  margin-bottom: 1rem;
+  background: #FFFFFF;
+  border: 1px solid #D8D8D8;
+  box-sizing: border-box;
+  border-radius: 8px;
+  color: #2F80ED;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 2rem;
+  text-align: center;
+
 }
 
 .card-balance__label{
-  color: #a29c9c;
-  font-size: 26px;
+  color: #030303;
+  font-size: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.card-balance__amount{
+  margin-bottom: 1.4rem;
+  margin-top: 1rem;
+}
+
+.wallet-table{
+  max-width: 58rem;
+  margin: 0 auto;
+  margin-right: 2rem
 }

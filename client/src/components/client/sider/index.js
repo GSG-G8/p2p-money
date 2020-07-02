@@ -3,7 +3,7 @@ import { Layout, Menu, ConfigProvider } from 'antd';
 import PropTypes from 'prop-types';
 import { WalletFilled, BankFilled, SettingFilled } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import Typography from '../../Common/Typography';
+import Logo from '../../../assets/icons/icon.svg';
 
 import Wallet from '../../pages/client/Wallet';
 import Bank from '../../pages/client/Bank';
@@ -14,8 +14,6 @@ import './style.css';
 
 const { Content, Sider } = Layout;
 const SiderMenu = ({ ClientData }) => {
-  // console.log(ClientData.result[0].clientData);
-  const { avatar, fullName } = ClientData.result[0].clientData;
   const routeName = window.location.pathname.split('/')[1];
   return (
     <ConfigProvider direction="rtl">
@@ -23,8 +21,8 @@ const SiderMenu = ({ ClientData }) => {
         <Layout dir="rtl">
           <Sider dir="rtl" className="sider-rtl">
             <div className="user-wrapper">
-              <img className="sider-logo" src={avatar} alt="user-name" />
-              <Typography className="user-title" Content={fullName} />
+              <img className="sider-logo" src={Logo} alt="logo-img" />
+              <div className="user-title">P2P Money</div>
             </div>
             <Menu theme="dark" mode="inline" defaultSelectedKeys={routeName}>
               <Menu.Item key="wallet" icon={<WalletFilled />}>
@@ -46,7 +44,7 @@ const SiderMenu = ({ ClientData }) => {
               <div className="wrap-layout__content" />
               {routeName === 'wallet' && <Wallet ClientData={ClientData} />}
               {routeName === 'bank' && <Bank />}
-              {routeName === 'settings' && <Settings ClientData={ClientData} />}
+              {routeName === 'settings' && <Settings />}
             </Content>
           </Layout>
         </Layout>
