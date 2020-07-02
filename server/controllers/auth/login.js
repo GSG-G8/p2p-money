@@ -28,38 +28,45 @@ const login = async (req, res) => {
     if (client) {
       await compare(password, client.password, (err, result) => {
         if (err) {
+          res.status(401).json(errResponse);
+        }
+        if (result) {
+          const clientToken = { clientId: client.id };
+          const cookie = sign(clientToken, process.env.SECRET_KEY);
+          res.cookie('client', cookie).json({
+            status: 'successfully',
+            role: 'client',
+            data: {
+              email: value.email,
+              mobileNumber: value.mobileNumber,
+              fullName: client.fullName,
+              avatar: client.avatar,
+              balance: client.mainBalance,
+              mainBankName: client.mainBankName,
+            },
+          });
+        } else {
           res.status(400).send({ err: 'error in password' });
         }
-        const clientToken = { clientId: client.id };
-        const cookie = sign(clientToken, process.env.SECRET_KEY);
-        res.cookie('client', cookie).json({
-          status: 'successfully',
-          role: 'client',
-          data: {
-            email: value.email,
-            mobileNumber: value.mobileNumber,
-            fullName: client.fullName,
-            avatar: client.avatar,
-            balance: client.mainBalance,
-            mainBankName: client.mainBankName,
-          },
-        });
       });
     } else {
       const admin = await Admin.findOne(value);
       if (admin) {
         await compare(password, admin.password, (err, result) => {
-          if (err) {
+          // if (err) {
+          //   res.status(400).json(errResponse);
+          // }
+          if (result) {
+            const adminToken = { adminId: admin.id };
+            const cookie = sign(adminToken, process.env.SECRET_KEY);
+            res.cookie('admin', cookie).json({
+              status: 'successfully',
+              role: 'admin',
+              data: { email },
+            });
+          } else {
             res.status(400).json(errResponse);
           }
-
-          const adminToken = { adminId: admin.id };
-          const cookie = sign(adminToken, process.env.SECRET_KEY);
-          res.cookie('admin', cookie).json({
-            status: 'successfully',
-            role: 'admin',
-            data: { email },
-          });
         });
       } else {
         res

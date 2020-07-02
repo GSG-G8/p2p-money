@@ -26,7 +26,7 @@ const SiderMenu = ({ ClientData }) => {
               <img className="sider-logo" src={avatar} alt="user-name" />
               <Typography className="user-title" Content={fullName} />
             </div>
-            <Menu theme="light" mode="inline" defaultSelectedKeys={routeName}>
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={routeName}>
               <Menu.Item key="wallet" icon={<WalletFilled />}>
                 <Link to="/wallet" />
                 محفظتي
@@ -46,7 +46,7 @@ const SiderMenu = ({ ClientData }) => {
               <div className="wrap-layout__content" />
               {routeName === 'wallet' && <Wallet ClientData={ClientData} />}
               {routeName === 'bank' && <Bank />}
-              {routeName === 'settings' && <Settings />}
+              {routeName === 'settings' && <Settings ClientData={ClientData} />}
             </Content>
           </Layout>
         </Layout>
