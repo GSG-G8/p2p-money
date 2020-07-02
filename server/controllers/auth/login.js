@@ -53,9 +53,6 @@ const login = async (req, res) => {
       const admin = await Admin.findOne(value);
       if (admin) {
         await compare(password, admin.password, (err, result) => {
-          // if (err) {
-          //   res.status(400).json(errResponse);
-          // }
           if (result) {
             const adminToken = { adminId: admin.id };
             const cookie = sign(adminToken, process.env.SECRET_KEY);
