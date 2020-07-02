@@ -42,5 +42,6 @@
 .wallet-table{
   max-width: 58rem;
   margin: 0 auto;
-  margin-right: 2rem
+  margin-right: 2rem;
+  font-family: Almarai;
 }
