@@ -19,11 +19,11 @@
   background: #363740;
 }
 
-.ant-menu.ant-menu-dark .ant-menu-item-selected{
+.sider-rtl .ant-menu.ant-menu-dark .ant-menu-item-selected{
  background: #9FA2B4;
 }
 
-.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+.sider-rtl .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
   background-color: #9fa2b429;
 }
 
