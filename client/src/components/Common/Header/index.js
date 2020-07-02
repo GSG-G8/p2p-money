@@ -26,7 +26,26 @@ const Header = () => {
           <p className=" logo-text">P2P Money</p>
         </div>
         <div className="header-left flex-row">
-          {isLogin ? (
+          {isLogin && Cookies.get('client') ? (
+            <>
+              <Button
+                className="header-btn btn-login"
+                content="المحفظة"
+                onClick={() => {
+                  history.push('/wallet');
+                }}
+              />
+              <Button
+                cssClass="blue-border"
+                className="header-btn btn-signup"
+                content="خروج"
+                onClick={async () => {
+                  await axios.post('/api/v1/logout');
+                  setIsLogin(false);
+                }}
+              />
+            </>
+          ) : isLogin && Cookies.get('admin') ? (
             <Button
               cssClass="blue-border"
               className="header-btn btn-signup"
