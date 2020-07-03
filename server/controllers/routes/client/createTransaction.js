@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable camelcase */
 const transactions = require('../../../database/models/transactions');
 const exchangeMoney = require('../../../database/models/exchangeMoney');
 const client = require('../../../database/models/client');
@@ -8,6 +6,7 @@ const createTransactionValidation = require('../../../utils/validations/createTr
 
 const createTransaction = async (req, res) => {
   try {
+    // eslint-disable-next-line camelcase
     const client_id = res.clientId;
     const { amount, from, to } = req.body;
     const latestPrices = await prices.find({});
@@ -47,7 +46,7 @@ const createTransaction = async (req, res) => {
           agency_price_sell: agencyPrice[0].sell * amount,
           agency_price_buy: agencyPrice[0].buy * amount,
           agency_saved_money:
-            agencyPrice[0].sell * amount - bankPrice[0].sell * amount, // need review
+            agencyPrice[0].sell * amount - bankPrice[0].sell * amount,
         });
         await transactions.create({ client_id, exchange_id: _id });
         mainBalance[from] -= amount;
