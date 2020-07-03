@@ -1,47 +1,76 @@
-.wallet-head{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 2rem
+.wallet-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-right: 2rem
 }
 
-.exchange-btn{
-  float: right;
-}
-.card-balance{
-  font-family: Almarai;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 100%;
-  max-width: 14rem;
-  margin-bottom: 1rem;
-  background: #FFFFFF;
-  border: 1px solid #D8D8D8;
-  box-sizing: border-box;
-  border-radius: 8px;
-  color: #2F80ED;
-  font-weight: bold;
-  font-size: 40px;
-  line-height: 2rem;
-  text-align: center;
-
+.exchange-btn {
+	float: right;
 }
 
-.card-balance__label{
-  color: #030303;
-  font-size: 0.8rem;
-  margin-top: 0.8rem;
+.card-balance {
+	font-family: Almarai;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	width: 100%;
+	max-width: 14rem;
+	margin-bottom: 1rem;
+	background: #FFFFFF;
+	border: 1px solid #D8D8D8;
+	box-sizing: border-box;
+	border-radius: 8px;
+	color: #2F80ED;
+	font-weight: bold;
+	font-size: 40px;
+	line-height: 2rem;
+	text-align: center;
 }
 
-.card-balance__amount{
-  margin-bottom: 1.4rem;
-  margin-top: 1rem;
+.card-balance__label {
+	color: rgba(0, 0, 0, 0.65);
+	font-size: 0.8rem;
+	margin-top: 0.8rem;
 }
 
-.wallet-table{
-  max-width: 58rem;
-  margin: 0 auto;
-  margin-right: 2rem;
-  font-family: Almarai;
+.card-balance__amount {
+	margin-bottom: 1.4rem;
+	margin-top: 1rem;
+}
+
+.wallet-table {
+	max-width: 58rem;
+	margin: 0 auto;
+	margin-right: 2rem;
+	font-family: Almarai;
+}
+
+@media screen and (max-width: 650px) {
+	.wallet-head {
+		flex-direction: column;
+		margin-bottom: 1.2rem;
+	}
+	.ant-table-thead>tr th:first-of-type,
+	.ant-table-tbody>tr th:first-of-type,
+	.ant-table-thead>tr td:first-of-type,
+	.ant-table-tbody>tr td:first-of-type {
+		padding-top: 1rem;
+	}
+	.ant-table-thead>tr th:last-of-type,
+	.ant-table-tbody>tr th:last-of-type,
+	.ant-table-thead>tr td:last-of-type,
+	.ant-table-tbody>tr td:last-of-type {
+		padding-bottom: 1rem;
+	}
+	.ant-table-thead>tr>th,
+	.ant-table-tbody>tr>th,
+	.ant-table-thead>tr>td,
+	.ant-table-tbody>tr>td {
+		display: block;
+		width: auto !important;
+		border: none;
+		padding: 0 3rem;
+		font-size: 1.1rem;
+	}
 }

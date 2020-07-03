@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Table } from 'antd';
 import PropTypes from 'prop-types';
 import Axios from 'axios';
+import Helmet from 'react-helmet';
 import Button from '../../../Common/Button';
 
 import './style.css';
@@ -99,6 +100,9 @@ const Wallet = ({ ClientData }) => {
 
   return (
     <>
+      <Helmet>
+        <title>Wallet</title>
+      </Helmet>
       <div className="wallet-table">
         <div className="wallet-head">
           <div className="card-balance">
