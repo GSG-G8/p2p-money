@@ -99,31 +99,31 @@ const SignupForm = () => {
       .then((confirmationResult) => {
         setLoading(false);
         window.confirmationResult = confirmationResult;
-
-        // const code = window.prompt('ادخل كود التفعيل');
-        confirmationResult
-          .confirm(code)
-          .then(() => addUserToDatabase(userData))
-          .catch(() => {
-            setAlert(messages.mobileCodeWrong);
-          });
+        setPopUp(true);
+        window.userData = userData;
       })
       .catch(() => {
         setLoading(false);
         setAlert(messages.mobileUsed);
       });
   };
+  const handelCode = () => {
+    window.confirmationResult
+      .confirm(code)
+      .then(() => addUserToDatabase(window.userData))
+      .catch(() => {
+        setAlert(messages.mobileCodeWrong);
+      });
+  };
 
   const onFinish = ({ user }) => {
-    setPopUp(true);
-
-    // setLoading(true);
-    // if (user.email) {
-    //   SubmitByEmail(user);
-    //   setAlert(messages.emailSent);
-    // } else if (user.mobileNumber) {
-    //   mobileVerification(user);
-    // }
+    setLoading(true);
+    if (user.email) {
+      SubmitByEmail(user);
+      setAlert(messages.emailSent);
+    } else if (user.mobileNumber) {
+      mobileVerification(user);
+    }
   };
 
   return (
@@ -280,15 +280,18 @@ const SignupForm = () => {
         </Form.Item>
       </Form>
       <div id="sign-in-container" />
-
       <Modal
-        title="تحقق من الكود التفعيل في هاتفك"
         visible={popUp}
-        onOk={() => setPopUp(false)}
+        onOk={() => {
+          setPopUp(false);
+          handelCode();
+        }}
         onCancel={() => {
-          setCode(0);
           setPopUp(false);
         }}
+        title="تحقق من الكود التفعيل في هاتفك"
+        okText="تفعيل"
+        cancelText="إالغاء"
       >
         <InputText
           value={code}
