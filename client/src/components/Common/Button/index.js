@@ -5,12 +5,13 @@ import 'antd/dist/antd.css';
 import './style.css';
 
 const ButtonComponent = ({
-  Content,
+  content,
   disabled,
   loading,
   size,
   block,
   onClick,
+  cssClass,
 }) => (
   <ConfigProvider direction="rtl">
     <Button
@@ -20,28 +21,29 @@ const ButtonComponent = ({
       size={size}
       block={block}
       onClick={onClick}
-      className="button-component"
+      className={cssClass}
     >
-      {Content}
+      {content}
     </Button>
   </ConfigProvider>
 );
 ButtonComponent.propTypes = {
-  Content: PropTypes.string,
+  content: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
   size: PropTypes.string,
   block: PropTypes.bool,
   onClick: PropTypes.func,
+  cssClass: PropTypes.string,
 };
 
 ButtonComponent.defaultProps = {
-  Content: 'تسجيل الدخول',
   disabled: false,
   loading: false,
   size: 'all', // other sizes: large,middle,sm
   block: false, // make the button block element with full div width
-  onClick: null,
+  onClick: () => {},
+  cssClass: 'blue', // options:blue blue-border green
 };
 
 export default ButtonComponent;
