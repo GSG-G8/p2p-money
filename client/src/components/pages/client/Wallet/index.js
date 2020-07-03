@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Table } from 'antd';
 import PropTypes from 'prop-types';
+import Axios from 'axios';
 import Button from '../../../Common/Button';
 
 import './style.css';
@@ -69,16 +70,32 @@ const columns = [
   },
 ];
 
+const getTransactions = async () => {
+  const { data } = await Axios.get('/api/v1/transaction');
+  return data;
+};
+
 const Wallet = ({ ClientData }) => {
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const history = useHistory();
 
-  const { total } = ClientData.result[0].clientData.mainBalance[0];
-
+  const { total } = ClientData.mainBalance[0];
   const handleClick = () => history.push('/');
-  const transactions = ClientData.result[1].exchangeDetail.map((obj) => ({
-    ...obj,
-    operation_time: obj.operation_time.split('T')[0],
-  }));
+
+  useEffect(() => {
+    setLoading(true);
+    getTransactions().then((rows) => {
+      setTransactions(
+        rows.result[1].exchangeDetail.map((obj) => ({
+          ...obj,
+          operation_time: obj.operation_time.split('T')[0],
+        }))
+      );
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <>
@@ -101,6 +118,7 @@ const Wallet = ({ ClientData }) => {
               defaultCurrent: 1,
               defaultPageSize: 5,
             }}
+            loading={loading}
           />
         </div>
       </div>
