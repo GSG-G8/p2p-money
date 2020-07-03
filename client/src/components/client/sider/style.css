@@ -1,0 +1,36 @@
+.sider-rtl{
+  font-family: Almarai;
+  overflow: auto;
+  height: 100vh;
+  background: white;
+}
+
+.sider-rtl .ant-menu-rtl.ant-menu-inline{
+  border-top: 0.5px solid rgba(0, 0, 0, 0.11);
+}
+
+.wrap-layout{
+  margin: 1.5rem 1rem 0;
+  overflow: initial;
+}
+
+.wrap-layout__content{
+  padding: 24;
+  text-align: center;
+}
+
+.sider-logo{
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 0.625rem;
+  margin-left: 0.76rem;
+}
+
+.user-wrapper{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 1.4rem 1.4rem 0.9rem 1.4rem;
+  padding-left: 1.938rem;  
+}
