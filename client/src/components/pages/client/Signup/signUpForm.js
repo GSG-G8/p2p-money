@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
-import { Form, InputNumber, Button, ConfigProvider, Input, Select } from 'antd';
+import {
+  Form,
+  InputNumber,
+  Button,
+  ConfigProvider,
+  Input,
+  Select,
+  Modal,
+} from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Typography from '../../../Common/Typography';
 import Configurations from './AntFormantConfigurations';
+import InputText from '../../../Common/TextInput';
 import Alert from '../../../Common/Alert';
 import fireBase from './firebase';
 
@@ -14,8 +23,8 @@ const { antConfigurations, messages } = Configurations;
 const prefixSelector = (
   <Form.Item name="prefix" noStyle>
     <Select defaultValue="+970" style={{ width: 75 }}>
-      <Option value="+970">970+</Option>
-      <Option value="+972">972+</Option>
+      <Option value="+97">97+</Option>
+      <Option value="+97">97+</Option>
     </Select>
   </Form.Item>
 );
@@ -23,6 +32,9 @@ const SignupForm = () => {
   const [LogMobile, setMobile] = useState();
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState();
+  const [code, setCode] = useState();
+  const [popUp, setPopUp] = useState(false);
+
   const [form] = Form.useForm();
   const history = useHistory();
 
@@ -87,7 +99,8 @@ const SignupForm = () => {
       .then((confirmationResult) => {
         setLoading(false);
         window.confirmationResult = confirmationResult;
-        const code = window.prompt('ادخل كود التفعيل');
+
+        // const code = window.prompt('ادخل كود التفعيل');
         confirmationResult
           .confirm(code)
           .then(() => addUserToDatabase(userData))
@@ -96,18 +109,21 @@ const SignupForm = () => {
           });
       })
       .catch(() => {
+        setLoading(false);
         setAlert(messages.mobileUsed);
       });
   };
 
   const onFinish = ({ user }) => {
-    setLoading(true);
-    if (user.email) {
-      SubmitByEmail(user);
-      setAlert(messages.emailSent);
-    } else if (user.mobileNumber) {
-      mobileVerification(user);
-    }
+    setPopUp(true);
+
+    // setLoading(true);
+    // if (user.email) {
+    //   SubmitByEmail(user);
+    //   setAlert(messages.emailSent);
+    // } else if (user.mobileNumber) {
+    //   mobileVerification(user);
+    // }
   };
 
   return (
@@ -119,7 +135,7 @@ const SignupForm = () => {
           className="signUp__alert"
         />
       )}
-      <Typography type="title" level={4} Content="تسجيل الدخول" />
+      <Typography type="title" level={4} Content="حساب جديد" />
       <Form
         {...antConfigurations.formItemLayout}
         form={form}
@@ -264,6 +280,23 @@ const SignupForm = () => {
         </Form.Item>
       </Form>
       <div id="sign-in-container" />
+
+      <Modal
+        title="تحقق من الكود التفعيل في هاتفك"
+        visible={popUp}
+        onOk={() => setPopUp(false)}
+        onCancel={() => {
+          setCode(0);
+          setPopUp(false);
+        }}
+      >
+        <InputText
+          value={code}
+          type="number"
+          placeholder=" ادخل كود التفعيل "
+          handleChange={(e) => setCode(e.target.value)}
+        />
+      </Modal>
     </ConfigProvider>
   );
 };
