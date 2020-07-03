@@ -51,4 +51,37 @@ const antConfigurations = {
   },
 };
 
-export default antConfigurations;
+const messages = {
+  addUserSuccess: {
+    type: 'success',
+    message:
+      'تم تسجيل دخولك بنجاح, سيتم توجيهك الى الصفحة الرئيسية خلال 5 ثواني..',
+  },
+  addUserFailed: {
+    type: 'error',
+    message: 'هذا الحساب مستخدم تاكد من البريد ورقم الحساب',
+  },
+  mobileCodeSent: {
+    type: 'warning',
+    message: 'تم ارسال كود التفعيل الى هاتفك ',
+  },
+  mobileCodeWrong: {
+    type: 'error',
+    message: 'كود التفعيل خطا, برجاء المحاولة مرة اخرى',
+  },
+  mobileUsed: {
+    type: 'warning',
+    message: 'هذا الهاتف مفعل مسبقا, برجاء تسجيل الدخول',
+  },
+  emailSent: {
+    type: 'warning',
+    message: 'تم ارسال بريد الكترونيو برجاء تفعيل حسابك .',
+  },
+  emailVerificationSuccess: '',
+  emailVerificationFailed: {
+    type: 'error',
+    message: 'هذا الحساب مفعل مسبقا برجاء تسجيل الدخول',
+  },
+};
+
+export default { antConfigurations, messages };

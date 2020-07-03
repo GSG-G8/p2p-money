@@ -37,5 +37,6 @@ const SubmitByEmail = (user) =>
       localStorage.setItem('User_Data', JSON.stringify(user));
     })
     .catch((error) => error);
+// send mobile code and save user data in local storage
 
 export default { firebase, SubmitByEmail };

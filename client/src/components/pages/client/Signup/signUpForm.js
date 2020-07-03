@@ -3,12 +3,13 @@ import { Form, InputNumber, Button, ConfigProvider, Input, Select } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Typography from '../../../Common/Typography';
-import antConfigurations from './AntFormantConfigurations';
+import Configurations from './AntFormantConfigurations';
 import Alert from '../../../Common/Alert';
 import fireBase from './firebase';
 
 const { Option } = Select;
 const { firebase, SubmitByEmail } = fireBase;
+const { antConfigurations, messages } = Configurations;
 
 const prefixSelector = (
   <Form.Item name="prefix" noStyle>
@@ -18,7 +19,6 @@ const prefixSelector = (
     </Select>
   </Form.Item>
 );
-
 const SignupForm = () => {
   const [LogMobile, setMobile] = useState();
   const [loading, setLoading] = useState(false);
@@ -35,19 +35,12 @@ const SignupForm = () => {
         setTimeout(() => {
           history.push('/');
         }, 5 * 1000);
-        setAlert({
-          type: 'success',
-          message:
-            'تم تسجيل دخولك بنجاح, سيتم توجيهك الى الصفحة الرئيسية خلال 5 ثواني..',
-        });
+        setAlert(messages.addUserSuccess);
       })
       .catch(() => {
         window.localStorage.removeItem('User_Data');
         setLoading(false);
-        setAlert({
-          type: 'error',
-          message: 'تاكد من البريد الالكتروني,رقم الهاتف ورقم الحساب',
-        });
+        setAlert(messages.addUserFailed);
       });
   };
 
@@ -64,25 +57,56 @@ const SignupForm = () => {
           })
           .catch(() => {
             window.localStorage.removeItem('User_Data');
-            setAlert({
-              type: 'error',
-              message: 'هذا الحساب مفعل مسبقا برجاء تسجيل الدخول',
-            });
+            setAlert(messages.emailVerificationFailed);
             setLoading(false);
           });
       }
   })();
 
+  const setUpRecaptcha = () => {
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+      'sign-in-container',
+      {
+        size: 'invisible',
+        callback() {
+          mobileVerification();
+        },
+      }
+    );
+  };
+
+  const mobileVerification = (userData) => {
+    setAlert(messages.mobileCodeSent);
+    form.resetFields();
+    setUpRecaptcha();
+    const phoneNumber = `+97 ${userData.mobileNumber}`;
+    const appVerifier = window.recaptchaVerifier;
+    firebase
+      .auth()
+      .signInWithPhoneNumber(phoneNumber, appVerifier)
+      .then((confirmationResult) => {
+        setLoading(false);
+        window.confirmationResult = confirmationResult;
+        const code = window.prompt('ادخل كود التفعيل');
+        confirmationResult
+          .confirm(code)
+          .then(() => addUserToDatabase(userData))
+          .catch(() => {
+            setAlert(messages.mobileCodeWrong);
+          });
+      })
+      .catch(() => {
+        setAlert(messages.mobileUsed);
+      });
+  };
+
   const onFinish = ({ user }) => {
     setLoading(true);
     if (user.email) {
       SubmitByEmail(user);
-      setAlert({
-        type: 'warning',
-        message: 'تم ارسال بريد الكترونيو برجاء تفعيل حسابك .',
-      });
-      setLoading(false);
-      form.resetFields();
+      setAlert(messages.emailSent);
+    } else if (user.mobileNumber) {
+      mobileVerification(user);
     }
   };
 
@@ -239,6 +263,7 @@ const SignupForm = () => {
           />
         </Form.Item>
       </Form>
+      <div id="sign-in-container" />
     </ConfigProvider>
   );
 };
