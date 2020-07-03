@@ -50,4 +50,5 @@ const antConfigurations = {
     return Promise.reject(message);
   },
 };
+
 export default antConfigurations;

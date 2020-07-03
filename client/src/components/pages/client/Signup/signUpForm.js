@@ -5,8 +5,10 @@ import axios from 'axios';
 import Typography from '../../../Common/Typography';
 import antConfigurations from './AntFormantConfigurations';
 import Alert from '../../../Common/Alert';
+import fireBase from './firebase';
 
 const { Option } = Select;
+const { firebase, SubmitByEmail } = fireBase;
 
 const prefixSelector = (
   <Form.Item name="prefix" noStyle>
@@ -16,6 +18,7 @@ const prefixSelector = (
     </Select>
   </Form.Item>
 );
+
 const SignupForm = () => {
   const [LogMobile, setMobile] = useState();
   const [loading, setLoading] = useState(false);
@@ -23,12 +26,12 @@ const SignupForm = () => {
   const [form] = Form.useForm();
   const history = useHistory();
 
-  const onFinish = ({ user }) => {
-    setLoading(true);
+  const addUserToDatabase = (user) => {
     axios
       .post('/api/v1/signup', user)
       .then(() => {
         form.resetFields();
+        window.localStorage.removeItem('User_Data');
         setTimeout(() => {
           history.push('/');
         }, 5 * 1000);
@@ -38,13 +41,51 @@ const SignupForm = () => {
             'تم تسجيل دخولك بنجاح, سيتم توجيهك الى الصفحة الرئيسية خلال 5 ثواني..',
         });
       })
-      .catch(() =>
+      .catch(() => {
+        window.localStorage.removeItem('User_Data');
+        setLoading(false);
         setAlert({
           type: 'error',
           message: 'تاكد من البريد الالكتروني,رقم الهاتف ورقم الحساب',
-        })
-      );
+        });
+      });
   };
+
+  (() => {
+    if (window.localStorage.getItem('User_Data'))
+      if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+        const userData = JSON.parse(window.localStorage.getItem('User_Data'));
+        const { email } = userData;
+        return firebase
+          .auth()
+          .signInWithEmailLink(email, window.location.href)
+          .then(() => {
+            addUserToDatabase(userData);
+          })
+          .catch(() => {
+            window.localStorage.removeItem('User_Data');
+            setAlert({
+              type: 'error',
+              message: 'هذا الحساب مفعل مسبقا برجاء تسجيل الدخول',
+            });
+            setLoading(false);
+          });
+      }
+  })();
+
+  const onFinish = ({ user }) => {
+    setLoading(true);
+    if (user.email) {
+      SubmitByEmail(user);
+      setAlert({
+        type: 'warning',
+        message: 'تم ارسال بريد الكترونيو برجاء تفعيل حسابك .',
+      });
+      setLoading(false);
+      form.resetFields();
+    }
+  };
+
   return (
     <ConfigProvider direction="rtl">
       {alert && (
@@ -153,7 +194,7 @@ const SignupForm = () => {
           wrapperCol={{ ...antConfigurations.layout.wrapperCol, offset: 7 }}
         >
           <Button
-            // loading={loading}
+            loading={loading}
             type="primary"
             htmlType="submit"
             className="signUp__submit"

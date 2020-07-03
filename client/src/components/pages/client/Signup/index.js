@@ -8,7 +8,7 @@ import './style.css';
 const Signup = () => (
   <div className="signUp__container">
     <Helmet>
-      <title>SignUp</title>
+      <title>إنشاء حساب</title>
     </Helmet>
     <div className="signUp__left">
       <SignUpForm />
