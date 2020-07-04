@@ -98,7 +98,6 @@ const App = () => {
           path={['/wallet', '/bank', '/settings']}
           render={() => <SiderMenu content={Wallet} ClientData={ClientData} />}
         />
-
         {staticRoutes.includes(pathname) && (
           // when we finish the alert component
           // we will tell the Client you already login and the redirect their to wallet
