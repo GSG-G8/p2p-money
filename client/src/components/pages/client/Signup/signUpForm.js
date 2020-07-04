@@ -22,7 +22,7 @@ const { antConfigurations, messages } = Configurations;
 
 const prefixSelector = (
   <Form.Item name="prefix" noStyle>
-    <Select defaultValue="+970" style={{ width: 75 }}>
+    <Select defaultValue="+97" style={{ width: 75 }}>
       <Option value="+97">97+</Option>
       <Option value="+97">97+</Option>
     </Select>
@@ -71,6 +71,7 @@ const SignupForm = () => {
             window.localStorage.removeItem('User_Data');
             setAlert(messages.emailVerificationFailed);
             setLoading(false);
+            history.push('/signup');
           });
       }
   })();
