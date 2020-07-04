@@ -1,0 +1,30 @@
+.settings-wrapper{
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+}
+
+.form-wrapper{
+  width: 100%;
+  max-width: 32rem;
+}
+
+.setting-item{
+  margin: 1rem;
+}
+
+.avatar-preview{
+  width: 12.5rem;
+  height: 12.5rem;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 750px) {
+  .settings-wrapper{
+    
+  }
+
+}
