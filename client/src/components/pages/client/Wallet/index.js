@@ -111,7 +111,7 @@ const Wallet = ({ ClientData }) => {
             </div>
             <div className="card-balance__amount">{total}$</div>
           </div>
-          <Button onClick={() => handleClick} Content="تحويل جديد" />
+          <Button onClick={handleClick} Content="تحويل جديد" />
         </div>
         <div className="wallet-table">
           <Table
