@@ -1,36 +1,91 @@
-.sider-rtl{
-  font-family: Almarai;
-  overflow: auto;
-  height: 100vh;
-  background: white;
+.sider-rtl {
+	transition: all 0.2s;
+	font-family: Almarai;
+	overflow: auto;
+	min-height: 100vh;
 }
 
-.sider-rtl .ant-menu-rtl.ant-menu-inline{
-  border-top: 0.5px solid rgba(0, 0, 0, 0.11);
+.sider-rtl .ant-layout-sider-children {
+	width: 12.5rem;
+	position: fixed;
+	transition: all 0.2s;
 }
 
-.wrap-layout{
-  margin: 1.5rem 1rem 0;
-  overflow: initial;
+.sider-rtl .ant-typography {
+	color: white;
 }
 
-.wrap-layout__content{
-  padding: 24;
-  text-align: center;
+.ant-layout-sider {
+	background: #363740;
 }
 
-.sider-logo{
-  border-radius: 50%;
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-bottom: 0.625rem;
-  margin-left: 0.76rem;
+.sider-rtl .ant-menu-rtl.ant-menu-inline {
+	border-top: 0.5px solid rgba(230, 225, 225, 0.11);
 }
 
-.user-wrapper{
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin: 1.4rem 1.4rem 0.9rem 1.4rem;
-  padding-left: 1.938rem;  
+.sider-rtl .ant-menu.ant-menu-dark {
+	background: #363740;
+}
+
+.sider-rtl .ant-menu.ant-menu-dark .ant-menu-item-selected {
+	background: #9FA2B4;
+}
+
+.sider-rtl .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+	background-color: #9fa2b429;
+}
+
+.wrap-layout {
+	margin: 1.5rem 1rem 0;
+	overflow: initial;
+}
+
+.wrap-layout__content {
+	padding: 24;
+	text-align: center;
+}
+
+.sider-logo {
+	border-radius: 50%;
+	width: 2.5rem;
+	height: 2.5rem;
+	margin-left: 0.76rem;
+}
+
+.user-wrapper {
+	font-family: fantasy;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	margin: 1.4rem 0.9rem 0.9rem 1.4rem;
+	padding-left: 1.938rem;
+	color: white;
+}
+
+@media screen and (max-width: 800px) {
+	.sider-rtl {
+		flex: 0 0 9rem !important;
+		min-width: 1rem !important;
+	}
+	.sider-rtl .ant-layout-sider-children {
+		transition: all 0.2s;
+		width: 9rem !important;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.sider-rtl {
+		flex: 0 0 9rem !important;
+		min-width: 1rem !important;
+	}
+	.sider-rtl .ant-layout-sider-children {
+		width: 9rem !important;
+	}
+}
+
+@media screen and (max-width: 720px) {
+	.sider-rtl {
+		flex: 4em 1;
+		width: 80px;
+	}
 }
