@@ -71,12 +71,6 @@
 		transition: all 0.2s;
 		width: 9rem !important;
 	}
-	.wallet-table {
-		margin-right: 0;
-	}
-	.wallet-head {
-		margin-right: 0;
-	}
 }
 
 @media screen and (max-width: 650px) {
@@ -90,14 +84,8 @@
 }
 
 @media screen and (max-width: 720px) {
-	.sider-rtl aside {
+	.sider-rtl {
 		flex: 4em 1;
 		width: 80px;
-	}
-	.wallet-table {
-		margin-right: 0;
-	}
-	.wallet-head {
-		margin-right: 0;
 	}
 }
