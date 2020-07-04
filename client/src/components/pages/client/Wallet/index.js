@@ -101,7 +101,7 @@ const Wallet = ({ ClientData }) => {
   return (
     <>
       <Helmet>
-        <title>Wallet</title>
+        <title>محفظتي</title>
       </Helmet>
       <div className="wallet-table">
         <div className="wallet-head">

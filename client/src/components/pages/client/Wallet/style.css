@@ -46,6 +46,26 @@
 	font-family: Almarai;
 }
 
+@media screen and (max-width: 1020px) {
+  .wallet-table {
+		margin-right: 0;
+	}
+	.wallet-head {
+		margin-right: 0;
+	}
+
+}
+
+@media screen and (max-width: 720px) {
+	.wallet-table {
+		margin-right: 0;
+	}
+	.wallet-head {
+		margin-right: 0;
+	}
+}
+
+
 @media screen and (max-width: 650px) {
 	.wallet-head {
 		flex-direction: column;
