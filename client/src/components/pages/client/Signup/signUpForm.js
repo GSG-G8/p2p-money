@@ -29,7 +29,7 @@ const prefixSelector = (
   </Form.Item>
 );
 const SignupForm = () => {
-  const [LogMobile, setMobile] = useState();
+  const [LogMobile, setMobile] = useState(true);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState();
   const [code, setCode] = useState();
