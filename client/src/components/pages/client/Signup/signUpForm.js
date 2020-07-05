@@ -105,7 +105,6 @@ const SignupForm = () => {
           mobileNumber: `0${mobileNumber}`.toString(),
           ...rest,
         };
-        console.log(window.userData);
       })
       .catch(() => {
         setLoading(false);
@@ -149,6 +148,7 @@ const SignupForm = () => {
         name="nest-messages"
         onFinish={onFinish}
         validateMessages={antConfigurations.validateMessages}
+        horizontal="true"
       >
         <Form.Item
           name={['user', 'fullName']}
