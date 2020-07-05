@@ -49,8 +49,6 @@ const Banks = ({ ClientData }) => {
   });
   const handleClick = () => history.push('/');
 
-  useEffect(() => {}, []);
-  console.log(bankAccounts);
   return (
     <>
       <Helmet>
