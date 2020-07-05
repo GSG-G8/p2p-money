@@ -4,7 +4,7 @@ const { sign } = require('jsonwebtoken');
 const { client } = require('../../database/models');
 const signUpValidation = require('../../utils/validations/signUpValidation');
 
-const signUp = async (req, res, next) => {
+const signUp = async (req, res) => {
   const {
     fullName,
     email,
@@ -27,34 +27,30 @@ const signUp = async (req, res, next) => {
         } is already exists, please sign-in`,
       });
     } else {
-      try {
-        const hashedPassword = await hash(password, 10);
-        const { _id } = await client.create({
-          fullName,
-          ...value,
-          password: hashedPassword,
-          mainBankName,
-          mainBankAccount,
-          bankAccounts: [
-            {
-              bankName: mainBankName,
-              accountNumber: mainBankAccount,
-              balance: [{ type: 'USD', total: 1000 }],
-            },
-          ],
-          mainBalance: [{ type: 'USD', total: 1000 }],
-          avatar,
-        });
-        const clientToken = { clientId: _id };
-        const cookie = sign(clientToken, process.env.SECRET_KEY);
-        res.cookie('client', cookie).json({
-          status: 'successfully',
-          role: 'client',
-          _id,
-        });
-      } catch (error) {
-        res.status(400).json(error);
-      }
+      const hashedPassword = await hash(password, 10);
+      const { _id } = await client.create({
+        fullName,
+        ...value,
+        password: hashedPassword,
+        mainBankName,
+        mainBankAccount,
+        bankAccounts: [
+          {
+            bankName: mainBankName,
+            accountNumber: mainBankAccount,
+            balance: { USD: 1000, ILS: 3000 },
+          },
+        ],
+        mainBalance: { USD: 1000, ILS: 3000 },
+        avatar,
+      });
+      const clientToken = { clientId: _id };
+      const cookie = sign(clientToken, process.env.SECRET_KEY);
+      res.cookie('client', cookie).json({
+        status: 'successfully',
+        role: 'client',
+        _id,
+      });
     }
   };
 
