@@ -8,18 +8,49 @@ import Button from '../../../Common/Button';
 
 import './style.css';
 
-const columns = [];
+const columns = [
+  {
+    title: 'اسم البنك',
+    dataIndex: 'bankName',
+    key: 'bankName',
+    sorter: {
+      compare: (a, b) => a.amount - b.amount,
+    },
+  },
+  {
+    title: 'رقم الحساب',
+    dataIndex: 'accountNumber',
+    key: 'accountNumber',
+    sorter: {
+      compare: (a, b) => a.amount - b.amount,
+    },
+  },
+];
 
 const Banks = ({ ClientData }) => {
   const [loading, setLoading] = useState(false);
-  console.log({ ClientData });
   const history = useHistory();
 
   const { bankAccounts } = ClientData;
+  const data = bankAccounts.map(({ balance, accountNumber, bankName }, key) => {
+    const children = [
+      {
+        key: (key + 100).toString(),
+        bankName: balance[key].type,
+        accountNumber: balance[key].total,
+      },
+    ];
+    return {
+      children,
+      accountNumber,
+      bankName,
+      key: key.toString(),
+    };
+  });
   const handleClick = () => history.push('/');
 
   useEffect(() => {}, []);
-
+  console.log(bankAccounts);
   return (
     <>
       <Helmet>
@@ -34,12 +65,11 @@ const Banks = ({ ClientData }) => {
             onClick={() => {}}
             cssClass="add--bank--btn"
           />
-          {/* <Button onClick={handleClick} Content="اضافة حساب بنكي" /> */}
         </div>
         <div className="wallet-table">
           <Table
             columns={columns}
-            dataSource={bankAccounts}
+            dataSource={data}
             rowKey="_id"
             pagination={{
               defaultCurrent: 1,
@@ -51,14 +81,6 @@ const Banks = ({ ClientData }) => {
       </div>
     </>
   );
-};
-
-Banks.propTypes = {
-  ClientData: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.array,
-  ]).isRequired,
 };
 
 export default Banks;
