@@ -71,6 +71,14 @@ const columns = [
   },
 ];
 
+const currencyLogo = {
+  USD: ['$', 'الدولار'],
+  ILS: ['₪', 'الشيكل'],
+  JOD: ['JD', 'الدينار'],
+  EUR: ['€', 'اليورو'],
+  EGP: ['£', 'الجنيه المصري'],
+};
+
 const getTransactions = async () => {
   const { data } = await Axios.get('/api/v1/transaction');
   return data;
@@ -82,7 +90,7 @@ const Wallet = ({ ClientData }) => {
 
   const history = useHistory();
 
-  const { total } = ClientData.mainBalance[0];
+  const { mainBalance } = ClientData;
   const handleClick = () => history.push('/');
 
   useEffect(() => {
@@ -105,15 +113,27 @@ const Wallet = ({ ClientData }) => {
       </Helmet>
       <div className="wallet-table">
         <div className="wallet-head">
-          <div className="card-balance">
-            <div>
-              <div className="card-balance__label">المبلغ الحالي</div>
-            </div>
-            <div className="card-balance__amount">{total}$</div>
-          </div>
-          <Button onClick={handleClick} Content="تحويل جديد" />
+          {ClientData &&
+            Object.entries(mainBalance).map((arr) => (
+              <div key={currencyLogo[arr[0]][0]} className="card-balance">
+                <div>
+                  <div className="card-balance__label">
+                    رصيد {currencyLogo[arr[0]][1]}
+                  </div>
+                </div>
+                <div className="card-balance__amount">
+                  {arr[1]}
+                  {currencyLogo[arr[0]][0]}
+                </div>
+              </div>
+            ))}
         </div>
         <div className="wallet-table">
+          <Button
+            onClick={handleClick}
+            cssClass="btn_wall"
+            content="تحويل جديد"
+          />
           <Table
             columns={columns}
             dataSource={transactions}
