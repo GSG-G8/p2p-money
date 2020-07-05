@@ -93,7 +93,6 @@ const SignupForm = () => {
     setUpRecaptcha();
     const phoneNumber = `+970${userData.mobileNumber}`;
     const appVerifier = window.recaptchaVerifier;
-    console.log(phoneNumber);
     firebase
       .auth()
       .signInWithPhoneNumber(phoneNumber, appVerifier)
@@ -108,9 +107,8 @@ const SignupForm = () => {
         };
         console.log(window.userData);
       })
-      .catch((error) => {
+      .catch(() => {
         setLoading(false);
-        console.log(error);
         setAlert(messages.ToManyUsed);
       });
   };

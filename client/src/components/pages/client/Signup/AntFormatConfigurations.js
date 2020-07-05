@@ -36,7 +36,7 @@ const antConfigurations = {
     if (password.match(validation)) {
       return Promise.resolve();
     }
-    const message = 'تاكد من كلمة المرور!';
+    const message = 'يجب ان تحتوي كلمة المرور على احرف وارقام ورموز خاصة!';
     return Promise.reject(message);
   },
   checkMobileNumber: (mobile) => {

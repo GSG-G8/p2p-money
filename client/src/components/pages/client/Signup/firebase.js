@@ -2,7 +2,7 @@ import * as firebase from 'firebase';
 
 // my web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
+  apiKey: 'AIzaSyAJCTmsmuDI4AbT377IBTNvCDSv5QNlnGQ',
   authDomain: 'testcall-58a86.firebaseapp.com',
   databaseURL: 'https://testcall-58a86.firebaseio.com',
   projectId: 'testcall-58a86',
@@ -10,7 +10,6 @@ const firebaseConfig = {
   messagingSenderId: '152667190733',
   appId: '152667190733:web:1fa51d46850ea902d88084',
 };
-console.log(firebaseConfig);
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -28,7 +27,6 @@ const actionCodeSettings = {
   },
   dynamicLinkDomain: 'fierbase.page.link',
 };
-
 // send email and save user data in local storage
 const SubmitByEmail = (user) =>
   firebase
