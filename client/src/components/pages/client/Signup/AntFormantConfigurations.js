@@ -42,7 +42,7 @@ const antConfigurations = {
   checkMobileNumber: (mobile) => {
     let message = 'رقم الهاتف مطلوب!';
     if (!mobile) return Promise.reject(message);
-    const validation = /^[0-9]{10}$/;
+    const validation = /^[0-9]{9}$/;
     if (mobile.match(validation)) {
       return Promise.resolve();
     }
@@ -72,6 +72,10 @@ const messages = {
   mobileUsed: {
     type: 'warning',
     message: 'هذا الهاتف مفعل مسبقا, برجاء تسجيل الدخول',
+  },
+  ToManyUsed: {
+    type: 'warning',
+    message: ' ..لقد قمت بعدد كبير من المحاولات, يرجى المحاولة فيما بعد',
   },
   emailSent: {
     type: 'warning',

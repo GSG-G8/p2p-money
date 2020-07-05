@@ -22,9 +22,9 @@ const { antConfigurations, messages } = Configurations;
 
 const prefixSelector = (
   <Form.Item name="prefix" noStyle>
-    <Select defaultValue="+97" style={{ width: 75 }}>
-      <Option value="+97">97+</Option>
-      <Option value="+97">97+</Option>
+    <Select defaultValue="+970" style={{ width: 75 }}>
+      <Option value="+970">970+</Option>
+      <Option value="+972">972+</Option>
     </Select>
   </Form.Item>
 );
@@ -34,7 +34,6 @@ const SignupForm = () => {
   const [alert, setAlert] = useState();
   const [code, setCode] = useState();
   const [popUp, setPopUp] = useState(false);
-
   const [form] = Form.useForm();
   const history = useHistory();
 
@@ -92,8 +91,9 @@ const SignupForm = () => {
     setAlert(messages.mobileCodeSent);
     form.resetFields();
     setUpRecaptcha();
-    const phoneNumber = `+97 ${userData.mobileNumber}`;
+    const phoneNumber = `+970${userData.mobileNumber}`;
     const appVerifier = window.recaptchaVerifier;
+    console.log(phoneNumber);
     firebase
       .auth()
       .signInWithPhoneNumber(phoneNumber, appVerifier)
@@ -101,11 +101,17 @@ const SignupForm = () => {
         setLoading(false);
         window.confirmationResult = confirmationResult;
         setPopUp(true);
-        window.userData = userData;
+        const { mobileNumber, ...rest } = userData;
+        window.userData = {
+          mobileNumber: `0${mobileNumber}`.toString(),
+          ...rest,
+        };
+        console.log(window.userData);
       })
-      .catch(() => {
+      .catch((error) => {
         setLoading(false);
-        setAlert(messages.mobileUsed);
+        console.log(error);
+        setAlert(messages.ToManyUsed);
       });
   };
   const handelCode = () => {
@@ -166,7 +172,11 @@ const SignupForm = () => {
               },
             ]}
           >
-            <Input addonAfter={prefixSelector} className="signUp__input" />
+            <Input
+              placeholder="5xx-xxx-xxx"
+              addonAfter={prefixSelector}
+              className="signUp__input"
+            />
           </Form.Item>
         ) : (
           <Form.Item

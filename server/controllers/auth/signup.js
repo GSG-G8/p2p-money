@@ -89,7 +89,7 @@ const signUp = async (req, res) => {
       addClient({ mobileNumber });
     }
   } catch (err) {
-    res.send(err);
+    res.status(400).json({ err });
   }
 };
 module.exports = signUp;
