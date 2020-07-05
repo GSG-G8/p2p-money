@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Form, Button, ConfigProvider, Input, Select } from 'antd';
-
 import Axios from 'axios';
-import Typography from '../../../Common/Typography';
-import antConfigurations from '../../client/Signup/AntFormantConfigurations';
 
+import Alert from '../../../Common/Alert';
+import Typography from '../../../Common/Typography';
+import Configurations from '../../client/Signup/AntFormantConfigurations';
+
+const { antConfigurations, messages } = Configurations;
 const { Option } = Select;
 
 const prefixSelector = (
@@ -16,9 +18,10 @@ const prefixSelector = (
     </Select>
   </Form.Item>
 );
-const SignupForm = () => {
+const LoginForm = () => {
   const [LogMobile, setMobile] = useState();
   const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState();
   const [form] = Form.useForm();
   const history = useHistory();
 
@@ -27,15 +30,23 @@ const SignupForm = () => {
     await Axios.post('/api/v1/login', {
       email: values.user.email,
       password: values.user.password,
-      mobileNumber: values.user.mobileNumber
-        ? `0${values.user.mobileNumber}`
-        : undefined,
+      mobileNumber: values.user.mobileNumber,
     })
       .then(() => history.push('/'))
-      .catch(console.log);
+      .catch(() => {
+        setLoading(false);
+        setAlert(messages.LoginFailed);
+      });
   };
   return (
     <ConfigProvider direction="rtl">
+      {alert && (
+        <Alert
+          type={alert.type}
+          message={alert.message}
+          className="signUp__alert"
+        />
+      )}
       <Typography type="title" level={4} Content="تسجيل الدخول" />
       <Form
         {...antConfigurations.formItemLayout}
@@ -59,7 +70,11 @@ const SignupForm = () => {
               },
             ]}
           >
-            <Input addonAfter={prefixSelector} className="signUp__input" />
+            <Input
+              placeholder="مثل :0590134567"
+              addonAfter={prefixSelector}
+              className="signUp__input"
+            />
           </Form.Item>
         ) : (
           <Form.Item
@@ -136,4 +151,4 @@ const SignupForm = () => {
     </ConfigProvider>
   );
 };
-export default SignupForm;
+export default LoginForm;
