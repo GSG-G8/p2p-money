@@ -75,8 +75,8 @@ const currencyLogo = {
   USD: ['$', 'الدولار'],
   ILS: ['₪', 'الشيكل'],
   JOD: ['JD', 'الدينار'],
-  EUR: ['£', 'اليورو'],
-  EGP: ['E£', 'الجنيه المصري'],
+  EUR: ['€', 'اليورو'],
+  EGP: ['£', 'الجنيه المصري'],
 };
 
 const getTransactions = async () => {
@@ -115,7 +115,7 @@ const Wallet = ({ ClientData }) => {
         <div className="wallet-head">
           {ClientData &&
             Object.entries(mainBalance).map((arr) => (
-              <div className="card-balance">
+              <div key={currencyLogo[arr[0]][0]} className="card-balance">
                 <div>
                   <div className="card-balance__label">
                     رصيد {currencyLogo[arr[0]][1]}
@@ -127,10 +127,13 @@ const Wallet = ({ ClientData }) => {
                 </div>
               </div>
             ))}
-
-          <Button onClick={handleClick} Content="تحويل جديد" />
         </div>
         <div className="wallet-table">
+          <Button
+            onClick={handleClick}
+            cssClass="btn_wall"
+            content="تحويل جديد"
+          />
           <Table
             columns={columns}
             dataSource={transactions}

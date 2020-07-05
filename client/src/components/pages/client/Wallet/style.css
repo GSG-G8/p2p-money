@@ -2,14 +2,14 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-right: 2rem;
-	/* background: white; */
 	margin-bottom: 2rem;
 	border-radius: 4px;
 }
 
-.exchange-btn {
-	float: right;
+.btn_wall {
+	cursor: pointer;
+	margin-bottom: 1rem;
+	align-self: flex-end;
 }
 
 .card-balance {
@@ -19,8 +19,8 @@
 	justify-content: space-around;
 	width: 100%;
 	min-width: 0;
-    max-width: 15rem;
-		margin: 0;
+	max-width: 15rem;
+	margin: 0;
 	height: 6rem;
 	margin-right: 2.5rem;
 	background: #FFFFFF;
@@ -46,32 +46,31 @@
 }
 
 .wallet-table {
+	display: flex;
+	flex-direction: column;
 	max-width: 58rem;
 	margin: 0 auto;
 	margin-right: 2rem;
 	font-family: Almarai;
 }
 
-
 @media screen and (max-width: 1050px) {
 	.card-balance {
-	height: 6rem;
-	margin: 0.3rem;
+		height: 6rem;
+		margin: 0.3rem;
 	}
 }
+
 @media screen and (max-width: 1020px) {
-  .wallet-table {
+	.wallet-table {
 		margin-right: 0;
 	}
 	.wallet-head {
 		margin-right: 0;
-		/* flex-direction: column; */
 	}
-
-	.card-balance{
+	.card-balance {
 		margin-right: 0.5rem;
 	}
-
 }
 
 @media screen and (max-width: 878px) {
@@ -88,7 +87,6 @@
 		margin-right: 0;
 	}
 }
-
 
 @media screen and (max-width: 650px) {
 	.wallet-head {
