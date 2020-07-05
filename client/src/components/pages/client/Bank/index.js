@@ -4,10 +4,11 @@ import { Table } from 'antd';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Helmet from 'react-helmet';
+import Currency from './arabicCurrency';
 import Button from '../../../Common/Button';
-
 import './style.css';
 
+const { currencyLogo, arabicCurrency } = Currency;
 const columns = [
   {
     title: 'اسم البنك',
@@ -27,17 +28,21 @@ const columns = [
   },
 ];
 
-const Banks = ({ ClientData }) => {
-  const [loading, setLoading] = useState(false);
-  const history = useHistory();
-
-  const { bankAccounts } = ClientData;
-  const data = bankAccounts.map(({ balance, accountNumber, bankName }, key) => {
+const getData = (bankAccounts) =>
+  bankAccounts.map(({ balance, accountNumber, bankName }, key) => {
     const children = [
       {
         key: (key + 100).toString(),
-        bankName: balance[key].type,
-        accountNumber: balance[key].total,
+        bankName: (
+          <span className="insideTable">
+            {` ${arabicCurrency[balance[key].type]}`}
+          </span>
+        ),
+        accountNumber: (
+          <span className="insideTable">
+            {` ${balance[key].total} ${currencyLogo[balance[key].type]}`}{' '}
+          </span>
+        ),
       },
     ];
     return {
@@ -47,7 +52,16 @@ const Banks = ({ ClientData }) => {
       key: key.toString(),
     };
   });
-  const handleClick = () => history.push('/');
+
+const Banks = ({ ClientData }) => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState();
+  const history = useHistory();
+
+  const { bankAccounts } = ClientData;
+  useEffect(() => {
+    if (!data) setData(getData(bankAccounts));
+  });
 
   return (
     <>
