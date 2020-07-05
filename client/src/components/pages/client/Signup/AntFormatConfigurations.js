@@ -33,10 +33,15 @@ const antConfigurations = {
   },
   validatePassword: (password) => {
     const validation = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    let message;
+    if (!password) {
+      message = 'كلمة المرور مطلوبة!';
+      return Promise.reject(message);
+    }
     if (password.match(validation)) {
       return Promise.resolve();
     }
-    const message = 'يجب ان تحتوي كلمة المرور على احرف وارقام ورموز خاصة!';
+    message = 'يجب ان تحتوي كلمة المرور على احرف وارقام ورموز خاصة!';
     return Promise.reject(message);
   },
   checkMobileNumber: (mobile) => {

@@ -66,5 +66,8 @@
 .signUp__alert {
   width: 19rem;
   position: absolute;
-  /* padding: 10rem; */
+}
+
+.ant-form-item-explain, .ant-form-item-extra {
+  font-size: .78rem;
 }
