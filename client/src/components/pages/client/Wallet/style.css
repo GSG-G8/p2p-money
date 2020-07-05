@@ -2,7 +2,10 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-right: 2rem
+	margin-right: 2rem;
+	/* background: white; */
+	margin-bottom: 2rem;
+	border-radius: 4px;
 }
 
 .exchange-btn {
@@ -15,15 +18,18 @@
 	flex-direction: column;
 	justify-content: space-around;
 	width: 100%;
-	max-width: 14rem;
-	margin-bottom: 1rem;
+	min-width: 0;
+    max-width: 15rem;
+		margin: 0;
+	height: 6rem;
+	margin-right: 2.5rem;
 	background: #FFFFFF;
 	border: 1px solid #D8D8D8;
 	box-sizing: border-box;
 	border-radius: 8px;
 	color: #2F80ED;
 	font-weight: bold;
-	font-size: 40px;
+	font-size: 1.5rem;
 	line-height: 2rem;
 	text-align: center;
 }
@@ -46,14 +52,32 @@
 	font-family: Almarai;
 }
 
+
+@media screen and (max-width: 1050px) {
+	.card-balance {
+	height: 6rem;
+	margin: 0.3rem;
+	}
+}
 @media screen and (max-width: 1020px) {
   .wallet-table {
 		margin-right: 0;
 	}
 	.wallet-head {
 		margin-right: 0;
+		/* flex-direction: column; */
 	}
 
+	.card-balance{
+		margin-right: 0.5rem;
+	}
+
+}
+
+@media screen and (max-width: 878px) {
+	.wallet-head {
+		flex-direction: column;
+	}
 }
 
 @media screen and (max-width: 720px) {
@@ -70,6 +94,7 @@
 	.wallet-head {
 		flex-direction: column;
 		margin-bottom: 1.2rem;
+		margin: 1rem;
 	}
 	.ant-table-thead>tr th:first-of-type,
 	.ant-table-tbody>tr th:first-of-type,
