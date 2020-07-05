@@ -11,7 +11,7 @@ import {
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Typography from '../../../Common/Typography';
-import Configurations from './AntFormantConfigurations';
+import Configurations from './AntFormatConfigurations';
 import InputText from '../../../Common/TextInput';
 import Alert from '../../../Common/Alert';
 import fireBase from './firebase';
@@ -225,7 +225,7 @@ const SignupForm = () => {
         </Form.Item>
         <Form.Item
           name={['user', 'mainBankName']}
-          label="حساب البنك"
+          label="اسم البنك"
           rules={[{ required: true }]}
         >
           <Select style={{ width: '20rem', height: '2rem' }}>

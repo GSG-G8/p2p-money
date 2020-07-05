@@ -18,7 +18,7 @@ const Signup = () => (
         type="title"
         level={4}
         className="signUp__title"
-        Content="تمتع بمبلغ 1000$ و 3000 شيكل كاش بمجرد تسجيل دخولك الآن."
+        Content="تمتع بمبلغ 1000$ و 3000 شيكل كاش بمجرد إنشاء حساب جديد الآن."
       />
       <Typography
         className="signUp__description"

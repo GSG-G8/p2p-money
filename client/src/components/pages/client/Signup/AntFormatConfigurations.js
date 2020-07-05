@@ -55,7 +55,7 @@ const messages = {
   addUserSuccess: {
     type: 'success',
     message:
-      'تم تسجيل دخولك بنجاح, سيتم توجيهك الى الصفحة الرئيسية خلال 5 ثواني..',
+      'تم تسجيل دخولك بنجاح، سيتم توجيهك الى الصفحة الرئيسية خلال 5 ثواني..',
   },
   addUserFailed: {
     type: 'error',
@@ -67,11 +67,11 @@ const messages = {
   },
   mobileCodeWrong: {
     type: 'error',
-    message: 'كود التفعيل خطا, برجاء المحاولة مرة اخرى',
+    message: 'كود التفعيل خطأ   الرجاء المحاولة مرة اخرى',
   },
   mobileUsed: {
     type: 'warning',
-    message: 'هذا الهاتف مفعل مسبقا, برجاء تسجيل الدخول',
+    message: 'هذا الهاتف مفعل مسبقاً،  الرجاء تسجيل الدخول',
   },
   ToManyUsed: {
     type: 'warning',
@@ -79,12 +79,12 @@ const messages = {
   },
   emailSent: {
     type: 'warning',
-    message: 'تم ارسال بريد الكترونيو برجاء تفعيل حسابك .',
+    message: 'تم ارسال رسالة إلى بريدك الالكتروني،  الرجاء تفعيل حسابك .',
   },
   emailVerificationSuccess: '',
   emailVerificationFailed: {
     type: 'error',
-    message: 'هذا الحساب مفعل مسبقا برجاء تسجيل الدخول',
+    message: 'هذا الحساب مفعل مسبقا ، الرجاء تسجيل الدخول',
   },
 };
 
