@@ -1,72 +1,191 @@
-import React from 'react';
-import { Switch, Input } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Switch, Input, Button, Form, ConfigProvider } from 'antd';
 import Helmet from 'react-helmet';
-import TextInput from '../../../Common/TextInput';
+import PropTypes from 'prop-types';
+import Axios from 'axios';
 import Typography from '../../../Common/Typography';
 import SelectBox from '../../../Common/selectBox';
-import Button from '../../../Common/Button';
+import Alert from '../../../Common/Alert';
+
+// import Button from '../../../Common/Button';
+import PopUp from './popUp';
 
 import './style.css';
 
 const { TextArea } = Input;
 
-const Setting = () => (
-  <>
-    <Helmet>
-      <title>الاعدادات</title>
-    </Helmet>
-    <Typography Content="الاعدادات" />
-    <div className="settings-wrapper">
-      <div className="avatar">
-        <img
-          className="avatar-preview"
-          src="https://media1.popsugar-assets.com/files/thumbor/aE3EHrt_FvLGy30jPKfZPWg__qM/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2018/08/17/651/n/1922283/99dde2155b76ddb9115023.04123404_/i/World-Highest-Paid-Actress-2018.jpg"
-          alt="avtar-preview"
-        />
-      </div>
-      <div className="form-wrapper">
-        <div className="setting-item">
-          <Typography Content="الاسم الكامل" />
-          <TextInput placeholder="أدخل اسمك الكامل" />
-        </div>
-        <div className="setting-item">
-          <Typography Content="البريد الالكتروني" />
-          <TextInput placeholder="أدخل بريدك الالكتروني" />
-        </div>
-        <div className="setting-item">
-          <Typography Content="كلمة المرور القديمة" />
-          <TextInput placeholder="كلمة المرور الجديدة" />
-        </div>
-        <div className="setting-item">
-          <Typography Content="كلمة المرور الجديدة" />
-          <TextInput placeholder="أدخل كلمة المررور الجديدة" />
-        </div>
-        <div className="setting-item">
-          <Typography Content="العملة الرئيسية" />
-          <SelectBox placeholder="أدخل العملة الرئيسية" />
-        </div>
-        <div className="setting-item">
-          <Typography Content="حساب البنك الرئيسي" />
-          <SelectBox placeholder="أدخل حساب البنك الرئيسي" />
-        </div>
-        <div className="setting-item">
-          <Typography Content="ايقاف التحويلات" />
-          <Switch />
-        </div>
-        <div className="setting-item">
-          <Typography Content="النشرة البريدية" />
-          <Switch />
-        </div>
-        <div className="setting-item">
-          <Typography Content="الاقتراحات او الشكاوي" />
-          <TextArea placeholder="اذا كان لديك شكوى او اقتراح ارسلها الينا" />
-        </div>
-        <div className="setting-item">
-          <Button Content="تحديث البيانات" />
-        </div>
-      </div>
-    </div>
-  </>
-);
+const Setting = ({ ClientData }) => {
+  const [aletMsg, setAlertMsg] = useState([]);
+  const [clientInfo, setClientInfo] = useState(ClientData);
 
+  const handleSubmit = async (values) => {
+    try {
+      const updateSetting = await Axios.patch('/api/v1/client', {
+        ...values,
+        mainBankName: values.mainBankName.key || values.mainBankName,
+      });
+      console.log(updateSetting.data.message);
+      // setClientInfo({
+      //   ...values,
+      //   mainBankName: values.mainBankName.key || values.mainBankName,
+      // });
+      setAlertMsg([
+        ...aletMsg,
+        <Alert message="تمت العملية" description="تم تحديث بياناتك بنجاح" />,
+      ]);
+      setTimeout(() => {
+        setAlertMsg([]);
+      }, 2000);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    setClientInfo(clientInfo);
+  }, [clientInfo]);
+
+  const {
+    avatar,
+    fullName,
+    email,
+    bankAccounts,
+    defaultCurrency,
+    newsLetter,
+    feedback,
+    activeAccount,
+    mainBankName,
+  } = clientInfo;
+  return (
+    <>
+      {aletMsg}
+      <ConfigProvider direction="rtl">
+        <Helmet>
+          <title>الاعدادات</title>
+        </Helmet>
+        <div className="page-title">
+          <Typography Content="الاعدادات" />
+        </div>
+        <div className="settings-wrapper">
+          <div className="avatar">
+            <img className="avatar-preview" src={avatar} alt="avtar-preview" />
+            <PopUp fullName={fullName} avatar={avatar} />
+          </div>
+          <div className="form-wrapper">
+            <Form onFinish={handleSubmit}>
+              <div className="setting-item">
+                <Typography Content="الاسم الكامل" />
+                <Form.Item initialValue={fullName} name="fullName">
+                  <Input
+                    className="input-custom"
+                    placeholder="أدخل اسمك الكامل"
+                  />
+                </Form.Item>
+              </div>
+              <div className="setting-item">
+                <Typography Content="البريد الالكتروني" />
+                <Form.Item initialValue={email} name="email">
+                  <Input
+                    className="input-custom"
+                    placeholder="أدخل بريدك الالكتروني"
+                  />
+                </Form.Item>
+              </div>
+              <div className="setting-item">
+                <Typography Content="كلمة المرور السابقة" />
+                <Form.Item name="oldPassword">
+                  <Input.Password
+                    type="password"
+                    className="password-input"
+                    placeholder="كلمة المرور السابقة"
+                  />
+                </Form.Item>
+              </div>
+              <div className="setting-item">
+                <Typography Content="كلمة المرور الجديدة" />
+                <Form.Item name="newPassword">
+                  <Input.Password
+                    type="password"
+                    className="password-input"
+                    placeholder="أدخل كلمة المررور الجديدة"
+                  />
+                </Form.Item>
+              </div>
+              <div className="setting-item">
+                <Typography Content="تأكيد كلمة المرور الجديدة" />
+                <Form.Item name="passwordConfirmation">
+                  <Input.Password
+                    type="password"
+                    className="password-input"
+                    placeholder="تأكيد كلمة المرور الجديدة"
+                  />
+                </Form.Item>
+              </div>
+              <div className="setting-item">
+                <Typography Content="العملة الرئيسية" />
+                <Form.Item
+                  initialValue={defaultCurrency}
+                  name="defaultCurrency"
+                >
+                  <SelectBox
+                    className="select-settings"
+                    elements={['USD', 'ILS', 'JOD', 'EUR', 'EGP']}
+                    placeholder="أدخل العملة الرئيسية"
+                  />
+                </Form.Item>
+              </div>
+              <div className="setting-item">
+                <Typography Content="حساب البنك الرئيسي" />
+                <Form.Item initialValue={mainBankName} name="mainBankName">
+                  <SelectBox
+                    elements={bankAccounts.map(({ bankName }) => (
+                      <div key={bankName}>{bankName}</div>
+                    ))}
+                    className="select-settings"
+                    placeholder="أدخل حساب البنك الرئيسي"
+                  />
+                </Form.Item>
+              </div>
+              <div className="setting-item">
+                <Typography Content="ايقاف التحويلات" />
+                <Form.Item initialValue={activeAccount} name="activeAccount">
+                  <Switch defaultChecked={activeAccount} />
+                </Form.Item>
+              </div>
+              <div className="setting-item">
+                <Typography Content="النشرة البريدية" />
+                <Form.Item initialValue={newsLetter} name="newsLetter">
+                  <Switch defaultChecked={newsLetter} />
+                </Form.Item>
+              </div>
+              <div className="setting-item">
+                <Typography Content="الاقتراحات او الشكاوي" />
+                <Form.Item initialValue={feedback} name="feedback">
+                  <TextArea
+                    rows={5}
+                    className="form-textarea"
+                    placeholder="اذا كان لديك شكوى او اقتراح ارسلها الينا"
+                  />
+                </Form.Item>
+              </div>
+              <div className="setting-item">
+                <Button type="primary" htmlType="submit">
+                  تحديث البيانات
+                </Button>
+              </div>
+            </Form>
+          </div>
+        </div>
+      </ConfigProvider>
+    </>
+  );
+};
+
+Setting.propTypes = {
+  ClientData: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.array,
+  ]).isRequired,
+};
 export default Setting;

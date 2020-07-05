@@ -44,7 +44,7 @@ const SiderMenu = ({ ClientData }) => {
               <div className="wrap-layout__content" />
               {routeName === 'wallet' && <Wallet ClientData={ClientData} />}
               {routeName === 'bank' && <Bank />}
-              {routeName === 'settings' && <Settings />}
+              {routeName === 'settings' && <Settings ClientData={ClientData} />}
             </Content>
           </Layout>
         </Layout>
