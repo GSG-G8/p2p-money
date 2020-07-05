@@ -2,8 +2,12 @@ const express = require('express');
 
 const transactionRouter = express.Router();
 
-const { getTransactionsById } = require('../controllers/routes/client');
+const {
+  getTransactionsById,
+  createTransaction,
+} = require('../controllers/routes/client');
 
 transactionRouter.get('/', getTransactionsById);
+transactionRouter.post('/', createTransaction);
 
 module.exports = transactionRouter;
