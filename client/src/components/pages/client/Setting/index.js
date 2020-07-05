@@ -25,10 +25,6 @@ const Setting = ({ ClientData }) => {
         mainBankName: values.mainBankName.key || values.mainBankName,
       });
       console.log(updateSetting.data.message);
-      // setClientInfo({
-      //   ...values,
-      //   mainBankName: values.mainBankName.key || values.mainBankName,
-      // });
       setAlertMsg([
         ...aletMsg,
         <Alert message="تمت العملية" description="تم تحديث بياناتك بنجاح" />,
@@ -41,9 +37,9 @@ const Setting = ({ ClientData }) => {
     }
   };
 
-  useEffect(() => {
-    setClientInfo(clientInfo);
-  }, [clientInfo]);
+  // useEffect(() => {
+  //   setClientInfo(clientInfo);
+  // }, [clientInfo]);
 
   const {
     avatar,
@@ -75,7 +71,13 @@ const Setting = ({ ClientData }) => {
             <Form onFinish={handleSubmit}>
               <div className="setting-item">
                 <Typography Content="الاسم الكامل" />
-                <Form.Item initialValue={fullName} name="fullName">
+                <Form.Item
+                  rules={[
+                    { required: true, message: 'الرجاء إدخال الاسم الكامل' },
+                  ]}
+                  initialValue={fullName}
+                  name="fullName"
+                >
                   <Input
                     className="input-custom"
                     placeholder="أدخل اسمك الكامل"
@@ -84,7 +86,16 @@ const Setting = ({ ClientData }) => {
               </div>
               <div className="setting-item">
                 <Typography Content="البريد الالكتروني" />
-                <Form.Item initialValue={email} name="email">
+                <Form.Item
+                  rules={[
+                    {
+                      required: true,
+                      message: 'الرجاء إدخال البريد الالكتروني',
+                    },
+                  ]}
+                  initialValue={email}
+                  name="email"
+                >
                   <Input
                     className="input-custom"
                     placeholder="أدخل بريدك الالكتروني"
