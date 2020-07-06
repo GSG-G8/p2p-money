@@ -15,9 +15,9 @@ const { currencyLogo, arabicCurrency } = Currency;
 const getData = (bankAccounts) =>
   bankAccounts.map(({ balance = {}, accountNumber, bankName }, key) => {
     const children = [];
-    Object.keys(balance).map((el, index) => {
+    Object.keys(balance).map((el, index) =>
       children.push({
-        key: (key + 1).toString() + index + 1,
+        key: (key + 1000).toString() + (index + 1),
         bankName: (
           <span className="insideTable">{` ${arabicCurrency[el]}`}</span>
         ),
@@ -26,13 +26,13 @@ const getData = (bankAccounts) =>
             {` ${balance[el]} ${currencyLogo[el]}`}
           </span>
         ),
-      });
-    });
+      })
+    );
     return {
-      children,
       accountNumber,
       bankName,
-      key: key.toString(),
+      children,
+      key: (key + 1).toString(),
     };
   });
 
@@ -47,8 +47,7 @@ const Banks = ({ ClientData }) => {
   const { bankAccounts } = ClientData;
   useEffect(() => {
     if (!data) setData(getData(bankAccounts));
-  });
-
+  }, [data, bankAccounts]);
   const handleDelete = (bankAccount) => {
     axios
       .put('/api/v1/client/bank', { accountNumber: bankAccount })
@@ -73,8 +72,9 @@ const Banks = ({ ClientData }) => {
       title: 'اسم البنك',
       dataIndex: 'bankName',
       key: 'bankName',
+      width: '50%',
       sorter: {
-        compare: (a, b) => a.amount - b.amount,
+        compare: (a, b) => a.bankName - b.bankName,
       },
     },
     {
@@ -82,20 +82,23 @@ const Banks = ({ ClientData }) => {
       dataIndex: 'accountNumber',
       key: 'accountNumber',
       sorter: {
-        compare: (a, b) => a.amount - b.amount,
+        compare: (a, b) => a.accountNumber - b.accountNumber,
       },
     },
     {
-      title: 'حذف',
+      title: '',
       dataIndex: 'operation',
-      render: (text, record) => (
-        <Popconfirm
-          title="هل انت متاكد من حذف الحساب?"
-          onConfirm={() => handleDelete(record.accountNumber)}
-        >
-          <Button content="حذف الحساب " cssClass="delete--bank--btn" />
-        </Popconfirm>
-      ),
+      render: (text, record) => {
+        if (record.key < 1000)
+          return (
+            <Popconfirm
+              title="هل انت متاكد من حذف الحساب?"
+              onConfirm={() => handleDelete(record.accountNumber)}
+            >
+              <Button content="حذف" cssClass="delete--bank--btn" />
+            </Popconfirm>
+          );
+      },
     },
   ];
 
@@ -107,11 +110,6 @@ const Banks = ({ ClientData }) => {
       });
       setLoading(false);
     } else {
-      console.log({
-        bankName,
-        accountNumber,
-        balance: { USD: 200, ILS: 200 },
-      });
       axios
         .post('/api/v1/client/bank', {
           bankName,
@@ -165,10 +163,9 @@ const Banks = ({ ClientData }) => {
           <Table
             columns={columns}
             dataSource={data}
-            rowKey="_id"
             pagination={{
               defaultCurrent: 1,
-              defaultPageSize: 5,
+              defaultPageSize: 6,
             }}
             loading={loading}
           />
@@ -179,12 +176,16 @@ const Banks = ({ ClientData }) => {
         title="اضافة حساب بنك جديد"
         visible={showModal}
         onOk={addBank}
-        onCancel={() => setShowModel(false)}
+        onCancel={() => {
+          setLoading(false);
+          setShowModel(false);
+        }}
         okText="اضافـة"
         cancelText="إلغـاء"
       >
         <div className="bankName">
           <SelectBox
+            placeholder=" اختر العملة "
             defaultValue="بنك فلسطين"
             elements={['بنك فلسطين', 'بنك الإسكان', 'بنك القدس']}
             value={bankName}
