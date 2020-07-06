@@ -1,7 +1,43 @@
-.add--bank--btn{
-  margin: 1rem 0 1rem 0;
+.addBankModel {
+  font-family: 'Almarai';
 }
-.insideTable{
-color: #1B8FFC;
-font-weight: 500;
+
+.add--bank--btn {
+  margin: 1rem 0 1rem 0;
+  width: 10rem;
+  align-self: flex-end;
+}
+
+.insideTable {
+  color: #1B8FFC;
+  font-weight: 500;
+}
+
+.form--input--bank {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid rgb(216, 213, 213);
+  margin-bottom: 1rem;
+  width: 14rem;
+}
+
+.formName {
+  line-height: 0;
+  padding: 1rem .5rem 0 0;
+}
+
+.SelectCurrencyForm {
+  width: 9rem !important;
+  margin-left: 2rem  !important;
+}
+
+.bankName{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.wallet_alert{
+  position: fixed;
+  width: 50%;
 }

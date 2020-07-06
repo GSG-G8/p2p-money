@@ -8,6 +8,7 @@ import './style.css';
 const { Option } = Select;
 
 const SelectBox = ({
+  defaultValue,
   onChange,
   elements,
   placeholder,
@@ -18,6 +19,7 @@ const SelectBox = ({
   <div className="custom-select">
     <ConfigProvider direction="rtl">
       <Select
+        defaultValue={defaultValue}
         direction="rtl"
         className={`full-width ${className}`}
         disabled={disabled}
@@ -42,6 +44,7 @@ SelectBox.propTypes = {
   className: PropTypes.string,
   value: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
+  defaultValue: PropTypes.string,
 };
 
 SelectBox.defaultProps = {
@@ -49,6 +52,7 @@ SelectBox.defaultProps = {
   className: '',
   elements: [],
   disabled: false,
+  defaultValue: '',
 };
 
 export default SelectBox;

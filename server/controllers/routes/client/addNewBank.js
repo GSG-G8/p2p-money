@@ -16,11 +16,12 @@ const addClientBank = async (req, res) => {
         $push: { bankAccounts: req.body },
       },
       { useFindAndModify: false },
-      (err) => {
+      (err, data) => {
         if (err) res.status(400).json({ message: 'User not exist' });
         else
           res.status(200).json({
             message: 'User Bank added successfully',
+            data,
           });
       }
     );
