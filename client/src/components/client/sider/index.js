@@ -64,6 +64,7 @@ SiderMenu.propTypes = {
     PropTypes.object,
     PropTypes.array,
   ]).isRequired,
+  setClientData: PropTypes.func.isRequired,
 };
 
 export default SiderMenu;

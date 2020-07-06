@@ -1,16 +1,27 @@
 .settings-wrapper {
+	font-family: Almarai;
+	margin: 0 auto;
   border-radius: 4px;
-	margin-top: 2rem;
 	margin-bottom: 2rem;
+	max-width: 53rem;
 	display: flex;
 	justify-content: space-evenly;
 	flex-direction: row-reverse;
 	flex-wrap: wrap;
+	background: white;
+	border-radius: 4px;
 }
 
 .page-title{
-  text-align: center;
-  font-size: 3rem;
+	background: white;
+	text-align: center;
+	font-size: 3rem;
+	max-width: 53rem;
+	margin: 0 auto;
+}
+
+.page-title .ant-typography-rtl{
+	margin-bottom: 0;
 }
 
 .form-wrapper {
@@ -21,6 +32,11 @@
 
 .form-wrapper .ant-form-item {
 	margin-bottom: 0;
+}
+
+.form-wrapper .ant-switch{
+	margin-left: 18rem;
+	margin-bottom: .6rem;
 }
 
 .ant-alert{
@@ -68,8 +84,15 @@
 	justify-content: space-between;
 	align-items: center;
 	margin: 1rem;
+	margin-bottom: 2rem;
 }
 
+.form-wrapper .ant-form-item-explain{
+	font-size: 0.77rem;
+	position: absolute;
+	color: #ff4d4f;
+	top: 98%;
+}
 
 .select-settings {
 	width: 21rem !important;
@@ -79,6 +102,7 @@
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+	margin-top: 2rem;
 }
 
 .avatar-btn {
@@ -132,5 +156,8 @@
 @media screen and (max-width: 750px) {
 	.pop-image {
 		margin-right: 1.6rem;
+	}
+	.avatar{
+    margin-bottom: 1.4rem;
 	}
 }

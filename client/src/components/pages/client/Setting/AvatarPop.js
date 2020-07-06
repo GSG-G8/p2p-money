@@ -4,22 +4,24 @@ import Axios from 'axios';
 import { Modal, Button, Input } from 'antd';
 import Alert from '../../../Common/Alert';
 
-const PopUp = ({ fullName, avatar, changeAvatar }) => {
+const AvatarPop = ({ setAvatar, ClientData }) => {
   const [visible, setVisible] = useState(false);
-  const [image, setImage] = useState(avatar);
+  const [image, setImage] = useState(ClientData.avatar);
   const [aletMsg, setAlertMsg] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const { avatar, fullName } = ClientData;
 
   const showModal = () => setVisible(true);
 
   const handleOk = async () => {
     try {
       setLoading(true);
-      const updateSetting = await Axios.patch('/api/v1/client', {
+      await Axios.patch('/api/v1/client', {
         avatar: image,
         fullName,
       });
-      console.log(updateSetting.data.message);
+      setAvatar({ ...ClientData, avatar: image });
       setLoading(false);
       setAlertMsg([
         ...aletMsg,
@@ -29,14 +31,24 @@ const PopUp = ({ fullName, avatar, changeAvatar }) => {
         setAlertMsg([]);
       }, 2000);
     } catch (error) {
-      console.log(error.message);
+      setAlertMsg([
+        <Alert
+          type="error"
+          message="فشلت العملية"
+          description="حدث خطأ اثناء تحديث الصورة"
+        />,
+        ...aletMsg,
+      ]);
+      setTimeout(() => {
+        setAlertMsg([]);
+        setLoading(false);
+      }, 4000);
     }
 
     setVisible(false);
   };
 
   const handleCancel = () => setVisible(false);
-
   return (
     <div>
       <Button className="avatar-btn" type="primary" onClick={showModal}>
@@ -45,14 +57,12 @@ const PopUp = ({ fullName, avatar, changeAvatar }) => {
       <Modal
         visible={visible}
         title="تغيير صورة البروفايل"
-        // onOk={changeAvatar(image)}
         onCancel={handleCancel}
         footer={[
           <Button key="back" onClick={handleCancel}>
             رجوع
           </Button>,
           <Button
-            onOk={console.log('asdsadas')}
             loading={loading}
             key="submit"
             type="primary"
@@ -72,16 +82,20 @@ const PopUp = ({ fullName, avatar, changeAvatar }) => {
           className="input-custom"
           onChange={(e) => setImage(e.target.value)}
           placeholder="أدخل رابط الصورة"
+          // onError={() => setImage(avatar)}
         />
       </Modal>
     </div>
   );
 };
 
-PopUp.propTypes = {
-  fullName: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
-  changeAvatar: PropTypes.func.isRequired,
+AvatarPop.propTypes = {
+  ClientData: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.array,
+  ]).isRequired,
+  setAvatar: PropTypes.func.isRequired,
 };
 
-export default PopUp;
+export default AvatarPop;

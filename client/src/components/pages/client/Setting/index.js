@@ -1,61 +1,94 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Switch, Input, Button, Form, ConfigProvider } from 'antd';
 import Helmet from 'react-helmet';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Axios from 'axios';
 import Typography from '../../../Common/Typography';
 import SelectBox from '../../../Common/selectBox';
 import Alert from '../../../Common/Alert';
 
-// import Button from '../../../Common/Button';
-import PopUp from './popUp';
+import AvatarPop from './AvatarPop';
 
 import './style.css';
 
 const { TextArea } = Input;
 
+const EmptyOrNull = (value) => value == null || value.length === 0;
+const isNull = (value) => value === null;
+
 const Setting = ({ ClientData, setClientData }) => {
   const [aletMsg, setAlertMsg] = useState([]);
-  // const [clientInfo, setClientInfo] = useState('');
-  // const [avatarImg, setAvatarIMG] = useState('');
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (values) => {
     try {
-      // setLoading(true);
-      const updateSetting = await Axios.patch('/api/v1/client', {
-        ...values,
-        mainBankName: values.mainBankName.key || values.mainBankName,
-      });
-      console.log(updateSetting.data.message);
-      // setLoading(false);
+      setLoading(true);
+      const {
+        newPassword,
+        oldPassword,
+        passwordConfirmation,
+        ...rest
+      } = values;
+
+      let upddateVals;
+      if (!isNull(newPassword, oldPassword, passwordConfirmation)) {
+        const updatedValue = {
+          ...rest,
+          mainBankName: rest.mainBankName.key || rest.mainBankName,
+        };
+        upddateVals = updatedValue;
+      } else {
+        const updatedValue = {
+          ...values,
+          mainBankName: values.mainBankName.key || values.mainBankName,
+        };
+        upddateVals = updatedValue;
+      }
+      if (!EmptyOrNull(newPassword, oldPassword, passwordConfirmation)) {
+        setAlertMsg([
+          <Alert
+            type="error"
+            message="فشلت العملية"
+            description="كلمة المرور السابقة غير صحيحة"
+          />,
+          ...aletMsg,
+        ]);
+        setTimeout(() => {
+          setAlertMsg([]);
+          setLoading(false);
+        }, 4000);
+      } else {
+        const updateSettings = await Axios.patch('/api/v1/client', upddateVals);
+        if (updateSettings) {
+          setClientData({ ...ClientData, ...upddateVals });
+          setLoading(false);
+          setAlertMsg([
+            <Alert
+              message="تمت العملية"
+              description="تم تحديث بياناتك بنجاح"
+            />,
+            ...aletMsg,
+          ]);
+          setTimeout(() => {
+            setAlertMsg([]);
+          }, 2000);
+        }
+      }
+    } catch (error) {
       setAlertMsg([
-        <Alert message="تمت العملية" description="تم تحديث بياناتك بنجاح" />,
+        <Alert
+          type="error"
+          message="فشلت العملية"
+          description="حدث خطأ اثناء التحديث"
+        />,
         ...aletMsg,
       ]);
       setTimeout(() => {
         setAlertMsg([]);
-      }, 2000);
-    } catch (error) {
-      console.log(error.message);
+        setLoading(false);
+      }, 4000);
     }
   };
-  // const getClientData = async () => {
-  //   const {
-  //     data: { clientData },
-  //   } = await Axios.get('/api/v1/client');
-  //   return clientData;
-  // };
-
-  // useEffect(() => {
-  //   if (!clientInfo)
-  //     getClientData().then((rows) => {
-  //       setClientInfo(rows);
-  //       setAvatarIMG(rows.avatar);
-  //     });
-  // }, [clientInfo]);
-
-  // const changeAvatar = (img) => setAvatarIMG(img);
 
   const {
     avatar,
@@ -68,10 +101,9 @@ const Setting = ({ ClientData, setClientData }) => {
     activeAccount,
     mainBankName,
   } = ClientData;
-  console.log(Object.entries(ClientData));
   return (
     <>
-      {/* {!clientInfo && <div>loading......</div>} */}
+      {!ClientData && <div>loading......</div>}
       {aletMsg}
       <ConfigProvider direction="rtl">
         <Helmet>
@@ -88,24 +120,15 @@ const Setting = ({ ClientData, setClientData }) => {
                 src={avatar}
                 alt="avtar-preview"
               />
-              <PopUp
-                // changeAvatar={changeAvatar}
+              <AvatarPop
+                setAvatar={setClientData}
                 fullName={fullName}
                 avatar={avatar}
+                ClientData={ClientData}
               />
             </div>
             <div className="form-wrapper">
-              <Form
-                // fields={[Object.entries(ClientData)]}
-                onFinish={handleSubmit}
-                // onValuesChange={(chValues, vals) => {
-                //   const key = Object.keys(chValues)[0];
-                //   setClientInfo({
-                //     ...clientInfo,
-                //     [key]: Object.values(chValues)[0],
-                //   });
-                // }}
-              >
+              <Form onFinish={handleSubmit}>
                 <div className="setting-item">
                   <Typography Content="الاسم الكامل" />
                   <Form.Item
@@ -129,6 +152,10 @@ const Setting = ({ ClientData, setClientData }) => {
                         required: true,
                         message: 'الرجاء إدخال البريد الالكتروني',
                       },
+                      {
+                        type: 'email',
+                        message: 'قم بإدخال بريد إلكتروني صحيح',
+                      },
                     ]}
                     initialValue={email}
                     name="email"
@@ -141,7 +168,15 @@ const Setting = ({ ClientData, setClientData }) => {
                 </div>
                 <div className="setting-item">
                   <Typography Content="كلمة المرور السابقة" />
-                  <Form.Item name="oldPassword">
+                  <Form.Item
+                    name="oldPassword"
+                    rules={[
+                      {
+                        pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}/,
+                        message: `يجب ان تحتوي على ارقام وحروف وموز مثال :- test@1234`,
+                      },
+                    ]}
+                  >
                     <Input.Password
                       type="password"
                       className="password-input"
@@ -151,7 +186,15 @@ const Setting = ({ ClientData, setClientData }) => {
                 </div>
                 <div className="setting-item">
                   <Typography Content="كلمة المرور الجديدة" />
-                  <Form.Item name="newPassword">
+                  <Form.Item
+                    rules={[
+                      {
+                        pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}/,
+                        message: `يجب ان تحتوي على ارقام وحروف وموز مثال :- test@1234`,
+                      },
+                    ]}
+                    name="newPassword"
+                  >
                     <Input.Password
                       type="password"
                       className="password-input"
@@ -161,7 +204,27 @@ const Setting = ({ ClientData, setClientData }) => {
                 </div>
                 <div className="setting-item">
                   <Typography Content="تأكيد كلمة المرور الجديدة" />
-                  <Form.Item name="passwordConfirmation">
+                  <Form.Item
+                    rules={[
+                      {
+                        types: 'password',
+                        required: false,
+                      },
+                      ({ getFieldValue }) => ({
+                        validator(rule, value) {
+                          if (
+                            !value ||
+                            getFieldValue('newPassword') === value
+                          ) {
+                            return Promise.resolve();
+                          }
+                          const message = 'تاكيد كلمة المرور غير صحيح';
+                          return Promise.reject(message);
+                        },
+                      }),
+                    ]}
+                    name="passwordConfirmation"
+                  >
                     <Input.Password
                       type="password"
                       className="password-input"
@@ -172,6 +235,11 @@ const Setting = ({ ClientData, setClientData }) => {
                 <div className="setting-item">
                   <Typography Content="العملة الرئيسية" />
                   <Form.Item
+                    rules={[
+                      {
+                        type: 'string',
+                      },
+                    ]}
                     initialValue={defaultCurrency}
                     name="defaultCurrency"
                   >
@@ -182,7 +250,7 @@ const Setting = ({ ClientData, setClientData }) => {
                     />
                   </Form.Item>
                 </div>
-                {/* <div className="setting-item">
+                <div className="setting-item">
                   <Typography Content="حساب البنك الرئيسي" />
                   <Form.Item initialValue={mainBankName} name="mainBankName">
                     <SelectBox
@@ -193,22 +261,38 @@ const Setting = ({ ClientData, setClientData }) => {
                       placeholder="أدخل حساب البنك الرئيسي"
                     />
                   </Form.Item>
-                </div> */}
+                </div>
                 <div className="setting-item">
                   <Typography Content="ايقاف التحويلات" />
-                  <Form.Item initialValue={activeAccount} name="activeAccount">
+                  <Form.Item
+                    initialValue={activeAccount}
+                    valuePropName="checked"
+                    name="activeAccount"
+                  >
                     <Switch defaultChecked={activeAccount} />
                   </Form.Item>
                 </div>
                 <div className="setting-item">
                   <Typography Content="النشرة البريدية" />
-                  <Form.Item initialValue={newsLetter} name="newsLetter">
+                  <Form.Item
+                    valuePropName="checked"
+                    initialValue={newsLetter}
+                    name="newsLetter"
+                  >
                     <Switch defaultChecked={newsLetter} />
                   </Form.Item>
                 </div>
                 <div className="setting-item">
                   <Typography Content="الاقتراحات او الشكاوي" />
-                  <Form.Item initialValue={feedback} name="feedback">
+                  <Form.Item
+                    rules={[
+                      {
+                        type: 'string',
+                      },
+                    ]}
+                    initialValue={feedback}
+                    name="feedback"
+                  >
                     <TextArea
                       rows={5}
                       className="form-textarea"
@@ -217,12 +301,7 @@ const Setting = ({ ClientData, setClientData }) => {
                   </Form.Item>
                 </div>
                 <div className="setting-item">
-                  <Button
-                    // loading={loading}
-                    onClick={() => setClientData([])}
-                    type="primary"
-                    htmlType="submit"
-                  >
+                  <Button loading={loading} type="primary" htmlType="submit">
                     تحديث البيانات
                   </Button>
                 </div>
@@ -233,6 +312,15 @@ const Setting = ({ ClientData, setClientData }) => {
       </ConfigProvider>
     </>
   );
+};
+
+Setting.propTypes = {
+  ClientData: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.array,
+  ]).isRequired,
+  setClientData: PropTypes.func.isRequired,
 };
 
 export default Setting;
