@@ -85,74 +85,121 @@ const App = () => {
   }
   if (client) {
     return (
-      <Switch>
-        <Header />
-        <Route exact path="/404" render={() => <Error404 />} />
-        <Route exact path="/" render={() => <Home />} />
-        <Route
-          path={['/wallet', '/bank', '/settings']}
-          render={() => <SiderMenu content={Wallet} ClientData={ClientData} />}
+      <>
+        <Header
+          isAdmin={admin}
+          isClient={client}
+          logoutHandler={logoutHandler}
         />
+        <Switch>
+          <Route exact path="/404" render={() => <Error404 />} />
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Home
+                MainBalance={ClientData ? ClientData.mainBalance : {}}
+                isClient={client}
+              />
+            )}
+          />
+          <Route
+            path={['/wallet', '/bank', '/settings']}
+            render={() => (
+              <SiderMenu content={Wallet} ClientData={ClientData} />
+            )}
+          />
 
-        {staticRoutes.includes(pathname) && (
-          // when we finish the alert component
-          // we will tell the Client you already login and the redirect their to wallet
-          <>{window.location.replace('/')}</>
-        )}
-        {pathname === '/dashboard' ? ( // when we finish the alert component
-          // we will tell the client you can't see this routes
-          <>{window.location.replace('/wallet')}</>
-        ) : (
-          <Redirect to="/404" />
-        )}
-      </Switch>
+          {staticRoutes.includes(pathname) && (
+            // when we finish the alert component
+            // we will tell the Client you already login and the redirect their to wallet
+            <>{window.location.replace('/')}</>
+          )}
+          {pathname === '/dashboard' ? ( // when we finish the alert component
+            // we will tell the client you can't see this routes
+            <>{window.location.replace('/wallet')}</>
+          ) : (
+            <Redirect to="/404" />
+          )}
+        </Switch>
+      </>
     );
   }
 
   if (admin) {
     return (
-      <Switch>
-        <Route exact path="/404" render={() => <Error404 />} />
-        <Route exact path="/" render={() => <Home />} />
-        <Route
-          exact
-          path="/dashboard"
-          render={() => (
-            <Dashboard Clients={Clients} Transactions={Transactions} />
-          )}
+      <>
+        <Header
+          isAdmin={admin}
+          isClient={client}
+          logoutHandler={logoutHandler}
         />
-        {staticRoutes.includes(pathname) && (
-          // when we finish the alert component
-          // we will tell the admin you already login and the redirect their to dashboard
-          <>{window.location.replace('/dashboard')}</>
-        )}
-        {Routes.includes(pathname) ? ( // when we finish the alert component
-          // we will tell the admin you can't see this routes
-          <>{window.location.replace('/dashboard')}</>
-        ) : (
-          <Redirect to="/404" />
-        )}
-      </Switch>
+        <Switch>
+          <Route exact path="/404" render={() => <Error404 />} />
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Home
+                MainBalance={ClientData ? ClientData.mainBalance : {}}
+                isClient={client}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/dashboard"
+            render={() => (
+              <Dashboard Clients={Clients} Transactions={Transactions} />
+            )}
+          />
+          {staticRoutes.includes(pathname) && (
+            // when we finish the alert component
+            // we will tell the admin you already login and the redirect their to dashboard
+            <>{window.location.replace('/dashboard')}</>
+          )}
+          {Routes.includes(pathname) ? ( // when we finish the alert component
+            // we will tell the admin you can't see this routes
+            <>{window.location.replace('/dashboard')}</>
+          ) : (
+            <Redirect to="/404" />
+          )}
+        </Switch>
+      </>
     );
   }
   return (
-    <>
-      <Header />
-      <Switch>
-        <Route exact path="/404" render={() => <Error404 />} />
-        <Route exact path="/" render={() => <Home />} />
-        <Route exact path="/login" render={() => <Login />} />
-        <Route exact path="/signup" render={() => <SignUp />} />
-        {Routes.includes(pathname) || pathname === '/dashboard' ? (
-          // when we finish the alert component
-          // we will add alert to tell the client, you are unauthorized, you must to signup or login
-          // and redirect there to signup page
-          <>{window.location.replace('/signup')}</>
-        ) : (
-          <Redirect to="/404" />
+    <Switch>
+      <Route exact path="/404" render={() => <Error404 />} />
+      <Route
+        exact
+        path="/"
+        render={() => (
+          <>
+            <Header
+              isAdmin={admin}
+              isClient={client}
+              logoutHandler={logoutHandler}
+            />
+
+            <Home
+              MainBalance={ClientData ? ClientData.mainBalance : {}}
+              isClient={client}
+            />
+          </>
         )}
-      </Switch>
-    </>
+      />
+      <Route exact path="/login" render={() => <Login />} />
+      <Route exact path="/signup" render={() => <SignUp />} />
+      {Routes.includes(pathname) || pathname === '/dashboard' ? (
+        // when we finish the alert component
+        // we will add alert to tell the client, you are unauthorized, you must to signup or login
+        // and redirect there to signup page
+        <>{window.location.replace('/signup')}</>
+      ) : (
+        <Redirect to="/404" />
+      )}
+    </Switch>
   );
 };
 
