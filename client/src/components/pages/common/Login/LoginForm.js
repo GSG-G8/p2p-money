@@ -60,7 +60,7 @@ const LoginForm = () => {
       <Form
         {...antConfigurations.formItemLayout}
         form={form}
-        className="signUp__form"
+        className="signUp__form "
         {...antConfigurations.layout}
         name="nest-messages"
         onFinish={onFinish}
@@ -82,7 +82,7 @@ const LoginForm = () => {
             <Input
               placeholder="5xx-xxx-xxx"
               addonAfter={prefixSelector}
-              className="signUp__input"
+              className="signUp__input login__input--bottom-margin"
             />
           </Form.Item>
         ) : (
@@ -115,7 +115,7 @@ const LoginForm = () => {
             loading={loading}
             type="primary"
             htmlType="submit"
-            className="signUp__submit"
+            className="signUp__submit login__submit--margin"
           >
             تسجيل الدخول
           </Button>
@@ -151,7 +151,10 @@ const LoginForm = () => {
                     <br />
                   </>
                 )}
-                <Link to="/signup"> لا أملك حساب بعد</Link>
+                <p className="login-text--top-margin">
+                  لا تملك حساب بعد ؟
+                  <Link to="/signup"> يمكنك إنشاء حسابك الآن</Link>
+                </p>
               </p>
             }
           />
