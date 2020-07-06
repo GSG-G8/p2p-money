@@ -28,16 +28,24 @@
 
 .SelectCurrencyForm {
   width: 9rem !important;
-  margin-left: 2rem  !important;
+  margin-left: 2rem !important;
 }
 
-.bankName{
+.bankName {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-end;
 }
-.wallet_alert{
+
+.wallet_alert {
   position: fixed;
-  width: 50%;
+  width: 83%;
 }
+
+.delete--bank--btn {
+  background-color:rgb(231, 29, 29);
+  width: 7rem;
+  border: 0;
+}
+

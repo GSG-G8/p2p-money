@@ -13,7 +13,7 @@ import './style.css';
 const { currencyLogo, arabicCurrency } = Currency;
 
 const getData = (bankAccounts) =>
-  bankAccounts.map(({ balance, accountNumber, bankName }, key) => {
+  bankAccounts.map(({ balance = {}, accountNumber, bankName }, key) => {
     const children = [];
     Object.keys(balance).map((el, index) => {
       children.push({
@@ -42,13 +42,31 @@ const Banks = ({ ClientData }) => {
   const [showModal, setShowModel] = useState(false);
   const [accountNumber, setAccountNumber] = useState();
   const [bankName, setBankName] = useState('بنك فلسطين');
-  const [alert, setAlert] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [alert, setAlert] = useState();
 
   const { bankAccounts } = ClientData;
   useEffect(() => {
     if (!data) setData(getData(bankAccounts));
   });
+
+  const handleDelete = (bankAccount) => {
+    axios
+      .put('/api/v1/client/bank', { accountNumber: bankAccount })
+      .then((responseData) => {
+        setAlert({
+          type: 'success',
+          message: 'تم حذف حسابك البنكي بنجاح !',
+        });
+        setData(getData(responseData.data.data));
+      })
+      .catch(() => {
+        setAlert({
+          type: 'error',
+          message: 'عذرا ,لم يتم حذف حسابك البنكي',
+        });
+      });
+    setLoading(false);
+  };
 
   const columns = [
     {
@@ -73,42 +91,49 @@ const Banks = ({ ClientData }) => {
       render: (text, record) => (
         <Popconfirm
           title="هل انت متاكد من حذف الحساب?"
-          onConfirm={() => handleDelete(record.key)}
+          onConfirm={() => handleDelete(record.accountNumber)}
         >
-          <a>حذف الحساب</a>
+          <Button content="حذف الحساب " cssClass="delete--bank--btn" />
         </Popconfirm>
       ),
     },
   ];
 
-  const handleDelete = () => {};
   const addBank = () => {
     if (!accountNumber || accountNumber < 0) {
-      setAlert(true);
+      setAlert({
+        type: 'warning',
+        message: 'عذرا , لن يتم اضافة حسابك الجديد تاكد من رقم الحساب',
+      });
       setLoading(false);
     } else {
-      setShowModel(false);
+      console.log({
+        bankName,
+        accountNumber,
+        balance: { USD: 200, ILS: 200 },
+      });
       axios
         .post('/api/v1/client/bank', {
           bankName,
           accountNumber,
-          balance: {
-            ILS: 200,
-          },
+          balance: { USD: 200, ILS: 200 },
         })
         .then((responseData) => {
-          setSuccess(true);
-          setAlert(false);
-          setBankName('');
-          setAccountNumber(0);
-          setData(responseData.ata.data.bankAccounts);
+          setAlert({
+            type: 'success',
+            message: 'تم إضافة حساب بنكي جديد بنجاح !',
+          });
+          setData(getData(responseData.data.data));
         })
         .catch(() => {
-          setAlert(true);
-          setBankName('');
-          setAccountNumber(0);
+          setAlert({
+            type: 'warning',
+            message: 'عذرا , لن يتم اضافة حسابك الجديد تاكد من رقم الحساب',
+          });
         });
     }
+    setShowModel(false);
+    setAccountNumber();
     setLoading(false);
   };
 
@@ -119,17 +144,12 @@ const Banks = ({ ClientData }) => {
       </Helmet>
       {alert && (
         <Alert
+          type={alert.type}
+          message={alert.message}
           className="wallet_alert"
-          type="warning"
-          message="عذرا , لن يتم اضافة حسابك الجديد تاكد من رقم الحساب"
         />
       )}
-      {success && (
-        <Alert
-          className="wallet_alert"
-          message="تم اضافة حساب البنكي الجديد بنجاح"
-        />
-      )}
+
       <div className="wallet-table">
         <div className="wallet-head" />
         <Button
@@ -182,6 +202,14 @@ const Banks = ({ ClientData }) => {
       </Modal>
     </>
   );
+};
+
+Banks.propTypes = {
+  ClientData: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.array,
+  ]).isRequired,
 };
 
 export default Banks;
