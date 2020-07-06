@@ -39,16 +39,12 @@ const getData = (bankAccounts) =>
         bankName: (
           <span className="insideTable">{` ${arabicCurrency[el]}`}</span>
         ),
-
         accountNumber: (
           <span className="insideTable">
             {` ${balance[el]} ${currencyLogo[el]}`}
           </span>
         ),
       });
-
-      //   <span className="insideTable">{` ${arabicCurrency[]}`}</span>
-      //
     });
     return {
       children,
