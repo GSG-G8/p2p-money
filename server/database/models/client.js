@@ -38,7 +38,7 @@ const clientSchema = new Schema({
     required: true,
   },
   mainBalance: {
-    type: Array,
+    type: Object,
     required: true,
   },
   avatar: {
