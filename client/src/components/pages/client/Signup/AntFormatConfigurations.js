@@ -91,6 +91,10 @@ const messages = {
     type: 'error',
     message: 'هذا الحساب مفعل مسبقا ، الرجاء تسجيل الدخول',
   },
+  loginFailed: {
+    type: 'error',
+    message: 'الرجاء التأكد من بيانات الدخول',
+  },
 };
 
 export default { antConfigurations, messages };
