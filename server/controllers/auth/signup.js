@@ -30,8 +30,7 @@ const signUp = async (req, res) => {
       const hashedPassword = await hash(password, 10);
       const { _id } = await client.create({
         fullName,
-        email: value.email,
-        mobileNumber: value.mobileNumber,
+        ...value,
         password: hashedPassword,
         mainBankName,
         mainBankAccount,
@@ -90,7 +89,7 @@ const signUp = async (req, res) => {
       addClient({ mobileNumber });
     }
   } catch (err) {
-    res.send(err);
+    res.status(400).json({ err });
   }
 };
 module.exports = signUp;

@@ -110,7 +110,7 @@ const App = () => {
         {staticRoutes.includes(pathname) && (
           // when we finish the alert component
           // we will tell the Client you already login and the redirect their to wallet
-          <>{window.location.replace('/wallet')}</>
+          <>{window.location.replace('/')}</>
         )}
         {pathname === '/dashboard' ? ( // when we finish the alert component
           // we will tell the client you can't see this routes
