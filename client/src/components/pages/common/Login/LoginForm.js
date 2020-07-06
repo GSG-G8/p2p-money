@@ -19,7 +19,7 @@ const prefixSelector = (
   </Form.Item>
 );
 const LoginForm = () => {
-  const [LogMobile, setMobile] = useState();
+  const [LogMobile, setMobile] = useState(true);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState();
   const [form] = Form.useForm();
@@ -27,15 +27,24 @@ const LoginForm = () => {
 
   const onFinish = async (values) => {
     setLoading(true);
+    console.log({
+      email: values.user.email,
+      password: values.user.password,
+      mobileNumber: values.user.mobileNumber
+        ? 0 + values.user.mobileNumber
+        : undefined,
+    });
     await Axios.post('/api/v1/login', {
       email: values.user.email,
       password: values.user.password,
-      mobileNumber: values.user.mobileNumber,
+      mobileNumber: values.user.mobileNumber
+        ? 0 + values.user.mobileNumber
+        : undefined,
     })
       .then(() => history.push('/'))
       .catch(() => {
         setLoading(false);
-        setAlert(messages.LoginFailed);
+        setAlert(messages.loginFailed);
       });
   };
   return (
@@ -71,7 +80,7 @@ const LoginForm = () => {
             ]}
           >
             <Input
-              placeholder="مثل :0590134567"
+              placeholder="5xx-xxx-xxx"
               addonAfter={prefixSelector}
               className="signUp__input"
             />
