@@ -89,6 +89,8 @@ const App = () => {
   if (loading) {
     return <div>Loading......</div>;
   }
+  const handleSetClient = (data) => setClientData(data);
+
   if (client) {
     return (
       <Switch>
@@ -96,7 +98,13 @@ const App = () => {
         <Route exact path="/" render={() => <Home prices={prices} />} />
         <Route
           path={['/wallet', '/bank', '/settings']}
-          render={() => <SiderMenu content={Wallet} ClientData={ClientData} />}
+          render={() => (
+            <SiderMenu
+              content={Wallet}
+              setClientData={handleSetClient}
+              ClientData={ClientData}
+            />
+          )}
         />
 
         {staticRoutes.includes(pathname) && (
@@ -140,6 +148,7 @@ const App = () => {
       </Switch>
     );
   }
+
   return (
     <Switch>
       <Route exact path="/404" render={() => <Error404 />} />

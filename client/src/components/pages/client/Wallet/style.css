@@ -1,6 +1,5 @@
 .wallet-head {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 2rem;
 	border-radius: 4px;
@@ -16,13 +15,13 @@
 	font-family: Almarai;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
 	width: 100%;
 	min-width: 0;
-	max-width: 15rem;
+	max-width: 11rem;
 	margin: 0;
 	height: 6rem;
-	margin-right: 2.5rem;
+	margin-right: 0.5rem;
+	;
 	background: #FFFFFF;
 	border: 1px solid #D8D8D8;
 	box-sizing: border-box;
@@ -42,15 +41,15 @@
 
 .card-balance__amount {
 	margin-bottom: 1.4rem;
-	margin-top: 1rem;
+	margin-top: 0.2rem;
 }
 
 .wallet-table {
 	display: flex;
 	flex-direction: column;
-	max-width: 58rem;
+	/* max-width: 58rem;
 	margin: 0 auto;
-	margin-right: 2rem;
+	margin-right: 2rem; */
 	font-family: Almarai;
 }
 
@@ -75,7 +74,7 @@
 
 @media screen and (max-width: 878px) {
 	.wallet-head {
-		flex-direction: column;
+		flex-wrap: wrap;
 	}
 }
 
@@ -94,19 +93,19 @@
 		margin-bottom: 1.2rem;
 		margin: 1rem;
 	}
-	.ant-table-thead>tr th:first-of-type,
+	.wallet-table .ant-table-thead>tr th:first-of-type,
 	.ant-table-tbody>tr th:first-of-type,
 	.ant-table-thead>tr td:first-of-type,
 	.ant-table-tbody>tr td:first-of-type {
 		padding-top: 1rem;
 	}
-	.ant-table-thead>tr th:last-of-type,
+	.wallet-table .ant-table-thead>tr th:last-of-type,
 	.ant-table-tbody>tr th:last-of-type,
 	.ant-table-thead>tr td:last-of-type,
 	.ant-table-tbody>tr td:last-of-type {
 		padding-bottom: 1rem;
 	}
-	.ant-table-thead>tr>th,
+	.wallet-table .ant-table-thead>tr>th,
 	.ant-table-tbody>tr>th,
 	.ant-table-thead>tr>td,
 	.ant-table-tbody>tr>td {

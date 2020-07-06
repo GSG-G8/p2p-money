@@ -13,7 +13,7 @@ import 'antd/dist/antd.css';
 import './style.css';
 
 const { Content, Sider } = Layout;
-const SiderMenu = ({ ClientData }) => {
+const SiderMenu = ({ ClientData, setClientData }) => {
   const routeName = window.location.pathname.split('/')[1];
   return (
     <ConfigProvider direction="rtl">
@@ -44,7 +44,12 @@ const SiderMenu = ({ ClientData }) => {
               <div className="wrap-layout__content" />
               {routeName === 'wallet' && <Wallet ClientData={ClientData} />}
               {routeName === 'bank' && <Bank />}
-              {routeName === 'settings' && <Settings ClientData={ClientData} />}
+              {routeName === 'settings' && (
+                <Settings
+                  setClientData={setClientData}
+                  ClientData={ClientData}
+                />
+              )}
             </Content>
           </Layout>
         </Layout>

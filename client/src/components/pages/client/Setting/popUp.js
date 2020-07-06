@@ -4,20 +4,23 @@ import Axios from 'axios';
 import { Modal, Button, Input } from 'antd';
 import Alert from '../../../Common/Alert';
 
-const PopUp = ({ fullName, avatar }) => {
+const PopUp = ({ fullName, avatar, changeAvatar }) => {
   const [visible, setVisible] = useState(false);
   const [image, setImage] = useState(avatar);
   const [aletMsg, setAlertMsg] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const showModal = () => setVisible(true);
 
   const handleOk = async () => {
     try {
+      setLoading(true);
       const updateSetting = await Axios.patch('/api/v1/client', {
         avatar: image,
         fullName,
       });
       console.log(updateSetting.data.message);
+      setLoading(false);
       setAlertMsg([
         ...aletMsg,
         <Alert message="تمت العملية" description="تم تحديث الصورة بنجاح" />,
@@ -42,17 +45,18 @@ const PopUp = ({ fullName, avatar }) => {
       <Modal
         visible={visible}
         title="تغيير صورة البروفايل"
-        onOk={handleOk}
+        // onOk={changeAvatar(image)}
         onCancel={handleCancel}
         footer={[
           <Button key="back" onClick={handleCancel}>
             رجوع
           </Button>,
           <Button
+            onOk={console.log('asdsadas')}
+            loading={loading}
             key="submit"
             type="primary"
-            // loading={loading}
-            onClick={handleOk}
+            onClick={() => handleOk()}
           >
             حفظ
           </Button>,
@@ -77,6 +81,7 @@ const PopUp = ({ fullName, avatar }) => {
 PopUp.propTypes = {
   fullName: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
+  changeAvatar: PropTypes.func.isRequired,
 };
 
 export default PopUp;
