@@ -13,21 +13,23 @@ module.exports = async () => {
         {
           bankName: 'بنك فلسطين',
           accountNumber: 7895648237,
-          balance: [
-            { type: 'USD', total: 5000 },
-            { type: 'ILS', total: 300 },
-          ],
+          balance: {
+            USD: 5000,
+            ILS: 300,
+          },
         },
         {
           bankName: 'بنك القدس',
           accountNumber: 798434351,
-          balance: [{ type: 'USD', total: 200 }],
+          balance: {
+            USD: 200,
+          },
         },
       ],
-      mainBalance: [
-        { type: 'USD', total: 5000 },
-        { type: 'ILS', total: 300 },
-      ],
+      mainBalance: {
+        USD: 5000,
+        ILS: 300,
+      },
       mainBankName: 'بنك فلسطين',
       mainBankAccount: 7895648237,
     },
@@ -42,18 +44,22 @@ module.exports = async () => {
         {
           bankName: 'بنك فلسطين',
           accountNumber: 7895641237,
-          balance: [
-            { type: 'USD', total: 5000 },
-            { type: 'ILS', total: 300 },
-          ],
+          balance: {
+            USD: 5000,
+            ILS: 300,
+          },
         },
         {
           bankName: 'بنك القدس',
           accountNumber: 9856438127,
-          balance: [{ type: 'USD', total: 1000 }],
+          balance: {
+            USD: 820,
+          },
         },
       ],
-      mainBalance: [{ type: 'USD', total: 1000 }],
+      mainBalance: {
+        USD: 820,
+      },
       mainBankName: 'بنك القدس',
       mainBankAccount: 9856438127,
     },
@@ -68,23 +74,32 @@ module.exports = async () => {
         {
           bankName: 'بنك فلسطين',
           accountNumber: 1785648957,
-          balance: [
-            { type: 'USD', total: 5000 },
-            { type: 'ILS', total: 300 },
-          ],
+          balance: {
+            USD: 785,
+            ILS: 4115,
+          },
         },
         {
           bankName: 'بنك القدس',
           accountNumber: 7984132412,
-          balance: [{ type: 'USD', total: 700 }],
+          balance: {
+            USD: 884.9393939393935,
+            ILS: 389.5949999999998,
+          },
         },
         {
           bankName: 'بنك الإسكان',
           accountNumber: 7813569742,
-          balance: [{ type: 'USD', total: 200 }],
+          balance: {
+            USD: 1235,
+            ILS: 389,
+          },
         },
       ],
-      mainBalance: [{ type: 'USD', total: 200 }],
+      mainBalance: {
+        USD: 1235,
+        ILS: 389,
+      },
       mainBankName: 'بنك الإسكان',
       mainBankAccount: 7813569742,
     },
@@ -99,26 +114,32 @@ module.exports = async () => {
         {
           bankName: 'بنك فلسطين',
           accountNumber: 7894562894,
-          balance: [
-            { type: 'USD', total: 1000 },
-            { type: 'ILS', total: 9000 },
-          ],
+          balance: {
+            USD: 88477,
+            ILS: 3891,
+          },
         },
         {
           bankName: 'بنك القدس',
           accountNumber: 5246318975,
-          balance: [{ type: 'USD', total: 2356 }],
+          balance: {
+            USD: 887,
+            ILS: 39998,
+          },
         },
         {
           bankName: 'بنك الإسكان',
           accountNumber: 9245613876,
-          balance: [{ type: 'USD', total: 341 }],
+          balance: {
+            USD: 1978,
+            ILS: 99998,
+          },
         },
       ],
-      mainBalance: [
-        { type: 'USD', total: 1000 },
-        { type: 'ILS', total: 9000 },
-      ],
+      mainBalance: {
+        USD: 88477,
+        ILS: 3891,
+      },
       mainBankName: 'بنك فلسطين',
       mainBankAccount: 7894562894,
     },

@@ -1,0 +1,118 @@
+.wallet-head {
+	display: flex;
+	align-items: center;
+	margin-bottom: 2rem;
+	border-radius: 4px;
+}
+
+.btn_wall {
+	cursor: pointer;
+	margin-bottom: 1rem;
+	align-self: flex-end;
+}
+
+.card-balance {
+	font-family: Almarai;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	min-width: 0;
+	max-width: 11rem;
+	margin: 0;
+	height: 6rem;
+	margin-right: 0.5rem;
+	;
+	background: #FFFFFF;
+	border: 1px solid #D8D8D8;
+	box-sizing: border-box;
+	border-radius: 8px;
+	color: #2F80ED;
+	font-weight: bold;
+	font-size: 1.5rem;
+	line-height: 2rem;
+	text-align: center;
+}
+
+.card-balance__label {
+	color: rgba(0, 0, 0, 0.65);
+	font-size: 0.8rem;
+	margin-top: 0.8rem;
+}
+
+.card-balance__amount {
+	margin-bottom: 1.4rem;
+	margin-top: 0.2rem;
+}
+
+.wallet-table {
+	display: flex;
+	flex-direction: column;
+	/* max-width: 58rem;
+	margin: 0 auto;
+	margin-right: 2rem; */
+	font-family: Almarai;
+}
+
+@media screen and (max-width: 1050px) {
+	.card-balance {
+		height: 6rem;
+		margin: 0.3rem;
+	}
+}
+
+@media screen and (max-width: 1020px) {
+	.wallet-table {
+		margin-right: 0;
+	}
+	.wallet-head {
+		margin-right: 0;
+	}
+	.card-balance {
+		margin-right: 0.5rem;
+	}
+}
+
+@media screen and (max-width: 878px) {
+	.wallet-head {
+		flex-wrap: wrap;
+	}
+}
+
+@media screen and (max-width: 720px) {
+	.wallet-table {
+		margin-right: 0;
+	}
+	.wallet-head {
+		margin-right: 0;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.wallet-head {
+		flex-direction: column;
+		margin-bottom: 1.2rem;
+		margin: 1rem;
+	}
+	.wallet-table .ant-table-thead>tr th:first-of-type,
+	.ant-table-tbody>tr th:first-of-type,
+	.ant-table-thead>tr td:first-of-type,
+	.ant-table-tbody>tr td:first-of-type {
+		padding-top: 1rem;
+	}
+	.wallet-table .ant-table-thead>tr th:last-of-type,
+	.ant-table-tbody>tr th:last-of-type,
+	.ant-table-thead>tr td:last-of-type,
+	.ant-table-tbody>tr td:last-of-type {
+		padding-bottom: 1rem;
+	}
+	.wallet-table .ant-table-thead>tr>th,
+	.ant-table-tbody>tr>th,
+	.ant-table-thead>tr>td,
+	.ant-table-tbody>tr>td {
+		display: block;
+		width: auto !important;
+		border: none;
+		padding: 0 3rem;
+		font-size: 1.1rem;
+	}
+}

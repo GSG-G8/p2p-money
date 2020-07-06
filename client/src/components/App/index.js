@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import { initialize, pageview } from 'react-ga';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
@@ -65,6 +66,8 @@ const App = () => {
     } else {
       setLoading(false);
     }
+    initialize('UA-171542498-1');
+    pageview(pathname);
   }, [pathname]);
   const logoutHandler = () => {
     LogOut().then(() => {
@@ -94,7 +97,7 @@ const App = () => {
         {staticRoutes.includes(pathname) && (
           // when we finish the alert component
           // we will tell the Client you already login and the redirect their to wallet
-          <>{window.location.replace('/wallet')}</>
+          <>{window.location.replace('/')}</>
         )}
         {pathname === '/dashboard' ? ( // when we finish the alert component
           // we will tell the client you can't see this routes
