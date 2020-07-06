@@ -6,7 +6,9 @@ import axios from 'axios';
 import Helmet from 'react-helmet';
 import Currency from './arabicCurrency';
 import Button from '../../../Common/Button';
+
 import './style.css';
+import { object } from 'yup';
 
 const { currencyLogo, arabicCurrency } = Currency;
 const columns = [
@@ -30,21 +32,24 @@ const columns = [
 
 const getData = (bankAccounts) =>
   bankAccounts.map(({ balance, accountNumber, bankName }, key) => {
-    const children = [
-      {
-        key: (key + 100).toString(),
+    const children = [];
+    Object.keys(balance).map((el, index) => {
+      children.push({
+        key: (index * 100).toString(),
         bankName: (
-          <span className="insideTable">
-            {` ${arabicCurrency[balance[key].type]}`}
-          </span>
+          <span className="insideTable">{` ${arabicCurrency[el]}`}</span>
         ),
+
         accountNumber: (
           <span className="insideTable">
-            {` ${balance[key].total} ${currencyLogo[balance[key].type]}`}{' '}
+            {` ${balance[el]} ${currencyLogo[el]}`}
           </span>
         ),
-      },
-    ];
+      });
+
+      //   <span className="insideTable">{` ${arabicCurrency[]}`}</span>
+      //
+    });
     return {
       children,
       accountNumber,
@@ -59,6 +64,7 @@ const Banks = ({ ClientData }) => {
   const history = useHistory();
 
   const { bankAccounts } = ClientData;
+  console.log(bankAccounts);
   useEffect(() => {
     if (!data) setData(getData(bankAccounts));
   });
@@ -93,6 +99,14 @@ const Banks = ({ ClientData }) => {
       </div>
     </>
   );
+};
+
+Banks.propTypes = {
+  ClientData: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.array,
+  ]).isRequired,
 };
 
 export default Banks;
