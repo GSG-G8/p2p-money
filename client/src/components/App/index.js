@@ -10,7 +10,7 @@ import Home from '../pages/common/Home';
 import Login from '../pages/common/Login';
 import SignUp from '../pages/client/Signup';
 import SiderMenu from '../client/sider';
-
+import Header from '../Common/Header';
 import './style.css';
 
 const checkAdmin = async () => {
@@ -24,10 +24,6 @@ const checkClient = async () => {
   return data;
 };
 
-const getPrices = async () => {
-  const { Prices } = await axios.get('/api/v1/prices');
-  return Prices;
-};
 const LogOut = async () => {
   const data = await axios.post('/api/v1/logout');
   return data;
@@ -40,11 +36,9 @@ const App = () => {
   const [ClientData, setClientData] = useState();
   const [Clients, setClients] = useState();
   const [Transactions, setTransactions] = useState();
-  const [prices, setPrices] = useState();
   const history = useHistory();
   const { pathname } = window.location;
   useEffect(() => {
-    getPrices().then((Prices) => setPrices(Prices));
     if (Cookies.get('client')) {
       checkClient()
         .then(({ data: { clientData } }) => {
@@ -89,8 +83,9 @@ const App = () => {
   if (client) {
     return (
       <Switch>
+        <Header />
         <Route exact path="/404" render={() => <Error404 />} />
-        <Route exact path="/" render={() => <Home prices={prices} />} />
+        <Route exact path="/" render={() => <Home />} />
         <Route
           path={['/wallet', '/bank', '/settings']}
           render={() => <SiderMenu content={Wallet} ClientData={ClientData} />}
@@ -115,7 +110,7 @@ const App = () => {
     return (
       <Switch>
         <Route exact path="/404" render={() => <Error404 />} />
-        <Route exact path="/" render={() => <Home prices={prices} />} />
+        <Route exact path="/" render={() => <Home />} />
         <Route
           exact
           path="/dashboard"
@@ -138,20 +133,23 @@ const App = () => {
     );
   }
   return (
-    <Switch>
-      <Route exact path="/404" render={() => <Error404 />} />
-      <Route exact path="/" render={() => <Home prices={prices} />} />
-      <Route exact path="/login" render={() => <Login />} />
-      <Route exact path="/signup" render={() => <SignUp />} />
-      {Routes.includes(pathname) || pathname === '/dashboard' ? (
-        // when we finish the alert component
-        // we will add alert to tell the client, you are unauthorized, you must to signup or login
-        // and redirect there to signup page
-        <>{window.location.replace('/signup')}</>
-      ) : (
-        <Redirect to="/404" />
-      )}
-    </Switch>
+    <>
+      <Header />
+      <Switch>
+        <Route exact path="/404" render={() => <Error404 />} />
+        <Route exact path="/" render={() => <Home />} />
+        <Route exact path="/login" render={() => <Login />} />
+        <Route exact path="/signup" render={() => <SignUp />} />
+        {Routes.includes(pathname) || pathname === '/dashboard' ? (
+          // when we finish the alert component
+          // we will add alert to tell the client, you are unauthorized, you must to signup or login
+          // and redirect there to signup page
+          <>{window.location.replace('/signup')}</>
+        ) : (
+          <Redirect to="/404" />
+        )}
+      </Switch>
+    </>
   );
 };
 
