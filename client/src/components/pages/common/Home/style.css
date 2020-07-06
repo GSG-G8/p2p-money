@@ -12,13 +12,13 @@ body {
 .backGround {
   background-size: cover;
   background-repeat: no-repeat;
-  height: 45vh;
+  height: 50vh;
   width: 100%;
   background-image: url('../../../../assets/images/background.svg');
 }
 .cardStyle{
   position: absolute;
-  top: 30%;
+  top: 37%;
   left: 10%;
   width: 80%;
   height: 17rem;
@@ -43,7 +43,7 @@ body {
   align-self: center;
 }
 .container_card_Prices {
-  margin: 13% 0 4% 0 ;
+  margin: 15% 0 4% 0 ;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -130,4 +130,13 @@ font-size: 1.3rem;
   flex-direction: column;
   justify-content: space-evenly;
   height: 8rem;
+}
+.Home__alert {
+  position: fixed;
+  width: 50%;
+  z-index: 3;
+  left: 25%;
+  top: 2%;
+  font-size: 1rem;
+  text-align: center;
 }
