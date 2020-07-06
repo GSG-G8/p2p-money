@@ -5,7 +5,7 @@ import Axios from 'axios';
 
 import Alert from '../../../Common/Alert';
 import Typography from '../../../Common/Typography';
-import Configurations from '../../client/Signup/AntFormantConfigurations';
+import Configurations from '../../client/Signup/AntFormatConfigurations';
 
 const { antConfigurations, messages } = Configurations;
 const { Option } = Select;
