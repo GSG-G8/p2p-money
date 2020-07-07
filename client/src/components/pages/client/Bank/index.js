@@ -23,7 +23,7 @@ const getData = (bankAccounts) =>
         ),
         accountNumber: (
           <span className="insideTable">
-            {` ${balance[el]} ${currencyLogo[el]}`}
+            {` ${Math.floor(balance[el] * 100) / 100} ${currencyLogo[el]}`}
           </span>
         ),
       })
@@ -61,7 +61,7 @@ const Banks = ({ ClientData }) => {
       .catch(() => {
         setAlert({
           type: 'error',
-          message: 'عذرا ,لم يتم حذف حسابك البنكي',
+          message: 'عذرا ، لم يتم حذف حسابك البنكي',
         });
       });
     setLoading(false);
@@ -108,7 +108,7 @@ const Banks = ({ ClientData }) => {
     if (!accountNumber || accountNumber < 0) {
       setAlert({
         type: 'warning',
-        message: 'عذرا , لن يتم اضافة حسابك الجديد تاكد من رقم الحساب',
+        message: 'عذرا ، لن يتم اضافة حسابك الجديد تأكد من رقم الحساب',
       });
       setLoading(false);
     } else {
@@ -128,7 +128,7 @@ const Banks = ({ ClientData }) => {
         .catch(() => {
           setAlert({
             type: 'warning',
-            message: 'عذرا , لن يتم اضافة حسابك الجديد تاكد من رقم الحساب',
+            message: 'عذرا ، لن يتم اضافة حسابك الجديد تاكد من رقم الحساب',
           });
         });
     }
@@ -153,7 +153,7 @@ const Banks = ({ ClientData }) => {
       <div className="wallet-table">
         <div className="wallet-head" />
         <Button
-          content="اضافة حساب بنكي"
+          content="إضافة حساب بنكي"
           loading={loading}
           onClick={() => {
             setLoading(true);
@@ -175,7 +175,7 @@ const Banks = ({ ClientData }) => {
       </div>
       <Modal
         className="addBankModel"
-        title="اضافة حساب بنك جديد"
+        title="إضافة حساب بنك جديد"
         visible={showModal}
         onOk={addBank}
         onCancel={() => {
