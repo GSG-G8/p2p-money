@@ -38,8 +38,8 @@ TextInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
   onFocus: PropTypes.func,
-  value: PropTypes.string.isRequired,
   name: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 TextInput.defaultProps = {
