@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, ConfigProvider } from 'antd';
+import { Layout, Menu, ConfigProvider, Button } from 'antd';
 import PropTypes from 'prop-types';
 import { WalletFilled, BankFilled, SettingFilled } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
@@ -23,6 +23,7 @@ const SiderMenu = ({ ClientData, setClientData }) => {
               <div className="user-title">{ClientData.fullName}</div>
             </div>
             <Menu theme="dark" mode="inline" defaultSelectedKeys={routeName}>
+              {/* <Button onClick={() => setClientData([])}>مسح الداتا</Button> */}
               <Menu.Item key="wallet" icon={<WalletFilled />}>
                 <Link to="/wallet" />
                 محفظتي

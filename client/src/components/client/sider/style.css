@@ -9,6 +9,7 @@
 	width: 12.5rem;
 	position: fixed;
 	transition: all 0.2s;
+	margin-top: 3rem;
 }
 
 .sider-rtl .ant-typography {

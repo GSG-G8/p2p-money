@@ -17,6 +17,7 @@
 	text-align: center;
 	max-width: 53rem;
 	margin: 0 auto;
+	margin-top: 2rem;
 }
 
 
@@ -24,6 +25,10 @@
 	margin-bottom: 0;
 	font-size: 3rem !important;
 	text-align: center;
+}
+
+.setting-item .ant-typography{
+	margin-bottom: 0;
 }
 
 .form-wrapper {
@@ -41,10 +46,10 @@
 	margin-bottom: .6rem;
 }
 
-.ant-alert{
+.alert-wrappper .ant-alert{
   position: fixed;
   z-index: 1;
-  top: 1%;
+  top: 8%;
   left: 1%;
   width: 75%;
 }

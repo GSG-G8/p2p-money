@@ -110,7 +110,7 @@ const Setting = ({ ClientData, setClientData }) => {
   return (
     <>
       {!ClientData && <div>loading......</div>}
-      {aletMsg}
+      <div className="alert-wrappper">{aletMsg}</div>
       <ConfigProvider direction="rtl">
         <Helmet>
           <title>الاعدادات</title>
