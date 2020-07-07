@@ -1,0 +1,9 @@
+.dashboard__page{
+
+  width: 80%;
+  margin: 0 auto;
+  
+}
+.dashboard__head__card{
+  display: flex;
+}
