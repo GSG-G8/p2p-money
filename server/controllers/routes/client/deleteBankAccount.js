@@ -13,14 +13,22 @@ const deleteBankAccount = async (req, res) => {
   const accountValidation = await deleteBankAccountValidation(req.body);
 
   if (accountExist.length > 0 && accountValidation) {
-    await client.findByIdAndUpdate(
+    client.findByIdAndUpdate(
       clientId,
       { $pull: { bankAccounts: { accountNumber } } },
-      { useFindAndModify: false }
+      { useFindAndModify: false },
+      async (error) => {
+        if (error)
+          res.status(400).json({ message: "Account doesn't exist in DB" });
+        else {
+          const data = await client.findById(clientId);
+          res.status(200).json({
+            message: 'Account was deleted successfully',
+            data: data.bankAccounts,
+          });
+        }
+      }
     );
-    res.status(200).json({
-      message: 'Account was deleted successfully',
-    });
   } else res.status(400).json({ message: "Account doesn't exist" });
 };
 

@@ -10,18 +10,19 @@ const addClientBank = async (req, res) => {
     'bankAccounts.accountNumber': req.body.accountNumber,
   });
   if (checkBankAccount.length === 0 && isBankValidate) {
-    await client.findByIdAndUpdate(
+    client.findByIdAndUpdate(
       clientId,
       {
         $push: { bankAccounts: req.body },
       },
       { useFindAndModify: false },
-      (err) => {
+      async (err) => {
         if (err) res.status(400).json({ message: 'User not exist' });
-        else
-          res.status(200).json({
-            message: 'User Bank added successfully',
-          });
+        const data = await client.findById(clientId);
+        res.status(200).json({
+          message: 'User Bank added successfully',
+          data: data.bankAccounts,
+        });
       }
     );
   } else

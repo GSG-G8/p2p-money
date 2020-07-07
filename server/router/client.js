@@ -12,6 +12,6 @@ const {
 clientRouter.get('/', getClientData);
 clientRouter.patch('/', updateClientData);
 clientRouter.post('/bank', addBankAccount);
-clientRouter.delete('/bank', deleteBankAccount);
+clientRouter.put('/bank', deleteBankAccount);
 
 module.exports = clientRouter;
