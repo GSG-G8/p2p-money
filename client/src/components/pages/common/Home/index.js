@@ -52,10 +52,10 @@ const Home = ({ MainBalance, isClient }) => {
     const elementValue = e.target.value;
     setTotal(elementValue);
   };
-  const changeFrom = (value) => {
+  const changeFrom = ({ target: { value } }) => {
     setFrom(value);
   };
-  const changeTo = (value) => {
+  const changeTo = ({ target: { value } }) => {
     setTo(value);
   };
   const showModal = () => {
@@ -180,7 +180,7 @@ const Home = ({ MainBalance, isClient }) => {
           Content={
             <>
               <div className="first-section">
-                <SelectCurrency onChange={changeFrom} />
+                <SelectCurrency onChange={changeFrom} selectType="from" />
                 <TextInput
                   handleChange={addResult}
                   value={amount}
@@ -193,11 +193,7 @@ const Home = ({ MainBalance, isClient }) => {
                 </div>
               </div>
               <div className="second-section">
-                <SelectCurrency
-                  onChange={changeTo}
-                  valueSelect={From}
-                  selectType="from"
-                />
+                <SelectCurrency onChange={changeTo} valueSelect={From} />
                 <TextInput disabled value={resultExchange} placeholder="إلى" />
                 <Button
                   content="حول الآن"
