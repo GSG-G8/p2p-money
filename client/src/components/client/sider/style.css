@@ -57,9 +57,14 @@
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	margin: 1.4rem 0.9rem 0.9rem 1.4rem;
+	margin: 1rem 0.9rem 0.9rem 2.9rem;
 	padding-left: 1.938rem;
 	color: white;
+}
+
+.user-title{
+	font-size: 1rem;
+	font-family: Almarai;
 }
 
 @media screen and (max-width: 800px) {

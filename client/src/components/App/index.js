@@ -94,7 +94,11 @@ const App = () => {
   if (client) {
     return (
       <Switch>
-        <Route exact path="/404" render={() => <Error404 />} />
+        <Route
+          exact
+          path="/404"
+          render={() => <Error404 log={logoutHandler} />}
+        />
         <Route exact path="/" render={() => <Home prices={prices} />} />
         <Route
           path={['/wallet', '/bank', '/settings']}

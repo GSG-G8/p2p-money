@@ -21,8 +21,7 @@ const SiderMenu = ({ ClientData, setClientData }) => {
         <Layout dir="rtl">
           <Sider dir="rtl" className="sider-rtl">
             <div className="user-wrapper">
-              <img className="sider-logo" src={Logo} alt="logo-img" />
-              <div className="user-title">P2P Money</div>
+              <div className="user-title">{ClientData.fullName}</div>
             </div>
             <Menu theme="dark" mode="inline" defaultSelectedKeys={routeName}>
               <Menu.Item key="wallet" icon={<WalletFilled />}>

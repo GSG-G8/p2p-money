@@ -122,7 +122,7 @@ const Wallet = ({ ClientData }) => {
                   </div>
                 </div>
                 <div className="card-balance__amount">
-                  {arr[1]}
+                  {arr[1].toFixed(2)}
                   {currencyLogo[arr[0]][0]}
                 </div>
               </div>

@@ -34,12 +34,14 @@ const Setting = ({ ClientData, setClientData }) => {
       if (!isNull(newPassword, oldPassword, passwordConfirmation)) {
         const updatedValue = {
           ...rest,
+          feedback: values.feedback === null ? '' : values.feedback,
           mainBankName: rest.mainBankName.key || rest.mainBankName,
         };
         upddateVals = updatedValue;
       } else {
         const updatedValue = {
           ...values,
+          feedback: values.feedback === null ? '' : values.feedback,
           mainBankName: values.mainBankName.key || values.mainBankName,
         };
         upddateVals = updatedValue;
