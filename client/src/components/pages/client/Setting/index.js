@@ -46,7 +46,6 @@ const Setting = ({ ClientData, setClientData }) => {
         };
         upddateVals = updatedValue;
       }
-      console.log(upddateVals);
       if (!EmptyOrNull(newPassword, oldPassword, passwordConfirmation)) {
         setAlertMsg([
           <Alert
@@ -82,7 +81,6 @@ const Setting = ({ ClientData, setClientData }) => {
         }
       }
     } catch (error) {
-      console.log(error);
       setAlertMsg([
         <Alert
           type="error"

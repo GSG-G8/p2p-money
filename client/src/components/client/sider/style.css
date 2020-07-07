@@ -80,11 +80,11 @@
 
 @media screen and (max-width: 650px) {
 	.sider-rtl {
-		flex: 0 0 9rem !important;
+		/* flex: 0 0 9rem !important; */
 		min-width: 1rem !important;
 	}
 	.sider-rtl .ant-layout-sider-children {
-		width: 9rem !important;
+		/* width: 9rem !important; */
 	}
 }
 

@@ -3,7 +3,6 @@ import { Layout, Menu, ConfigProvider } from 'antd';
 import PropTypes from 'prop-types';
 import { WalletFilled, BankFilled, SettingFilled } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import Logo from '../../../assets/icons/icon.svg';
 
 import Wallet from '../../pages/client/Wallet';
 import Bank from '../../pages/client/Bank';
