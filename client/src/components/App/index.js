@@ -11,7 +11,7 @@ import Home from '../pages/common/Home';
 import Login from '../pages/common/Login';
 import SignUp from '../pages/client/Signup';
 import SiderMenu from '../client/sider';
-
+import Header from '../Common/Header';
 import './style.css';
 
 const checkAdmin = async () => {
@@ -25,10 +25,6 @@ const checkClient = async () => {
   return data;
 };
 
-const getPrices = async () => {
-  const { Prices } = await axios.get('/api/v1/prices');
-  return Prices;
-};
 const LogOut = async () => {
   const data = await axios.post('/api/v1/logout');
   return data;
@@ -41,11 +37,9 @@ const App = () => {
   const [ClientData, setClientData] = useState();
   const [Clients, setClients] = useState();
   const [Transactions, setTransactions] = useState();
-  const [prices, setPrices] = useState();
   const history = useHistory();
   const { pathname } = window.location;
   useEffect(() => {
-    getPrices().then((Prices) => setPrices(Prices));
     if (Cookies.get('client')) {
       checkClient()
         .then(({ data: { clientData } }) => {
@@ -91,59 +85,110 @@ const App = () => {
   }
   if (client) {
     return (
-      <Switch>
-        <Route exact path="/404" render={() => <Error404 />} />
-        <Route exact path="/" render={() => <Home prices={prices} />} />
-        <Route
-          path={['/wallet', '/bank', '/settings']}
-          render={() => <SiderMenu content={Wallet} ClientData={ClientData} />}
+      <>
+        <Header
+          isAdmin={admin}
+          isClient={client}
+          logoutHandler={logoutHandler}
         />
+        <Switch>
+          <Route exact path="/404" render={() => <Error404 />} />
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Home
+                MainBalance={ClientData ? ClientData.mainBalance : {}}
+                isClient={client}
+              />
+            )}
+          />
+          <Route
+            path={['/wallet', '/bank', '/settings']}
+            render={() => (
+              <SiderMenu content={Wallet} ClientData={ClientData} />
+            )}
+          />
 
-        {staticRoutes.includes(pathname) && (
-          // when we finish the alert component
-          // we will tell the Client you already login and the redirect their to wallet
-          <>{window.location.replace('/')}</>
-        )}
-        {pathname === '/dashboard' ? ( // when we finish the alert component
-          // we will tell the client you can't see this routes
-          <>{window.location.replace('/wallet')}</>
-        ) : (
-          <Redirect to="/404" />
-        )}
-      </Switch>
+          {staticRoutes.includes(pathname) && (
+            // when we finish the alert component
+            // we will tell the Client you already login and the redirect their to wallet
+            <>{window.location.replace('/')}</>
+          )}
+          {pathname === '/dashboard' ? ( // when we finish the alert component
+            // we will tell the client you can't see this routes
+            <>{window.location.replace('/wallet')}</>
+          ) : (
+            <Redirect to="/404" />
+          )}
+        </Switch>
+      </>
     );
   }
 
   if (admin) {
     return (
-      <Switch>
-        <Route exact path="/404" render={() => <Error404 />} />
-        <Route exact path="/" render={() => <Home prices={prices} />} />
-        <Route
-          exact
-          path="/dashboard"
-          render={() => (
-            <Dashboard Clients={Clients} Transactions={Transactions} />
-          )}
+      <>
+        <Header
+          isAdmin={admin}
+          isClient={client}
+          logoutHandler={logoutHandler}
         />
-        {staticRoutes.includes(pathname) && (
-          // when we finish the alert component
-          // we will tell the admin you already login and the redirect their to dashboard
-          <>{window.location.replace('/dashboard')}</>
-        )}
-        {Routes.includes(pathname) ? ( // when we finish the alert component
-          // we will tell the admin you can't see this routes
-          <>{window.location.replace('/dashboard')}</>
-        ) : (
-          <Redirect to="/404" />
-        )}
-      </Switch>
+        <Switch>
+          <Route exact path="/404" render={() => <Error404 />} />
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Home
+                MainBalance={ClientData ? ClientData.mainBalance : {}}
+                isClient={client}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/dashboard"
+            render={() => (
+              <Dashboard Clients={Clients} Transactions={Transactions} />
+            )}
+          />
+          {staticRoutes.includes(pathname) && (
+            // when we finish the alert component
+            // we will tell the admin you already login and the redirect their to dashboard
+            <>{window.location.replace('/dashboard')}</>
+          )}
+          {Routes.includes(pathname) ? ( // when we finish the alert component
+            // we will tell the admin you can't see this routes
+            <>{window.location.replace('/dashboard')}</>
+          ) : (
+            <Redirect to="/404" />
+          )}
+        </Switch>
+      </>
     );
   }
   return (
     <Switch>
       <Route exact path="/404" render={() => <Error404 />} />
-      <Route exact path="/" render={() => <Home prices={prices} />} />
+      <Route
+        exact
+        path="/"
+        render={() => (
+          <>
+            <Header
+              isAdmin={admin}
+              isClient={client}
+              logoutHandler={logoutHandler}
+            />
+
+            <Home
+              MainBalance={ClientData ? ClientData.mainBalance : {}}
+              isClient={client}
+            />
+          </>
+        )}
+      />
       <Route exact path="/login" render={() => <Login />} />
       <Route exact path="/signup" render={() => <SignUp />} />
       {Routes.includes(pathname) || pathname === '/dashboard' ? (

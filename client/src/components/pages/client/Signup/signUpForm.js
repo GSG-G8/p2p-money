@@ -70,7 +70,7 @@ const SignupForm = () => {
             window.localStorage.removeItem('User_Data');
             setAlert(messages.emailVerificationFailed);
             setLoading(false);
-            history.push('/signup');
+            window.location.replace('/signup');
           });
       }
   })();
@@ -251,7 +251,7 @@ const SignupForm = () => {
             تسجيل
           </Button>
           <Typography
-            level=".6rem"
+            ParagraphSize=".6rem"
             className="signUp__privacy"
             Content="بالنقر فوق تسجيل ، فإنك توافق على الشروط والأحكام وسياسة الخصوصية"
           />
