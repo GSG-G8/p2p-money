@@ -23,7 +23,7 @@ const getData = (bankAccounts) =>
         ),
         accountNumber: (
           <span className="insideTable">
-            {` ${Math.floor(balance[el] * 100) / 100} ${currencyLogo[el]}`}
+            {` ${balance[el].toFixed(2)} ${currencyLogo[el]}`}
           </span>
         ),
       })
