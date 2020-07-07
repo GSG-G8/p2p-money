@@ -1,4 +1,12 @@
-.Chart {
-  width: 50%;
-  height: 50%;
+.chart__first {
+  min-width: 43rem;
+  min-height: 20rem;
+  margin-bottom: 1rem;
+}
+
+.chart__second {
+  margin-top: 1rem;
+  min-width: 43rem;
+  min-height: 20rem;
+  margin-bottom: 1rem;
 }

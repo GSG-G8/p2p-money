@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import { MDBContainer } from 'mdbreact';
 import { GoogleLogin } from 'react-google-login';
+import { Card } from 'antd';
 import queryReport from './queryReport';
 
 import './style.css';
@@ -44,7 +45,7 @@ const ChartsPage = () => {
     const event = [];
     const clicks = [];
     // eslint-disable-next-line no-unused-vars
-    let elementIndex = 0;
+    const elementIndex = 0;
     const firstResult = firstDat.result.reports[0].data.rows;
     const secondResult = secondData.result.reports[0].data.rows;
     firstResult.forEach((row, index) => {
@@ -60,13 +61,14 @@ const ChartsPage = () => {
         path.push('البنوك');
       } else if (row.dimensions[0] === '/settings') {
         path.push('الإعدادات');
-      } else if (!path.includes('أخرى')) {
-        path.push('أخرى');
-        elementIndex = index;
-      } else {
-        // eslint-disable-next-line no-return-assign
-        return (views[elementIndex] += row.metrics[0].values[0]);
       }
+      // else if (!path.includes('أخرى')) {
+      //   path.push('أخرى');
+      //   elementIndex = index;
+      // } else {
+      //   // eslint-disable-next-line no-return-assign
+      //   return (views[elementIndex] += row.metrics[0].values[0]);
+      // }
       views.push(row.metrics[0].values[0]);
     });
     secondResult.forEach((row) => {
@@ -115,6 +117,7 @@ const ChartsPage = () => {
       labels: event,
       datasets: [
         {
+          label: 'الاحداث على الصفحات',
           data: clicks,
           backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
           hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
@@ -142,16 +145,25 @@ const ChartsPage = () => {
     );
   });
   return (
-    <MDBContainer className="Chart">
-      <Bar data={pathData} />
-      <Doughnut data={eventsData} />
-      {!isSignedIn && (
-        <GoogleLogin
-          clientId="65637092858-8nm8i0t7151g09jth8u148sgsbkufaih.apps.googleusercontent.com"
-          buttonText="Login"
-          cookiePolicy="single_host_origin"
-        />
-      )}
+    <MDBContainer>
+      <Card hoverable>
+        <div className="chart__first">
+          <Bar data={pathData} height="8rem" width="14rem" />
+        </div>
+      </Card>
+
+      <div className="chart__second">
+        <Card hoverable>
+          <Doughnut data={eventsData} height="8rem" width="14rem" />
+          {!isSignedIn && (
+            <GoogleLogin
+              clientId="65637092858-8nm8i0t7151g09jth8u148sgsbkufaih.apps.googleusercontent.com"
+              buttonText="Login"
+              cookiePolicy="single_host_origin"
+            />
+          )}
+        </Card>
+      </div>
     </MDBContainer>
   );
 };

@@ -21,27 +21,20 @@ const ClientsCard = ({ className }) => {
   }, [data]);
 
   return (
-    <Card
-      dir="rtl"
-      hoverable
-      className={`clientsCard ${className}`}
-      cover={
-        <List
-          loading={!(data && data.length)}
-          className="listItems"
-          itemLayout="horizontal"
-          dataSource={data}
-          renderItem={(item) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={<Avatar src={item.avatar} className="listItems" />}
-                title={item.fullName}
-                description={item.email || item.mobileNumber}
-              />
-            </List.Item>
-          )}
-        />
-      }
+    <List
+      loading={!(data && data.length)}
+      className="listItems"
+      itemLayout="horizontal"
+      dataSource={data}
+      renderItem={(item) => (
+        <List.Item>
+          <List.Item.Meta
+            avatar={<Avatar src={item.avatar} className="listItems" />}
+            title={item.fullName}
+            description={item.email || item.mobileNumber}
+          />
+        </List.Item>
+      )}
     />
   );
 };
