@@ -93,6 +93,8 @@ const Banks = ({ ClientData }) => {
           return (
             <Popconfirm
               title="هل انت متاكد من حذف الحساب?"
+              okText="موافق"
+              cancelText="الغاء"
               onConfirm={() => handleDelete(record.accountNumber)}
             >
               <Button content="حذف" cssClass="delete--bank--btn" />
