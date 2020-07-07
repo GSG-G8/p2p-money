@@ -140,3 +140,13 @@ font-size: 1.3rem;
   font-size: 1rem;
   text-align: center;
 }
+.Home_typography {
+  position: absolute;
+  right: 5%;
+  top:15%;
+  color: white !important;
+}
+.extra_typo {
+  top:17%;
+  right: 9%;
+}

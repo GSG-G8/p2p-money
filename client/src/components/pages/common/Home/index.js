@@ -15,6 +15,7 @@ import HomeMap from '../../../../assets/images/HomeMap.svg';
 import Button from '../../../Common/Button';
 import Footer from '../../../Common/Footer';
 import Alert from '../../../Common/Alert';
+import Typography from '../../../Common/Typography';
 
 import './style.css';
 
@@ -127,6 +128,18 @@ const Home = ({ MainBalance, isClient }) => {
         </>
       )}
       <div className="home_section">
+        <Typography
+          Content="أفضل سعر بيع وشراء, في أي وقت, وأي مكان."
+          className="Home_typography"
+          level={3}
+          type="title"
+        />
+        <Typography
+          Content="بدون أي عمولة أو ضريبة ."
+          className="Home_typography extra_typo"
+          level={3}
+          type="title"
+        />
         <ConfigProvider direction="rtl">
           {MainBalance[From] && MainBalance[From] >= amount && (
             <Modal
