@@ -3,7 +3,6 @@ import { Layout, Menu, ConfigProvider } from 'antd';
 import PropTypes from 'prop-types';
 import { WalletFilled, BankFilled, SettingFilled } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import Logo from '../../../assets/icons/icon.svg';
 
 import Wallet from '../../pages/client/Wallet';
 import Bank from '../../pages/client/Bank';
@@ -20,10 +19,6 @@ const SiderMenu = ({ ClientData }) => {
       <div className="sider-wrapper">
         <Layout dir="rtl">
           <Sider dir="rtl" className="sider-rtl">
-            <div className="user-wrapper">
-              <img className="sider-logo" src={Logo} alt="logo-img" />
-              <div className="user-title">P2P Money</div>
-            </div>
             <Menu theme="dark" mode="inline" defaultSelectedKeys={routeName}>
               <Menu.Item key="wallet" icon={<WalletFilled />}>
                 <Link to="/wallet" />
