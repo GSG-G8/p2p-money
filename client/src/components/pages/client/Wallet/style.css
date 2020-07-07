@@ -47,12 +47,9 @@
 .wallet-table {
 	display: flex;
 	flex-direction: column;
-	/* max-width: 58rem;
-	margin: 0 auto;
-	margin-right: 2rem; */
+	margin-top: 3rem;
 	font-family: Almarai;
 }
-
 @media screen and (max-width: 1050px) {
 	.card-balance {
 		height: 6rem;

@@ -1,6 +1,7 @@
 .main-card-currencies {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  flex-wrap: wrap;
   padding-top: 2rem;
   width: 60%;
   height: 30%;
@@ -10,15 +11,15 @@
   top: 10%;
   border-radius: 0.5rem;
   background-color: rgb(255, 255, 255);
-  box-shadow: 0.1rem 0.1rem 0.4rem 0.1rem #e4e4e4;
+  box-shadow: 0 0.3rem 0.6rem 0.1rem #9c9c9c6b;
 }
 .top-curricle {
-  width: 2rem;
-  height: 2rem;
-  background-color: #1A6FC0;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #0B65BC;
   position: absolute;
   top: -1rem;
-  right: 49%;
+  right: 47%;
   border-radius: 50%;
 }
 .bottom-curricle {
@@ -30,8 +31,9 @@
   background-color: rgb(255, 255, 255);
   position: absolute;
   bottom: -1rem;
-  right: 49%;
+  right: 47%;
   border-radius: 50%;
+  box-shadow: 0 0.5rem 0.6rem 0.01rem #9c9c9c6b;
 }
 
 
