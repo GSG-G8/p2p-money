@@ -12,16 +12,18 @@
 	border-radius: 4px;
 }
 
-.page-title{
+.page-title {
 	background: white;
 	text-align: center;
-	font-size: 3rem;
 	max-width: 53rem;
 	margin: 0 auto;
 }
 
+
 .page-title .ant-typography-rtl{
 	margin-bottom: 0;
+	font-size: 3rem !important;
+	text-align: center;
 }
 
 .form-wrapper {

@@ -23,6 +23,7 @@ const Setting = ({ ClientData, setClientData }) => {
   const handleSubmit = async (values) => {
     try {
       setLoading(true);
+      let upddateVals;
       const {
         newPassword,
         oldPassword,
@@ -30,7 +31,6 @@ const Setting = ({ ClientData, setClientData }) => {
         ...rest
       } = values;
 
-      let upddateVals;
       if (!isNull(newPassword, oldPassword, passwordConfirmation)) {
         const updatedValue = {
           ...rest,
@@ -44,12 +44,17 @@ const Setting = ({ ClientData, setClientData }) => {
         };
         upddateVals = updatedValue;
       }
+      console.log(upddateVals);
       if (!EmptyOrNull(newPassword, oldPassword, passwordConfirmation)) {
         setAlertMsg([
           <Alert
             type="error"
             message="فشلت العملية"
-            description="كلمة المرور السابقة غير صحيحة"
+            description={
+              EmptyOrNull(passwordConfirmation)
+                ? 'قم بكتابة تأكيد كلمة المرور'
+                : 'كلمة المرور السابقة غير صحيحة'
+            }
           />,
           ...aletMsg,
         ]);
@@ -75,6 +80,7 @@ const Setting = ({ ClientData, setClientData }) => {
         }
       }
     } catch (error) {
+      console.log(error);
       setAlertMsg([
         <Alert
           type="error"
@@ -110,7 +116,7 @@ const Setting = ({ ClientData, setClientData }) => {
           <title>الاعدادات</title>
         </Helmet>
         <div className="page-title">
-          <Typography Content="الاعدادات" />
+          <Typography className="age-title__sub" Content="الاعدادات" />
         </div>
         {ClientData && (
           <div className="settings-wrapper">
@@ -207,8 +213,8 @@ const Setting = ({ ClientData, setClientData }) => {
                   <Form.Item
                     rules={[
                       {
-                        types: 'password',
                         required: false,
+                        message: 'الرجاء تأكيد كلمة المرور الجديدة',
                       },
                       ({ getFieldValue }) => ({
                         validator(rule, value) {
