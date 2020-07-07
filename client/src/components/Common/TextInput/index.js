@@ -36,7 +36,7 @@ TextInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
   handleChange: PropTypes.func,
   onFocus: PropTypes.func,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 TextInput.defaultProps = {
