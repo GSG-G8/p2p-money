@@ -27,7 +27,7 @@ const createTransaction = async (req, res) => {
         mainBalance[from] < amount ||
         mainBalance[from] === 0
       ) {
-        res.send({
+        res.status(400).send({
           message: "Sorry, but you don't have enough balance to continue.",
         });
       } else {
@@ -71,7 +71,7 @@ const createTransaction = async (req, res) => {
         res.send({ mainBalance });
       }
     } else {
-      res.send({ message: 'client not exist' });
+      res.status(400).send({ message: 'client not exist' });
     }
   } catch (error) {
     res.status(400).json({ message: error.message });

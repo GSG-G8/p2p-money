@@ -1,0 +1,152 @@
+body {
+  font-family: Almarai;
+}
+.home_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.backGround {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 50vh;
+  width: 100%;
+  background-image: url('../../../../assets/images/background.svg');
+}
+.cardStyle{
+  position: absolute;
+  top: 37%;
+  left: 10%;
+  width: 80%;
+  height: 17rem;
+}
+.first-section {
+  margin-right: 5%;
+}
+.exchange_section {
+  display: flex;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  font-weight: 900;
+}
+.second-section {
+  margin-right: 5%;
+  margin-left: 25%;
+}
+.ant-input[disabled]{
+  color: rgb(66, 38, 38) !important;
+}
+.currency_prices {
+  align-self: center;
+}
+.container_card_Prices {
+  margin: 15% 0 4% 0 ;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 60%;
+  height: 25rem;
+  border: 1px solid rgba(208, 234, 255, 0.705);
+  border-radius: 0.8rem;
+  /* padding: 0 10%; */
+}
+
+.title_Exchange {
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+.Text_buy_sell {
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+.images_section {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0 10%;
+}
+.image_title_section {
+padding-left: 1rem;
+}
+.sections_logo {
+  width: 3rem;
+  height: 3rem;
+}
+.title_section {
+  width: 64.5%;
+  margin-top: 0.9rem;
+}
+
+.name_prices {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 1rem;
+  height: 16rem;
+  width: 20%;
+}
+.prices_logo {
+  width: 5rem;
+  height: 5rem;
+}
+.extra_sell {
+padding-right: 1rem;
+}
+
+.prices_title {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.prices_title--green {
+  color: green;
+}
+.prices_title--red {
+  color: #ff0000;
+}
+.prices_title--blue {
+  color: blue;
+}
+.prices_title--orange {
+color: rgb(245, 171, 33);
+margin:0 0.5rem;
+font-weight: 900;
+font-size: 1.3rem;
+}
+.exchange_button {
+  margin: 1rem 0.5rem 0.2rem 0;
+  font-size: large;
+  text-align: center !important;
+  padding-bottom: 2rem !important;
+  /* padding-bottom: 1rem; */
+}
+
+.extra_prices {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 8rem;
+}
+.Home__alert {
+  position: fixed;
+  width: 50%;
+  z-index: 3;
+  left: 25%;
+  top: 2%;
+  font-size: 1rem;
+  text-align: center;
+}
+.Home_typography {
+  position: absolute;
+  right: 5%;
+  top:15%;
+  color: white !important;
+}
+.extra_typo {
+  top:17%;
+  right: 9%;
+}

@@ -1,23 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
-import axios from 'axios';
 import Cookies from 'js-cookie';
+import PropTypes from 'prop-types';
 
 import headerIcon from '../../../assets/icons/headerIcon.svg';
 import Button from '../Button';
 import './style.css';
 
-const Header = () => {
+const Header = ({ isClient, isAdmin, logoutHandler }) => {
   const history = useHistory();
-  const [isLogin, setIsLogin] = useState(false);
-  useEffect(() => {
-    if (Cookies.get('client') || Cookies.get('admin')) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, [isLogin]);
   return (
     <ConfigProvider direction="rtl">
       <header className="header-component">
@@ -26,7 +18,7 @@ const Header = () => {
           <p className=" logo-text">P2P Money</p>
         </div>
         <div className="header-left flex-row">
-          {isLogin && Cookies.get('client') ? (
+          {isClient && Cookies.get('client') ? (
             <>
               <Button
                 className="header-btn btn-login"
@@ -39,29 +31,36 @@ const Header = () => {
                 cssClass="blue-border"
                 className="header-btn btn-signup"
                 content="خروج"
-                onClick={async () => {
-                  await axios.post('/api/v1/logout');
-                  setIsLogin(false);
-                }}
+                onClick={logoutHandler}
               />
             </>
-          ) : isLogin && Cookies.get('admin') ? (
-            <Button
-              cssClass="blue-border"
-              className="header-btn btn-signup"
-              content="خروج"
-              onClick={async () => {
-                await axios.post('/api/v1/logout');
-                setIsLogin(false);
-              }}
-            />
+          ) : isAdmin && Cookies.get('admin') ? (
+            <>
+              <Button
+                className="header-btn btn-login"
+                content="لوحة التحكم"
+                onClick={() => {
+                  history.push('/dashboard');
+                }}
+              />
+              <Button
+                cssClass="blue-border"
+                className="header-btn btn-signup"
+                content="خروج"
+                onClick={logoutHandler}
+              />
+            </>
           ) : (
             <>
               <Button
                 className="header-btn btn-login"
                 content="تسجيل الدخول"
                 onClick={() => {
-                  history.push('/login');
+                  if (isAdmin || isClient) {
+                    window.location.replace('/login');
+                  } else {
+                    history.push('/login');
+                  }
                 }}
               />
               <Button
@@ -69,7 +68,11 @@ const Header = () => {
                 className="header-btn btn-signup"
                 content="حساب جديد"
                 onClick={() => {
-                  history.push('/signup');
+                  if (isAdmin || isClient) {
+                    window.location.replace('/signup');
+                  } else {
+                    history.push('/signup');
+                  }
                 }}
               />
             </>
@@ -80,4 +83,13 @@ const Header = () => {
   );
 };
 
+Header.propTypes = {
+  logoutHandler: PropTypes.func.isRequired,
+  isClient: PropTypes.bool,
+  isAdmin: PropTypes.bool,
+};
+Header.defaultProps = {
+  isClient: false,
+  isAdmin: false,
+};
 export default Header;

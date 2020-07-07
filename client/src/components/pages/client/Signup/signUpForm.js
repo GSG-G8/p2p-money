@@ -70,7 +70,7 @@ const SignupForm = () => {
             window.localStorage.removeItem('User_Data');
             setAlert(messages.emailVerificationFailed);
             setLoading(false);
-            history.push('/signup');
+            window.location.replace('/signup');
           });
       }
   })();
