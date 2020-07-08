@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Form, Button, ConfigProvider, Input, Select } from 'antd';
 import Axios from 'axios';
 
@@ -23,7 +23,6 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState();
   const [form] = Form.useForm();
-  const history = useHistory();
 
   const onFinish = async (values) => {
     setLoading(true);
@@ -41,7 +40,7 @@ const LoginForm = () => {
         ? 0 + values.user.mobileNumber
         : undefined,
     })
-      .then(() => history.push('/'))
+      .then(() => window.location.replace('/'))
       .catch(() => {
         setLoading(false);
         setAlert(messages.loginFailed);

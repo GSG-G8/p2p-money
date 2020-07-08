@@ -186,7 +186,7 @@ const Setting = ({ ClientData, setClientData }) => {
                     name="newPassword"
                   >
                     <Input.Password
-                      onChange={passState && setPassState(false)}
+                      onChange={() => passState && setPassState(false)}
                       type="password"
                       className="password-input"
                       placeholder="أدخل كلمة المررور الجديدة"
