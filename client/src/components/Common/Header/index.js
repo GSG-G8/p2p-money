@@ -9,6 +9,7 @@ import Button from '../Button';
 import './style.css';
 
 const Header = ({ isClient, isAdmin, logoutHandler, cssClass }) => {
+  const { pathname } = window.location;
   const history = useHistory();
   return (
     <ConfigProvider direction="rtl">
@@ -21,9 +22,12 @@ const Header = ({ isClient, isAdmin, logoutHandler, cssClass }) => {
             <>
               <Button
                 className="header-btn btn-login"
-                content="المحفظة"
+                content={pathname !== '/wallet' ? 'المحفظة' : 'الصفحة الرئيسية'}
                 onClick={() => {
-                  history.push('/wallet');
+                  // eslint-disable-next-line no-unused-expressions
+                  pathname !== '/wallet'
+                    ? window.location.replace('/wallet')
+                    : window.location.replace('/');
                 }}
               />
               <Button
@@ -37,9 +41,14 @@ const Header = ({ isClient, isAdmin, logoutHandler, cssClass }) => {
             <>
               <Button
                 className="header-btn btn-login"
-                content="لوحة التحكم"
+                content={
+                  pathname !== '/dashboard' ? 'لوحة التحكم' : 'الصفحة الرئيسية'
+                }
                 onClick={() => {
-                  history.push('/dashboard');
+                  // eslint-disable-next-line no-unused-expressions
+                  pathname !== '/dashboard'
+                    ? window.location.replace('/dashboard')
+                    : window.location.replace('/');
                 }}
               />
               <Button

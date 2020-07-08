@@ -6,6 +6,7 @@ import './style.css';
 const MainCardCurrencies = ({ Content, className }) => (
   <div className={`main-card-currencies ${className}`} dir="rtl">
     <div className="top-curricle" />
+    <div className="center-curricle" />
     <div className="bottom-curricle" />
     {Content}
   </div>
