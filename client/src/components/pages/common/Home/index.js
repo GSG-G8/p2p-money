@@ -83,7 +83,7 @@ const Home = ({ MainBalance, isClient }) => {
   const handleOk = () => {
     if (isClient) {
       axios.post('/api/v1/transaction', { from: From, to: To, amount });
-      history.push('/wallet');
+      window.location.replace('/wallet');
     } else {
       history.push('/signup');
     }
