@@ -36,3 +36,6 @@ color:#F0F0F0
 .dashboard__clients{
   margin-top: 1rem;
 }
+.dashboard__line{
+border: 1px solid #F0F0F0;
+}

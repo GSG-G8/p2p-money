@@ -45,7 +45,7 @@ const ChartsPage = () => {
     const event = [];
     const clicks = [];
     // eslint-disable-next-line no-unused-vars
-    const elementIndex = 0;
+    let elementIndex = 0;
     const firstResult = firstDat.result.reports[0].data.rows;
     const secondResult = secondData.result.reports[0].data.rows;
     firstResult.forEach((row, index) => {
@@ -61,14 +61,18 @@ const ChartsPage = () => {
         path.push('البنوك');
       } else if (row.dimensions[0] === '/settings') {
         path.push('الإعدادات');
+      } else if (row.dimensions[0] === '/404') {
+        path.push('صفحة الخطأ');
+      } else if (!path.includes('أخرى')) {
+        path.push('أخرى');
+        elementIndex = index;
+      } else {
+        // eslint-disable-next-line no-return-assign
+        const firstNum = Number(views[elementIndex]);
+        const secondNum = Number(row.metrics[0].values[0]);
+        const equal = (firstNum += secondNum);
+        return equal;
       }
-      // else if (!path.includes('أخرى')) {
-      //   path.push('أخرى');
-      //   elementIndex = index;
-      // } else {
-      //   // eslint-disable-next-line no-return-assign
-      //   return (views[elementIndex] += row.metrics[0].values[0]);
-      // }
       views.push(row.metrics[0].values[0]);
     });
     secondResult.forEach((row) => {

@@ -46,8 +46,8 @@ const Dashboard = ({ Clients, Transactions }) => {
               </div>
               <div className="dashboard__clients">
                 <Card hoverable loading={loading}>
-                  <p> آخر الزوار</p>
-                  <hr />
+                  <p> آخــر الــزوار</p>
+                  <hr className="dashboard__line" />
                   <ClientCard />
                 </Card>
               </div>
