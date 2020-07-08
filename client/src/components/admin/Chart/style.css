@@ -10,3 +10,11 @@
   min-height: 20rem;
   margin-bottom: 1rem;
 }
+
+.select_chart {
+  position: absolute;
+  top:-15%;
+  right: 0%;
+  width: 10rem;
+  height: 3rem;
+}

@@ -1,4 +1,4 @@
-const queryReport = (name) =>
+const queryReport = (name, date) =>
   window.gapi.client.request({
     path: '/v4/reports:batchGet',
     root: 'https://analyticsreporting.googleapis.com/',
@@ -9,7 +9,7 @@ const queryReport = (name) =>
           viewId: '222948475',
           dateRanges: [
             {
-              startDate: '2020-06-30',
+              startDate: date,
               endDate: 'today',
             },
           ],
