@@ -26,13 +26,7 @@ const LoginForm = () => {
 
   const onFinish = async (values) => {
     setLoading(true);
-    console.log({
-      email: values.user.email,
-      password: values.user.password,
-      mobileNumber: values.user.mobileNumber
-        ? 0 + values.user.mobileNumber
-        : undefined,
-    });
+
     await Axios.post('/api/v1/login', {
       email: values.user.email,
       password: values.user.password,
@@ -154,6 +148,7 @@ const LoginForm = () => {
                   لا تملك حساب بعد ؟
                   <Link to="/signup"> يمكنك إنشاء حسابك الآن</Link>
                 </p>
+                <Link to="/">الرجوع للصفحة الرئيسية</Link>
               </p>
             }
           />
