@@ -129,7 +129,7 @@ const Home = ({ MainBalance, isClient }) => {
       )}
       <div className="home_section">
         <Typography
-          Content="أفضل سعر بيع وشراء, في أي وقت, وأي مكان."
+          Content="أفضل سعر بيع وشراء، في أي وقت وبأي مكان "
           className="Home_typography"
           level={3}
           type="title"
@@ -253,7 +253,7 @@ const Home = ({ MainBalance, isClient }) => {
               </div>
               <div className="name_prices">
                 <img src={ourPriceLogo} alt="logo" className="sections_logo" />
-                <span className="prices_title extra_title">عملات إكس</span>
+                <span className="prices_title extra_title">X عُملات </span>
                 <div className="extra_prices">
                   <span className="prices_title prices_title--green ">
                     {currencyLogo[To]} {buyApp}

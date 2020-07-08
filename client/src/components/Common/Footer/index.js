@@ -6,7 +6,7 @@ import './style.css';
 const FooterComponent = () => (
   <footer className="footer-component">
     <ConfigProvider direction="rtl">
-      <p> جميع الحقوق محفوظة © 2020 | عملات إكس</p>
+      <p>X جميع الحقوق محفوظة © 2020 | عُملات </p>
     </ConfigProvider>
   </footer>
 );
