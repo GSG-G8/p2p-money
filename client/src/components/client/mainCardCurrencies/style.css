@@ -23,12 +23,15 @@
   border-radius: 50%;
 }
 .bottom-curricle {
-  background-image: url(../../../assets/icons/icon.svg);
+  background-image: url(../../../assets/icons/cardIcon.svg);
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 1.5rem;
+  padding-left: 0.3rem;
   width: 2.5rem;
   height: 2.5rem;
   background-color: rgb(255, 255, 255);
+
   position: absolute;
   bottom: -1rem;
   right: 47%;

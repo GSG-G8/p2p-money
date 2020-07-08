@@ -1,21 +1,11 @@
-.footer-component{
-  background-color:transparent;
-  border-top: 1px solid #E7E7E7;
+.footer-component {
+  background-color: transparent;
+  border-top: 1px solid #e7e7e7;
   width: 100%;
   height: 2rem;
   display: Flex;
   justify-content: center;
   align-items: center;
-  color: black;
-  z-index: 0;
-}
-
-.footer__img {
-  height: 1rem;
-}
-
-.footer__paragraph {
-  margin-bottom: 0;
   align-content: center;
   padding-top: 2rem;
   margin-top: 2rem;

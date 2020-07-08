@@ -8,11 +8,11 @@ import headerIcon from '../../../assets/icons/headerIcon.svg';
 import Button from '../Button';
 import './style.css';
 
-const Header = ({ isClient, isAdmin, logoutHandler }) => {
+const Header = ({ isClient, isAdmin, logoutHandler, cssClass }) => {
   const history = useHistory();
   return (
     <ConfigProvider direction="rtl">
-      <header className="header-component">
+      <header className={`header-component ${cssClass}`}>
         <div className="header-right flex-row">
           <img src={headerIcon} className="header__img" alt="site logo" />
         </div>
@@ -86,9 +86,11 @@ Header.propTypes = {
   logoutHandler: PropTypes.func.isRequired,
   isClient: PropTypes.bool,
   isAdmin: PropTypes.bool,
+  cssClass: PropTypes.string,
 };
 Header.defaultProps = {
   isClient: false,
   isAdmin: false,
+  cssClass: '',
 };
 export default Header;

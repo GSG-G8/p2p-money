@@ -14,9 +14,9 @@ body {
   background-repeat: no-repeat;
   height: 50vh;
   width: 100%;
-  background-image: url('../../../../assets/images/background.svg');
+  background-image: url("../../../../assets/images/background.svg");
 }
-.cardStyle{
+.cardStyle {
   position: absolute;
   top: 37%;
   left: 10%;
@@ -36,14 +36,14 @@ body {
   margin-right: 5%;
   margin-left: 25%;
 }
-.ant-input[disabled]{
+.ant-input[disabled] {
   color: rgb(66, 38, 38) !important;
 }
 .currency_prices {
   align-self: center;
 }
 .container_card_Prices {
-  margin: 15% 0 4% 0 ;
+  margin: 15% 0 4% 0;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -69,7 +69,7 @@ body {
   margin: 0 10%;
 }
 .image_title_section {
-padding-left: 1rem;
+  padding-left: 1rem;
 }
 .sections_logo {
   width: 3rem;
@@ -95,7 +95,7 @@ padding-left: 1rem;
   height: 5rem;
 }
 .extra_sell {
-padding-right: 1rem;
+  padding-right: 1rem;
 }
 
 .prices_title {
@@ -112,10 +112,10 @@ padding-right: 1rem;
   color: blue;
 }
 .prices_title--orange {
-color: rgb(245, 171, 33);
-margin:0 0.5rem;
-font-weight: 900;
-font-size: 1.3rem;
+  color: rgb(245, 171, 33);
+  margin: 0 0.5rem;
+  font-weight: 900;
+  font-size: 1.3rem;
 }
 .exchange_button {
   margin: 1rem 0.5rem 0.2rem 0;
@@ -143,10 +143,10 @@ font-size: 1.3rem;
 .Home_typography {
   position: absolute;
   right: 5%;
-  top:15%;
+  top: 15%;
   color: white !important;
 }
 .extra_typo {
-  top:17%;
+  top: 17%;
   right: 9%;
 }
