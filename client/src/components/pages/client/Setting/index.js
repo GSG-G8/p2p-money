@@ -14,24 +14,20 @@ import './style.css';
 const { TextArea } = Input;
 
 const EmptyOrNull = (value) => value == null || value.length === 0;
-const isNull = (value) => value === null;
 
 const Setting = ({ ClientData, setClientData }) => {
   const [aletMsg, setAlertMsg] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [passState, setPassState] = useState(false);
 
   const handleSubmit = async (values) => {
+    setLoading(true);
+    let upddateVals;
+    const { newPassword, oldPassword, passwordConfirmation, ...rest } = values;
     try {
-      setLoading(true);
-      let upddateVals;
-      const {
-        newPassword,
-        oldPassword,
-        passwordConfirmation,
-        ...rest
-      } = values;
-
-      if (!isNull(newPassword, oldPassword, passwordConfirmation)) {
+      setPassState(false);
+      if (EmptyOrNull(newPassword, passwordConfirmation)) {
+        setPassState(false);
         const updatedValue = {
           ...rest,
           feedback: values.feedback === null ? '' : values.feedback,
@@ -39,6 +35,7 @@ const Setting = ({ ClientData, setClientData }) => {
         };
         upddateVals = updatedValue;
       } else {
+        setPassState(true);
         const updatedValue = {
           ...values,
           feedback: values.feedback === null ? '' : values.feedback,
@@ -46,49 +43,33 @@ const Setting = ({ ClientData, setClientData }) => {
         };
         upddateVals = updatedValue;
       }
-      if (!EmptyOrNull(newPassword, oldPassword, passwordConfirmation)) {
+
+      const updateSettings = await Axios.patch('/api/v1/client', upddateVals);
+      if (updateSettings) {
+        setClientData({ ...ClientData, ...upddateVals });
+        setLoading(false);
         setAlertMsg([
-          <Alert
-            type="error"
-            message="فشلت العملية"
-            description={
-              EmptyOrNull(passwordConfirmation)
-                ? 'قم بكتابة تأكيد كلمة المرور'
-                : 'كلمة المرور السابقة غير صحيحة'
-            }
-          />,
+          <Alert message="تمت العملية" description="تم تحديث بياناتك بنجاح" />,
           ...aletMsg,
         ]);
+        setPassState(true);
+
         setTimeout(() => {
           setAlertMsg([]);
-          setLoading(false);
-        }, 4000);
-        // console.log(upddateVals);
-        // await Axios.patch('/api/v1/client', upddateVals);
-        // alert('done');
-      } else {
-        const updateSettings = await Axios.patch('/api/v1/client', upddateVals);
-        if (updateSettings) {
-          setClientData({ ...ClientData, ...upddateVals });
-          setLoading(false);
-          setAlertMsg([
-            <Alert
-              message="تمت العملية"
-              description="تم تحديث بياناتك بنجاح"
-            />,
-            ...aletMsg,
-          ]);
-          setTimeout(() => {
-            setAlertMsg([]);
-          }, 2000);
-        }
+        }, 2000);
       }
     } catch (error) {
       setAlertMsg([
         <Alert
           type="error"
           message="فشلت العملية"
-          description="حدث خطأ اثناء التحديث"
+          description={
+            EmptyOrNull(passwordConfirmation)
+              ? 'قم بتأكيد كلمة المرور'
+              : !EmptyOrNull(newPassword, passwordConfirmation)
+              ? 'كلمة المرور السابقة غير صحيحة'
+              : 'حدث خطأ في اثناء التحديث'
+          }
         />,
         ...aletMsg,
       ]);
@@ -205,6 +186,7 @@ const Setting = ({ ClientData, setClientData }) => {
                     name="newPassword"
                   >
                     <Input.Password
+                      onChange={passState && setPassState(false)}
                       type="password"
                       className="password-input"
                       placeholder="أدخل كلمة المررور الجديدة"
@@ -216,7 +198,7 @@ const Setting = ({ ClientData, setClientData }) => {
                   <Form.Item
                     rules={[
                       {
-                        required: false,
+                        required: passState,
                         message: 'الرجاء تأكيد كلمة المرور الجديدة',
                       },
                       ({ getFieldValue }) => ({

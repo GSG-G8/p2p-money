@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, ConfigProvider, Button } from 'antd';
+import { Layout, Menu, ConfigProvider } from 'antd';
 import PropTypes from 'prop-types';
 import { WalletFilled, BankFilled, SettingFilled } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
