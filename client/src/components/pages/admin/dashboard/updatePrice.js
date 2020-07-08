@@ -30,10 +30,11 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
   } = exchangePrice;
 
   useEffect(() => {
-    if (alert) setTimeout(() => setAlert(), 2555);
+    if (alert) setTimeout(() => setAlert(), 5000);
     if (!exchangePrice) getPrices().then(setPrices);
   }, [exchangePrice, alert]);
 
+  // get values to input text
   const getPriceData = (array, from, to, cases) =>
     array
       .map((element) =>
@@ -43,7 +44,8 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
       )
       .filter((e) => e !== 0);
 
-  const handleChange = (array, from, to, cases, value) => {
+  // change state for text input
+  const setValues = (array, from, to, cases, value) => {
     exchangePrice[array].map((price, index) => {
       if (price.from === from && price.to === to) {
         exchangePrice[array][index][cases] = value;
@@ -106,15 +108,6 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
             <Text className="update__text" Content="سعر البنك" />
             <Text className="update__text" Content="سعر الصرافين" />
             <Text className="update__text" Content="سعر عملات X" />
-
-            {/* <Text
-              className="update__text_rate"
-              Content={` شراء${getPriceData(screenPrice, From, To, 'buy')}`}
-            />
-            <Text
-              className="update__text_rate"
-              Content={` بيع${getPriceData(screenPrice, From, To, 'sell')}`}
-            /> */}
           </div>
           <div className="update__content">
             <InputText
@@ -127,7 +120,7 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
             <InputText
               type="number"
               handleChange={({ target: { value } }) =>
-                handleChange('bankPrice', From, To, 'buy', value)
+                setValues('bankPrice', From, To, 'buy', value)
               }
               value={getPriceData(bankPrice, From, To, 'buy')}
               className="update__input"
@@ -137,7 +130,7 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
               className="update__input"
               value={getPriceData(tellerPrice, From, To, 'buy')}
               handleChange={({ target: { value } }) =>
-                handleChange('tellerPrice', From, To, 'buy', value)
+                setValues('tellerPrice', From, To, 'buy', value)
               }
             />
             <InputText
@@ -145,7 +138,7 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
               className="update__input"
               value={getPriceData(appPrice, From, To, 'buy')}
               handleChange={({ target: { value } }) =>
-                handleChange('appPrice', From, To, 'buy', value)
+                setValues('appPrice', From, To, 'buy', value)
               }
             />
             <Text className="update__text" Content="سعر الشراء" />
@@ -163,7 +156,7 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
               className="update__input"
               value={getPriceData(bankPrice, From, To, 'sell')}
               handleChange={({ target: { value } }) =>
-                handleChange('bankPrice', From, To, 'sell', value)
+                setValues('bankPrice', From, To, 'sell', value)
               }
             />
             <InputText
@@ -171,7 +164,7 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
               className="update__input"
               value={getPriceData(tellerPrice, From, To, 'sell')}
               handleChange={({ target: { value } }) =>
-                handleChange('tellerPrice', From, To, 'sell', value)
+                setValues('tellerPrice', From, To, 'sell', value)
               }
             />
             <InputText
@@ -179,7 +172,7 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
               className="update__input"
               value={getPriceData(appPrice, From, To, 'sell')}
               handleChange={({ target: { value } }) =>
-                handleChange('appPrice', From, To, 'sell', value)
+                setValues('appPrice', From, To, 'sell', value)
               }
             />
 
