@@ -48,7 +48,7 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
   const setValues = (array, from, to, cases, value) => {
     exchangePrice[array].map((price, index) => {
       if (price.from === from && price.to === to) {
-        exchangePrice[array][index][cases] = value;
+        exchangePrice[array][index][cases] = Number(value);
       }
       return 0;
     });
@@ -179,6 +179,7 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
             <Text className="update__text" Content="سعـر البيـــع" />
           </div>
           <Text
+            className="update__date"
             Content={`آخر تعديل ${lastUpdate.split('T')[0]} الساعة  ${
               lastUpdate.split('T')[1]
             }  `}

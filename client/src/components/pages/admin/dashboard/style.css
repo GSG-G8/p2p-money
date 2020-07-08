@@ -72,13 +72,13 @@ hr {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 15rem;
-  margin: 0 0 5rem 1rem;
+  /* width: %; */
+  margin: 0 0 20.3rem 14rem;
 }
 
 .extra {
-margin: -.5rem 2rem 2rem 0;
-border-bottom: 1px dotted rgb(207, 207, 188);
+  margin: -.5rem 2rem 2rem 0;
+  border-bottom: 1px dotted rgb(207, 207, 188);
 }
 
 .less {
@@ -95,4 +95,10 @@ border-bottom: 1px dotted rgb(207, 207, 188);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 2rem;
+}
+
+.update__date {
+  position: absolute;
+  bottom: 0;
+  padding: 0 1.5rem .5rem;
 }
