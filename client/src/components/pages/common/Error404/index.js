@@ -1,7 +1,7 @@
 import React from 'react';
 import { Result, Button } from 'antd';
 
-const HEll = () => (
+const Error404 = () => (
   <Result
     status="404"
     title="404"
@@ -19,4 +19,4 @@ const HEll = () => (
   />
 );
 
-export default HEll;
+export default Error404;
