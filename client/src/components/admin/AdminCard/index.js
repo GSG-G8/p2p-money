@@ -12,10 +12,10 @@ import './style.css';
 const AdminCard = ({ loading, type, title, description }) => {
   let imgSource;
   switch (type) {
-    case type === 'transaction':
+    case 'transaction':
       imgSource = transactionImg;
       break;
-    case type === 'clients':
+    case 'clients':
       imgSource = clientsImg;
       break;
     default:
