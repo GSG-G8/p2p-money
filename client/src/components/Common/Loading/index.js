@@ -1,6 +1,7 @@
 import React from 'react';
-import './style.css';
 import { Spin, Space } from 'antd';
+
+import './style.css';
 
 const Loading = () => (
   <Space size="Large" className="loading-container">
