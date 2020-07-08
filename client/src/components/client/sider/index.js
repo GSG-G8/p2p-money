@@ -20,10 +20,11 @@ const SiderMenu = ({ ClientData, setClientData }) => {
         <Layout dir="rtl">
           <Sider dir="rtl" className="sider-rtl">
             <div className="user-wrapper">
-              <div className="user-title">{ClientData.fullName}</div>
+              <div className="user-title">
+                {ClientData && ClientData.fullName}
+              </div>
             </div>
             <Menu theme="dark" mode="inline" defaultSelectedKeys={routeName}>
-              {/* <Button onClick={() => setClientData([])}>مسح الداتا</Button> */}
               <Menu.Item key="wallet" icon={<WalletFilled />}>
                 <Link to="/wallet" />
                 محفظتي
