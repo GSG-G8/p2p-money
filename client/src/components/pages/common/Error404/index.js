@@ -1,7 +1,22 @@
 import React from 'react';
+import { Result, Button } from 'antd';
 
-import './style.css';
+const HEll = () => (
+  <Result
+    status="404"
+    title="404"
+    subTitle="للأسف، الصفحة المطلوبة غير موجودة"
+    extra={
+      <Button
+        type="primary"
+        onClick={() => {
+          window.location.replace('/');
+        }}
+      >
+        الرجوع للصفحة الرئيسية
+      </Button>
+    }
+  />
+);
 
-const Error404 = () => <>Error404</>;
-
-export default Error404;
+export default HEll;
