@@ -160,7 +160,7 @@ const Home = ({ MainBalance, isClient }) => {
       )}
       <div className="home_section">
         <Typography
-          Content="أفضل سعر بيع وشراء، في أي وقت وبأي مكان "
+          Content="أفضل سعر بيع وشراء، في أي وقت، وأي مكان"
           className="Home_typography"
           level={3}
           type="title"
@@ -294,7 +294,9 @@ const Home = ({ MainBalance, isClient }) => {
                 <img src={logo} alt="logo" className="prices_logo" />
                 <div className="extra_prices">
                   <span className="prices_title prices_title--green">شراء</span>
-                  <span className="prices_title prices_title--red ">بيع</span>
+                  <span className="prices_title prices_title--red ">
+                    بيـــع
+                  </span>
                 </div>
               </div>
             </div>
@@ -303,7 +305,7 @@ const Home = ({ MainBalance, isClient }) => {
           <div className="images_section extra_sell" />
         </div>
         <span className="title_Exchange ">
-          .أفضل سعر بيع وشراء, في أي وقت, وأي مكان
+          .أفضل سعر بيع وشراء، في أي وقت، وأي مكان
         </span>
         <img src={HomeMap} alt="map currency" />
         <Footer />
