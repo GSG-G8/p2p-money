@@ -71,6 +71,7 @@ const ChartsPage = () => {
         const firstNum = Number(views[elementIndex]);
         const secondNum = Number(row.metrics[0].values[0]);
         const equal = (firstNum += secondNum);
+        console.log(equal);
         return equal;
       }
       views.push(row.metrics[0].values[0]);

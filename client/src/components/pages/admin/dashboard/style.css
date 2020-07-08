@@ -31,6 +31,7 @@ hr {
 .dashboard__elements {
   margin-top: -9rem;
   display: flex;
+  
   flex-direction: column;
   max-width: 30%;
 }
@@ -41,4 +42,28 @@ hr {
 
 .dashboard__line {
   border: 1px solid #F0F0F0;
+}
+
+.update__content {
+  margin-top: -1rem;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.update__text {
+  font-size: 1.2rem !important;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #535050;
+}
+
+.update__input {
+  width: 5rem;
+}
+
+.update__text_rate{
+  border: 1px solid silver
 }

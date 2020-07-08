@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { Calendar, ConfigProvider, Card } from 'antd';
 import CardBox from '../../../admin/AdminCard';
 import Charts from '../../../admin/Chart';
 import ClientCard from '../../../admin/clientsCard';
-
+import UpdatePriceModal from './updatePrice';
 import './style.css';
 
 const Dashboard = ({ Clients, Transactions }) => {
-  const [loading, setLoading] = useState(false);
+  const [updatePriceModal, setUpdateModal] = useState(false);
   return (
     <ConfigProvider direction="rtl">
       <div className="dashboard">
@@ -28,24 +28,22 @@ const Dashboard = ({ Clients, Transactions }) => {
               title="عمـلاء"
               description={Clients.data.count}
             />
-            <CardBox title="تعــديل" description="الاســعار" />
+            <CardBox
+              onClick={() => setUpdateModal(true)}
+              title="تعــديل"
+              description="الاســعار"
+            />
           </div>
           <div className="dashboard__content">
-            <div className="dashboard__charts">
-              <Charts />
-            </div>
+            <div className="dashboard__charts">{/* <Charts /> */}</div>
             <div className="dashboard__elements">
               <div>
-                <Card
-                  className="dashboard__calendar"
-                  hoverable
-                  loading={loading}
-                >
+                <Card className="dashboard__calendar" hoverable>
                   <Calendar fullscreen={false} />
                 </Card>
               </div>
               <div className="dashboard__clients">
-                <Card hoverable loading={loading}>
+                <Card hoverable>
                   <p> آخــر الــزوار</p>
                   <hr className="dashboard__line" />
                   <ClientCard />
@@ -55,13 +53,27 @@ const Dashboard = ({ Clients, Transactions }) => {
           </div>
         </div>
       </div>
+      {updatePriceModal && (
+        <UpdatePriceModal
+          visible={updatePriceModal}
+          handleHide={setUpdateModal}
+        />
+      )}
     </ConfigProvider>
   );
 };
 
 Dashboard.propTypes = {
-  Clients: PropTypes.arrayOf(PropTypes.object).isRequired,
-  Transactions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  Clients: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.array,
+  ]).isRequired,
+  Transactions: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.array,
+  ]).isRequired,
 };
 
 export default Dashboard;
