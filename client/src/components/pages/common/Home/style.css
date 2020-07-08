@@ -28,7 +28,7 @@ body {
 }
 .exchange_section {
   display: flex;
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-top: 1rem;
   font-weight: 900;
 }
@@ -55,7 +55,7 @@ body {
 }
 
 .title_Exchange {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 900;
 }
 .Text_buy_sell {
@@ -91,15 +91,16 @@ body {
   width: 20%;
 }
 .prices_logo {
-  width: 5rem;
-  height: 5rem;
+  width: 5.5rem;
+  height: 5.5rem;
+  padding-bottom: 2rem;
 }
 .extra_sell {
   padding-right: 1rem;
 }
 
 .prices_title {
-  font-size: 1.4rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 .prices_title--green {

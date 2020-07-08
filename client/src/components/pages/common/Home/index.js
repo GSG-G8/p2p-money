@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import TextInput from '../../../Common/TextInput';
 import SelectCurrency from '../../../Common/selectCurrency';
 import MainCardCurrencies from '../../../client/mainCardCurrencies';
-import logo from '../../../../assets/icons/icon.svg';
+import logo from '../../../../assets/icons/homeIcon.svg';
 import ourPriceLogo from '../../../../assets/icons/ourPrice.svg';
 import bankPriceLogo from '../../../../assets/icons/bankPrice.svg';
 import tellerPriceLogo from '../../../../assets/icons/tellerPrice.svg';
