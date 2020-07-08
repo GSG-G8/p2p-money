@@ -3,9 +3,9 @@
   background-color: #E5E5E5;
   min-height: 100vh;
 }
-hr{
-  /* color:#F0F0F0; */
-color:#F0F0F0
+
+hr {
+  color: #F0F0F0
 }
 
 .dashboard__page {
@@ -23,19 +23,22 @@ color:#F0F0F0
   flex-direction: row;
   justify-content: space-between;
 }
-.dashboard__charts{
+
+.dashboard__charts {
   margin-left: 1rem;
-  /* background-color:white */
 }
+
 .dashboard__elements {
   margin-top: -9rem;
   display: flex;
   flex-direction: column;
   max-width: 30%;
 }
-.dashboard__clients{
+
+.dashboard__clients {
   margin-top: 1rem;
 }
-.dashboard__line{
-border: 1px solid #F0F0F0;
+
+.dashboard__line {
+  border: 1px solid #F0F0F0;
 }
