@@ -14,10 +14,14 @@ body {
   background-repeat: no-repeat;
   height: 50vh;
   width: 100%;
+<<<<<<< HEAD
   margin-top: 3rem;
   background-image: url('../../../../assets/images/background.svg');
+=======
+  background-image: url("../../../../assets/images/background.svg");
+>>>>>>> ce90479d174e10f2e309c76c8b9699876b5e6b79
 }
-.cardStyle{
+.cardStyle {
   position: absolute;
   top: 37%;
   left: 10%;
@@ -39,14 +43,14 @@ body {
   margin-left: 10%;
   width: 21rem;
 }
-.ant-input[disabled]{
+.ant-input[disabled] {
   color: rgb(66, 38, 38) !important;
 }
 .currency_prices {
   align-self: center;
 }
 .container_card_Prices {
-  margin: 15% 0 4% 0 ;
+  margin: 15% 0 4% 0;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -57,7 +61,7 @@ body {
 }
 
 .title_Exchange {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 900;
 }
 .Text_buy_sell {
@@ -71,7 +75,7 @@ body {
   margin: 0 10%;
 }
 .image_title_section {
-padding-left: 1rem;
+  padding-left: 1rem;
 }
 .sections_logo {
   width: 3rem;
@@ -93,15 +97,16 @@ padding-left: 1rem;
   width: 20%;
 }
 .prices_logo {
-  width: 5rem;
-  height: 5rem;
+  width: 5.5rem;
+  height: 5.5rem;
+  padding-bottom: 2rem;
 }
 .extra_sell {
-padding-right: 1rem;
+  padding-right: 1rem;
 }
 
 .prices_title {
-  font-size: 1.4rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 .prices_title--green {
@@ -114,10 +119,17 @@ padding-right: 1rem;
   color: blue;
 }
 .prices_title--orange {
+<<<<<<< HEAD
 color: rgb(245, 171, 33);
 margin:0 0.5rem;
 font-weight: 900;
 font-size: 1rem;
+=======
+  color: rgb(245, 171, 33);
+  margin: 0 0.5rem;
+  font-weight: 900;
+  font-size: 1.3rem;
+>>>>>>> ce90479d174e10f2e309c76c8b9699876b5e6b79
 }
 .exchange_button {
   margin: 1rem 0.5rem 0.2rem 0;
@@ -144,14 +156,13 @@ font-size: 1rem;
 .Home_typography {
   position: absolute;
   right: 5%;
-  top:15%;
+  top: 15%;
   color: white !important;
 }
 .extra_typo {
-  top:17%;
+  top: 17%;
   right: 9%;
 }
-
 
 @media screen and (max-width: 1125px) {
 	.first-section {

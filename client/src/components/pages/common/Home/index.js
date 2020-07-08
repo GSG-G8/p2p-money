@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import TextInput from '../../../Common/TextInput';
 import SelectCurrency from '../../../Common/selectCurrency';
 import MainCardCurrencies from '../../../client/mainCardCurrencies';
-import logo from '../../../../assets/icons/icon.svg';
+import logo from '../../../../assets/icons/homeIcon.svg';
 import ourPriceLogo from '../../../../assets/icons/ourPrice.svg';
 import bankPriceLogo from '../../../../assets/icons/bankPrice.svg';
 import tellerPriceLogo from '../../../../assets/icons/tellerPrice.svg';
@@ -160,7 +160,7 @@ const Home = ({ MainBalance, isClient }) => {
       )}
       <div className="home_section">
         <Typography
-          Content="أفضل سعر بيع وشراء, في أي وقت, وأي مكان."
+          Content="أفضل سعر بيع وشراء، في أي وقت وبأي مكان "
           className="Home_typography"
           level={3}
           type="title"
@@ -280,7 +280,7 @@ const Home = ({ MainBalance, isClient }) => {
               </div>
               <div className="name_prices">
                 <img src={ourPriceLogo} alt="logo" className="sections_logo" />
-                <span className="prices_title extra_title">عملات إكس</span>
+                <span className="prices_title extra_title">X عُملات </span>
                 <div className="extra_prices">
                   <span className="prices_title prices_title--green ">
                     {currencyLogo[To]} {buyApp}
