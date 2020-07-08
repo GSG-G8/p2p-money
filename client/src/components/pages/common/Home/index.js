@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Helmet from 'react-helmet';
@@ -41,11 +42,14 @@ const Home = ({ MainBalance, isClient }) => {
   const [buyTeller, setBuyTeller] = useState();
   const [sellApp, setSellApp] = useState();
   const [buyApp, setBuyApp] = useState();
-  const [resultExchange, setResultExchange] = useState(3452.8);
+  const [resultExchange, setResultExchange] = useState();
   const [bankResult, setBankResult] = useState(3470.0);
   const [amount, setTotal] = useState(1000);
   const [alert, setAlert] = useState();
   const [visible, setVisible] = useState(false);
+  const [AppPrice, setAppPrice] = useState([]);
+  const [BankPrice, setBankPrice] = useState([]);
+  const [TellerPrice, setTellerPrice] = useState([]);
   const history = useHistory();
 
   const addResult = (e) => {
@@ -54,6 +58,7 @@ const Home = ({ MainBalance, isClient }) => {
   };
   const changeFrom = ({ target: { value } }) => {
     setFrom(value);
+    setTo(value === 'ILS' ? 'USD' : 'ILS');
   };
   const changeTo = ({ target: { value } }) => {
     setTo(value);
@@ -88,6 +93,9 @@ const Home = ({ MainBalance, isClient }) => {
   };
   useEffect(() => {
     getPrices().then(({ appPrice, bankPrice, tellerPrice }) => {
+      setAppPrice(appPrice);
+      setBankPrice(bankPrice);
+      setTellerPrice(tellerPrice);
       appPrice.map(({ from, to, sell, buy }) => {
         if (from === From && to === To) {
           setSellApp(sell.toFixed(2));
@@ -111,8 +119,31 @@ const Home = ({ MainBalance, isClient }) => {
         }
       });
     });
-  }, [From, To, amount]);
+  }, []);
+  useEffect(() => {
+    AppPrice.map(({ from, to, sell, buy }) => {
+      if (from === From && to === To) {
+        setSellApp(sell.toFixed(2));
+        setBuyApp(buy.toFixed(2));
+        setResultExchange((amount * sell).toFixed(2));
+      }
+    });
 
+    BankPrice.map(({ from, to, sell, buy }) => {
+      if (from === From && to === To) {
+        setSellBank(sell.toFixed(2));
+        setBuyBank(buy.toFixed(2));
+        setBankResult((amount * sell).toFixed(2));
+      }
+    });
+
+    TellerPrice.map(({ from, to, sell, buy }) => {
+      if (from === From && to === To) {
+        setSellTeller(sell.toFixed(2));
+        setBuyTeller(buy.toFixed(2));
+      }
+    });
+  }, [From, To, amount]);
   return (
     <>
       <Helmet>
