@@ -13,6 +13,7 @@ const TextInput = ({
   handleChange,
   onFocus,
   value,
+  name,
 }) => (
   <div className="inputSpecs">
     <ConfigProvider direction="rtl">
@@ -24,6 +25,7 @@ const TextInput = ({
         onChange={handleChange}
         onFocus={onFocus}
         value={value}
+        name={name}
       />
     </ConfigProvider>
   </div>
@@ -36,6 +38,7 @@ TextInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
   handleChange: PropTypes.func,
   onFocus: PropTypes.func,
+  name: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
@@ -44,6 +47,7 @@ TextInput.defaultProps = {
   type: 'text',
   disabled: false,
   onFocus: () => {},
+  name: '',
   handleChange: () => {},
 };
 

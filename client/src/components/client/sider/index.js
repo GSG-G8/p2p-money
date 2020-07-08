@@ -12,13 +12,18 @@ import 'antd/dist/antd.css';
 import './style.css';
 
 const { Content, Sider } = Layout;
-const SiderMenu = ({ ClientData }) => {
+const SiderMenu = ({ ClientData, setClientData }) => {
   const routeName = window.location.pathname.split('/')[1];
   return (
     <ConfigProvider direction="rtl">
       <div className="sider-wrapper">
         <Layout dir="rtl">
           <Sider dir="rtl" className="sider-rtl">
+            <div className="user-wrapper">
+              <div className="user-title">
+                {ClientData && ClientData.fullName}
+              </div>
+            </div>
             <Menu theme="dark" mode="inline" defaultSelectedKeys={routeName}>
               <Menu.Item key="wallet" icon={<WalletFilled />}>
                 <Link to="/wallet" />
@@ -39,7 +44,12 @@ const SiderMenu = ({ ClientData }) => {
               <div className="wrap-layout__content" />
               {routeName === 'wallet' && <Wallet ClientData={ClientData} />}
               {routeName === 'bank' && <Bank ClientData={ClientData} />}
-              {routeName === 'settings' && <Settings ClientData={ClientData} />}
+              {routeName === 'settings' && (
+                <Settings
+                  setClientData={setClientData}
+                  ClientData={ClientData}
+                />
+              )}
             </Content>
           </Layout>
         </Layout>
@@ -54,6 +64,7 @@ SiderMenu.propTypes = {
     PropTypes.object,
     PropTypes.array,
   ]).isRequired,
+  setClientData: PropTypes.func.isRequired,
 };
 
 export default SiderMenu;

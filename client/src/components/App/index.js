@@ -84,6 +84,8 @@ const App = () => {
   if (loading) {
     return <Loading />;
   }
+  const handleSetClient = (data) => setClientData(data);
+
   if (client) {
     return (
       <>
@@ -107,7 +109,11 @@ const App = () => {
           <Route
             path={['/wallet', '/bank', '/settings']}
             render={() => (
-              <SiderMenu content={Wallet} ClientData={ClientData} />
+              <SiderMenu
+                content={Wallet}
+                setClientData={handleSetClient}
+                ClientData={ClientData}
+              />
             )}
           />
 
@@ -169,6 +175,7 @@ const App = () => {
       </>
     );
   }
+
   return (
     <Switch>
       <Route exact path="/404" render={() => <Error404 />} />
