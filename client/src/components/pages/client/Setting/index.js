@@ -63,6 +63,9 @@ const Setting = ({ ClientData, setClientData }) => {
           setAlertMsg([]);
           setLoading(false);
         }, 4000);
+        // console.log(upddateVals);
+        // await Axios.patch('/api/v1/client', upddateVals);
+        // alert('done');
       } else {
         const updateSettings = await Axios.patch('/api/v1/client', upddateVals);
         if (updateSettings) {
