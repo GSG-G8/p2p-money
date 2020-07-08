@@ -12,6 +12,7 @@ import Login from '../pages/common/Login';
 import SignUp from '../pages/client/Signup';
 import SiderMenu from '../client/sider';
 import Header from '../Common/Header';
+import Loading from '../Common/Loading';
 import './style.css';
 
 const checkAdmin = async () => {
@@ -81,7 +82,7 @@ const App = () => {
   const staticRoutes = ['/login', '/signup'];
 
   if (loading) {
-    return <div>Loading......</div>;
+    return <Loading />;
   }
   if (client) {
     return (
