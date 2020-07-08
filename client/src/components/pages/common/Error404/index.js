@@ -2,6 +2,8 @@ import React from 'react';
 import { Result, Button } from 'antd';
 import Helmet from 'react-helmet';
 
+import './style.css';
+
 const Error404 = () => (
   <>
     <Helmet>
