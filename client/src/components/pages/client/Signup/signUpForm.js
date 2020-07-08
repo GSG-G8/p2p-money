@@ -8,7 +8,7 @@ import {
   Select,
   Modal,
 } from 'antd';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Typography from '../../../Common/Typography';
 import Configurations from './AntFormatConfigurations';
@@ -35,7 +35,6 @@ const SignupForm = () => {
   const [code, setCode] = useState();
   const [popUp, setPopUp] = useState(false);
   const [form] = Form.useForm();
-  const history = useHistory();
 
   const addUserToDatabase = (user) => {
     axios
@@ -44,7 +43,7 @@ const SignupForm = () => {
         form.resetFields();
         window.localStorage.removeItem('User_Data');
         setTimeout(() => {
-          history.push('/');
+          window.location.replace('/');
         }, 5 * 1000);
         setAlert(messages.addUserSuccess);
       })
