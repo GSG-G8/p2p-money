@@ -13,10 +13,12 @@ const TextInput = ({
   handleChange,
   onFocus,
   value,
+  step,
 }) => (
   <div className="inputSpecs">
     <ConfigProvider direction="rtl">
       <Input
+        step={step}
         className={`${className} input-custom`}
         type={type}
         disabled={disabled}
@@ -33,10 +35,11 @@ TextInput.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string,
   disabled: PropTypes.bool,
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   handleChange: PropTypes.func,
   onFocus: PropTypes.func,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  step: PropTypes.string,
 };
 
 TextInput.defaultProps = {
@@ -45,6 +48,8 @@ TextInput.defaultProps = {
   disabled: false,
   onFocus: () => {},
   handleChange: () => {},
+  placeholder: '',
+  step: '.1',
 };
 
 export default TextInput;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { List, Avatar, Card } from 'antd';
+import { List, Avatar } from 'antd';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
@@ -23,7 +23,7 @@ const ClientsCard = ({ className }) => {
   return (
     <List
       loading={!(data && data.length)}
-      className="listItems"
+      className={`listItems ${className}`}
       itemLayout="horizontal"
       dataSource={data}
       renderItem={(item) => (

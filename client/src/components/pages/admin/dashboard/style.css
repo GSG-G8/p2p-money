@@ -31,7 +31,6 @@ hr {
 .dashboard__elements {
   margin-top: -9rem;
   display: flex;
-  
   flex-direction: column;
   max-width: 30%;
 }
@@ -45,7 +44,7 @@ hr {
 }
 
 .update__content {
-  margin-top: -1rem;
+  margin-top: -2rem;
   display: flex;
   /* flex-direction: row-reverse; */
   justify-content: space-around;
@@ -54,7 +53,8 @@ hr {
 }
 
 .update__text {
-  font-size: 1.2rem !important;
+  font-size: 1rem !important;
+  line-height: 2rem;
   margin-top: 1rem;
   font-weight: bold;
   color: #535050;
@@ -64,6 +64,35 @@ hr {
   width: 5rem;
 }
 
-.update__text_rate{
+.update__text_rate {
   border: 1px solid silver
+}
+
+.price_alert {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 15rem;
+  margin: 0 0 5rem 1rem;
+}
+
+.extra {
+margin: -.5rem 2rem 2rem 0;
+border-bottom: 1px dotted rgb(207, 207, 188);
+}
+
+.less {
+  padding-left: 18%;
+}
+
+.arrow-circle {
+  width: 2rem;
+  height: 2rem;
+  background-color: rgb(55, 123, 62);
+  border-radius: 50%;
+  text-align: center;
+  background-image: url(../../../../assets/icons/arrow.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 2rem;
 }

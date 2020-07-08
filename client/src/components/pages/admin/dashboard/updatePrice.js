@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Select from '../../../Common/selectCurrency';
 import InputText from '../../../Common/TextInput';
 import Text from '../../../Common/Typography';
+import Alert from '../../../Common/Alert';
 import './style.css';
 
 const getPrices = async () => {
@@ -14,7 +15,10 @@ const getPrices = async () => {
 
 const UpdatePriceForm = ({ visible, handleHide }) => {
   const [exchangePrice, setPrices] = useState(0);
-  const [alert, setAlert] = useState();
+  const [alert, setAlert] = useState({
+    type: 'warning',
+    message: 'تاكد من البيانات قبل التعديل',
+  });
   const [From, setFrom] = useState('USD');
   const [To, setTo] = useState('ILS');
   const {
@@ -24,6 +28,11 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
     screenPrice,
     lastUpdate,
   } = exchangePrice;
+
+  useEffect(() => {
+    if (alert) setTimeout(() => setAlert(), 2555);
+    if (!exchangePrice) getPrices().then(setPrices);
+  }, [exchangePrice, alert]);
 
   const getPriceData = (array, from, to, cases) =>
     array
@@ -38,23 +47,25 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
     exchangePrice[array].map((price, index) => {
       if (price.from === from && price.to === to) {
         exchangePrice[array][index][cases] = value;
-        return 0;
       }
+      return 0;
     });
     setPrices({ [array]: exchangePrice[array], ...exchangePrice });
   };
 
-  useEffect(() => {
-    if (!exchangePrice)
-      getPrices()
-        .then(setPrices)
-        .catch(
-          setAlert({
-            type: 'warning',
-            message: 'حدثت مشكلة تاكد من اتصالك بقاعدة البيانات',
-          })
-        );
-  }, [exchangePrice]);
+  const updatePrices = () => {
+    axios
+      .patch('/api/v1/admin/update', exchangePrice)
+      .then(() =>
+        setAlert({ type: 'success', message: 'تم تعديل الاسعار بنجاح' })
+      )
+      .catch(() =>
+        setAlert({
+          type: 'error',
+          message: 'لم يتم تحديث الاسعار تاكد من البيانات',
+        })
+      );
+  };
 
   const changeFrom = ({ target: { value } }) => {
     setFrom(value);
@@ -71,32 +82,48 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
           title="تعــديل الاســعار"
           width="40rem"
           visible={visible}
-          onOk={() => {}}
+          onOk={() => updatePrices()}
           onCancel={() => handleHide(false)}
           okText="تعــديل"
           cancelText="الــغاء"
         >
-          <div className="update__content">
-            <Text className="update__text" Content="مـن" />
+          {alert && (
+            <Alert
+              closable={false}
+              className="price_alert"
+              message={alert.message}
+              type={alert.type}
+            />
+          )}
+          <div className="update__content extra ">
             <Select selectType="from" onChange={changeFrom} />
-            <Text className="update__text" Content="الى" />
+            <div className="arrow-circle" />
             <Select valueSelect={From} onChange={changeTo} />
+            <Text className="update__text" Content="" />
           </div>
-
-          <div className="update__content">
+          <div className="update__content less">
+            <Text className="update__text" Content="سعر الشاشة" />
             <Text className="update__text" Content="سعر البنك" />
             <Text className="update__text" Content="سعر الصرافين" />
             <Text className="update__text" Content="سعر عملات X" />
-            <Text
+
+            {/* <Text
               className="update__text_rate"
               Content={` شراء${getPriceData(screenPrice, From, To, 'buy')}`}
             />
             <Text
               className="update__text_rate"
               Content={` بيع${getPriceData(screenPrice, From, To, 'sell')}`}
-            />
+            /> */}
           </div>
           <div className="update__content">
+            <InputText
+              type="number"
+              className="update__input"
+              value={getPriceData(screenPrice, From, To, 'buy')}
+              handleChange={() => {}}
+              disabled
+            />
             <InputText
               type="number"
               handleChange={({ target: { value } }) =>
@@ -127,6 +154,13 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
             <InputText
               type="number"
               className="update__input"
+              value={getPriceData(screenPrice, From, To, 'sell')}
+              handleChange={() => {}}
+              disabled
+            />
+            <InputText
+              type="number"
+              className="update__input"
               value={getPriceData(bankPrice, From, To, 'sell')}
               handleChange={({ target: { value } }) =>
                 handleChange('bankPrice', From, To, 'sell', value)
@@ -148,6 +182,7 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
                 handleChange('appPrice', From, To, 'sell', value)
               }
             />
+
             <Text className="update__text" Content="سعـر البيـــع" />
           </div>
           <Text
@@ -159,6 +194,11 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
       )}
     </ConfigProvider>
   );
+};
+
+UpdatePriceForm.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  handleHide: PropTypes.func.isRequired,
 };
 
 export default UpdatePriceForm;
