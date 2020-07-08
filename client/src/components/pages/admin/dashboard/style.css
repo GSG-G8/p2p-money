@@ -47,7 +47,7 @@ hr {
 .update__content {
   margin-top: -1rem;
   display: flex;
-  flex-direction: row-reverse;
+  /* flex-direction: row-reverse; */
   justify-content: space-around;
   align-items: center;
   margin-bottom: 1rem;
