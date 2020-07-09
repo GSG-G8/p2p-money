@@ -39,7 +39,7 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
     array
       .map((element) =>
         element.from === from && element.to === to
-          ? Number(element[cases]).toFixed(3)
+          ? Number(element[cases]).toFixed(4)
           : 0
       )
       .filter((e) => e !== 0);

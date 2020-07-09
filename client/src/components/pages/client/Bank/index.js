@@ -24,7 +24,7 @@ const getData = (bankAccounts) =>
         ),
         accountNumber: (
           <span className="insideTable">
-            {` ${balance[el].toFixed(3)} ${currencyLogo[el]}`}
+            {` ${balance[el].toFixed(4)} ${currencyLogo[el]}`}
           </span>
         ),
       })
