@@ -72,7 +72,7 @@ const Home = ({ MainBalance, isClient }) => {
         setAlert({
           type: 'error',
           message: `  عذرا لا تملك رصيد كافي لإتمام هذه العملية, رصيدك الحالي هو : ${
-            MainBalance[From] ? MainBalance[From].toFixed(2) : 0
+            MainBalance[From] ? MainBalance[From].toFixed(4) : 0
           } ${currencyLogo[From]}`,
         });
       }
@@ -107,24 +107,24 @@ const Home = ({ MainBalance, isClient }) => {
       setTellerPrice(tellerPrice);
       appPrice.map(({ from, to, sell, buy }) => {
         if (from === From && to === To) {
-          setSellApp(sell.toFixed(2));
-          setBuyApp(buy.toFixed(2));
-          setResultExchange((amount * sell).toFixed(2));
+          setSellApp(sell.toFixed(4));
+          setBuyApp(buy.toFixed(4));
+          setResultExchange((amount * sell).toFixed(4));
         }
       });
 
       bankPrice.map(({ from, to, sell, buy }) => {
         if (from === From && to === To) {
-          setSellBank(sell.toFixed(2));
-          setBuyBank(buy.toFixed(2));
-          setBankResult((amount * sell).toFixed(2));
+          setSellBank(sell.toFixed(4));
+          setBuyBank(buy.toFixed(4));
+          setBankResult((amount * sell).toFixed(4));
         }
       });
 
       tellerPrice.map(({ from, to, sell, buy }) => {
         if (from === From && to === To) {
-          setSellTeller(sell.toFixed(2));
-          setBuyTeller(buy.toFixed(2));
+          setSellTeller(sell.toFixed(4));
+          setBuyTeller(buy.toFixed(4));
         }
       });
     });
@@ -132,24 +132,24 @@ const Home = ({ MainBalance, isClient }) => {
   useEffect(() => {
     AppPrice.map(({ from, to, sell, buy }) => {
       if (from === From && to === To) {
-        setSellApp(sell.toFixed(2));
-        setBuyApp(buy.toFixed(2));
-        setResultExchange((amount * sell).toFixed(2));
+        setSellApp(sell.toFixed(4));
+        setBuyApp(buy.toFixed(4));
+        setResultExchange((amount * sell).toFixed(4));
       }
     });
 
     BankPrice.map(({ from, to, sell, buy }) => {
       if (from === From && to === To) {
-        setSellBank(sell.toFixed(2));
-        setBuyBank(buy.toFixed(2));
-        setBankResult((amount * sell).toFixed(2));
+        setSellBank(sell.toFixed(4));
+        setBuyBank(buy.toFixed(4));
+        setBankResult((amount * sell).toFixed(4));
       }
     });
 
     TellerPrice.map(({ from, to, sell, buy }) => {
       if (from === From && to === To) {
-        setSellTeller(sell.toFixed(2));
-        setBuyTeller(buy.toFixed(2));
+        setSellTeller(sell.toFixed(4));
+        setBuyTeller(buy.toFixed(4));
       }
     });
   }, [From, To, amount]);
