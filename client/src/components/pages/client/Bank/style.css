@@ -40,7 +40,12 @@
 
 .wallet_alert {
   position: fixed;
-  width: 83%;
+  width: 50%;
+  z-index: 3;
+  left: 25%;
+  top: 2%;
+  font-size: 1rem;
+  text-align: center;
 }
 
 .delete--bank--btn {

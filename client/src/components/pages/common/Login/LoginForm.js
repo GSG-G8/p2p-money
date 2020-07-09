@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Form, Button, ConfigProvider, Input, Select } from 'antd';
 import Axios from 'axios';
 
+import { event } from 'react-ga';
 import Alert from '../../../Common/Alert';
 import Typography from '../../../Common/Typography';
 import Configurations from '../../client/Signup/AntFormatConfigurations';
@@ -34,7 +35,14 @@ const LoginForm = () => {
         ? 0 + values.user.mobileNumber
         : undefined,
     })
-      .then(() => window.location.replace('/'))
+      .then(() => {
+        event({
+          category: 'Button',
+          action: 'تسجيل الدخول ',
+        });
+
+        window.location.replace('/');
+      })
       .catch(() => {
         setLoading(false);
         setAlert(messages.loginFailed);

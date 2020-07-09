@@ -8,6 +8,7 @@ import {
   Select,
   Modal,
 } from 'antd';
+import { event } from 'react-ga';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Typography from '../../../Common/Typography';
@@ -40,6 +41,10 @@ const SignupForm = () => {
     axios
       .post('/api/v1/signup', user)
       .then(() => {
+        event({
+          category: 'Button',
+          action: 'حساب جديد',
+        });
         form.resetFields();
         window.localStorage.removeItem('User_Data');
         setTimeout(() => {

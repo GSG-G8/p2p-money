@@ -3,6 +3,7 @@ import { Table, Modal, Popconfirm } from 'antd';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Helmet from 'react-helmet';
+import { event } from 'react-ga';
 import Currency from './arabicCurrency';
 import Button from '../../../Common/Button';
 import InputText from '../../../Common/TextInput';
@@ -52,6 +53,10 @@ const Banks = ({ ClientData }) => {
     axios
       .put('/api/v1/client/bank', { accountNumber: bankAccount })
       .then((responseData) => {
+        event({
+          category: 'Button',
+          action: 'حذف بنك',
+        });
         setAlert({
           type: 'success',
           message: 'تم حذف حسابك البنكي بنجاح !',
@@ -119,6 +124,10 @@ const Banks = ({ ClientData }) => {
           balance: { USD: 200, ILS: 200 },
         })
         .then((responseData) => {
+          event({
+            category: 'Button',
+            action: 'إضافة بنك',
+          });
           setAlert({
             type: 'success',
             message: 'تم إضافة حساب بنكي جديد بنجاح !',
