@@ -16,11 +16,12 @@ hr {
 
 .dashboard__head__card {
   display: flex;
+  flex-direction: row-reverse;
 }
 
 .dashboard__content {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: space-between;
 }
 
