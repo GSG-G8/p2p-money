@@ -35,7 +35,9 @@ const Dashboard = ({ Clients, Transactions }) => {
             />
           </div>
           <div className="dashboard__content">
-            <div className="dashboard__charts">{/* <Charts /> */}</div>
+            <div className="dashboard__charts">
+              <Charts />
+            </div>
             <div className="dashboard__elements">
               <div>
                 <Card className="dashboard__calendar" hoverable>
