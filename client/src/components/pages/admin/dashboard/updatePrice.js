@@ -110,6 +110,7 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
             <Text className="update__text" Content="سعر عملات X" />
           </div>
           <div className="update__content">
+          <Text className="update__text" Content="سعر الشراء" />
             <InputText
               type="number"
               className="update__input"
@@ -141,9 +142,10 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
                 setValues('appPrice', From, To, 'buy', value)
               }
             />
-            <Text className="update__text" Content="سعر الشراء" />
+            
           </div>
           <div className="update__content">
+          <Text className="update__text" Content="سعـر البيـــع" />
             <InputText
               type="number"
               className="update__input"
@@ -175,8 +177,6 @@ const UpdatePriceForm = ({ visible, handleHide }) => {
                 setValues('appPrice', From, To, 'sell', value)
               }
             />
-
-            <Text className="update__text" Content="سعـر البيـــع" />
           </div>
           <Text
             className="update__date"
