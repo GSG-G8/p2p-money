@@ -90,7 +90,6 @@ const Wallet = ({ ClientData }) => {
 
   const history = useHistory();
 
-  const { mainBalance } = ClientData;
   const handleClick = () => history.push('/');
 
   useEffect(() => {
@@ -114,7 +113,7 @@ const Wallet = ({ ClientData }) => {
       <div className="wallet-table">
         <div className="wallet-head">
           {ClientData &&
-            Object.entries(mainBalance).map((arr) => (
+            Object.entries(ClientData.mainBalance).map((arr) => (
               <div key={currencyLogo[arr[0]][0]} className="card-balance">
                 <div>
                   <div className="card-balance__label">

@@ -38,11 +38,11 @@ const SelectBox = ({
 );
 
 SelectBox.propTypes = {
-  elements: PropTypes.arrayOf(PropTypes.string),
+  elements: PropTypes.arrayOf(PropTypes.any),
   onChange: PropTypes.func,
   placeholder: PropTypes.string.isRequired,
   className: PropTypes.string,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   disabled: PropTypes.bool,
   defaultValue: PropTypes.string,
 };
@@ -53,6 +53,7 @@ SelectBox.defaultProps = {
   elements: [],
   disabled: false,
   defaultValue: '',
+  value: '',
 };
 
 export default SelectBox;

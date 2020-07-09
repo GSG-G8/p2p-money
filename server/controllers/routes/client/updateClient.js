@@ -3,13 +3,13 @@ const client = require('../../../database/models/client');
 const updateClientValidation = require('../../../utils/validations/updateClientValidation');
 
 const updateClientById = async (req, res) => {
-  const { id } = res;
+  const id = res.clientId;
   const { oldPassword, newPassword, passwordConfirmation, ...rest } = req.body;
 
   if (await updateClientValidation(req.body)) {
     // handle change password
     if (oldPassword) {
-      const clientPassword = await client.findById(id, 'password');
+      const clientPassword = await client.findById(id, { password: 1 });
       compare(oldPassword, clientPassword.password, async (err, result) => {
         if (result) {
           const password = await hash(newPassword, 10);
