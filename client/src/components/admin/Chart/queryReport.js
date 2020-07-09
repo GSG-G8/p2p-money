@@ -6,7 +6,7 @@ const queryReport = (name, date) =>
     body: {
       reportRequests: [
         {
-          viewId: '222948475',
+          viewId: process.env.REACT_APP_VIEW_ID,
           dateRanges: [
             {
               startDate: date,

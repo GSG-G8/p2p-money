@@ -19,8 +19,7 @@ const EventsAction = async (Date) => {
 
 const initAuth = () =>
   window.gapi.auth2.init({
-    client_id:
-      '65637092858-8nm8i0t7151g09jth8u148sgsbkufaih.apps.googleusercontent.com',
+    client_id: process.env.REACT_APP_Client_id,
     scope: 'https://www.googleapis.com/auth/analytics.readonly',
   });
 const checkSignedIn = () =>
@@ -132,6 +131,7 @@ const ChartsPage = () => {
       ],
     });
   };
+
   useEffect(() => {
     setTimeout(
       () =>
@@ -182,7 +182,7 @@ const ChartsPage = () => {
           <Doughnut data={eventsData} height="8rem" width="14rem" />
           {!isSignedIn && (
             <GoogleLogin
-              clientId="65637092858-8nm8i0t7151g09jth8u148sgsbkufaih.apps.googleusercontent.com"
+              clientId={process.env.REACT_APP_Client_id}
               buttonText="Login"
               cookiePolicy="single_host_origin"
             />
