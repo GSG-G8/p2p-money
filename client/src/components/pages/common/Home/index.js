@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Helmet from 'react-helmet';
+import { event } from 'react-ga';
 import PropTypes from 'prop-types';
 import { Modal, ConfigProvider } from 'antd';
 import { useHistory } from 'react-router-dom';
@@ -82,9 +83,17 @@ const Home = ({ MainBalance, isClient }) => {
   };
   const handleOk = () => {
     if (isClient) {
+      event({
+        category: 'Button',
+        action: 'تحويل من مستخدم',
+      });
       axios.post('/api/v1/transaction', { from: From, to: To, amount });
       window.location.replace('/wallet');
     } else {
+      event({
+        category: 'Button',
+        action: 'تحويل من زائر',
+      });
       history.push('/signup');
     }
   };

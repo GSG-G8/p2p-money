@@ -2,24 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import { MDBContainer } from 'mdbreact';
 import { GoogleLogin } from 'react-google-login';
-import { Card } from 'antd';
+import { Card, Alert } from 'antd';
 import queryReport from './queryReport';
+import SelectBox from '../../Common/selectBox/AdminSelect';
 
 import './style.css';
 
-const PagePath = async () => {
-  const data = await queryReport('ga:pagePath');
+const PagePath = async (Date) => {
+  const data = await queryReport('ga:pagePath', Date);
   return data;
 };
-const EventsAction = async () => {
-  const data = await queryReport('ga:eventAction');
+const EventsAction = async (Date) => {
+  const data = await queryReport('ga:eventAction', Date);
   return data;
 };
 
 const initAuth = () =>
   window.gapi.auth2.init({
-    client_id:
-      '65637092858-8nm8i0t7151g09jth8u148sgsbkufaih.apps.googleusercontent.com',
+    client_id: process.env.REACT_APP_Client_id,
     scope: 'https://www.googleapis.com/auth/analytics.readonly',
   });
 const checkSignedIn = () =>
@@ -38,16 +38,26 @@ const ChartsPage = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [pathData, setPathData] = useState([]);
   const [eventsData, setEventsData] = useState([]);
+  const [alert, setAlert] = useState();
+  const [date, setDate] = useState('today');
 
+  const changeSelect = (value) => {
+    setDate(value);
+  };
   const displayResults = (firstDat, secondData) => {
     const path = [];
     const views = [];
     const event = [];
     const clicks = [];
     // eslint-disable-next-line no-unused-vars
-    let elementIndex = 0;
-    const firstResult = firstDat.result.reports[0].data.rows;
-    const secondResult = secondData.result.reports[0].data.rows;
+    const elementIndex = 0;
+    const firstResult = firstDat.result.reports[0].data.rows || {
+      dimensions: ['لا زوار'],
+      metrics: [{ values: '0' }],
+    };
+    const secondResult = secondData.result.reports[0].data.rows || [
+      { dimensions: ['لا أحداث'], metrics: [{ values: '0' }] },
+    ];
     firstResult.forEach((row, index) => {
       if (row.dimensions[0] === '/') {
         path.push('الرئيسية');
@@ -63,17 +73,8 @@ const ChartsPage = () => {
         path.push('الإعدادات');
       } else if (row.dimensions[0] === '/404') {
         path.push('صفحة الخطأ');
-      } else if (!path.includes('أخرى')) {
-        path.push('أخرى');
-        elementIndex = index;
-      } else {
-        // eslint-disable-next-line no-return-assign
-        const firstNum = Number(views[elementIndex]);
-        const secondNum = Number(row.metrics[0].values[0]);
-        const equal = (firstNum += secondNum);
-        console.log(equal);
-        return equal;
       }
+
       views.push(row.metrics[0].values[0]);
     });
     secondResult.forEach((row) => {
@@ -134,13 +135,23 @@ const ChartsPage = () => {
   useEffect(() => {
     setTimeout(
       () =>
-        PagePath()
+        PagePath(date)
           .then((firstData) =>
-            EventsAction().then((secondData) =>
+            EventsAction(date).then((secondData) =>
               displayResults(firstData, secondData)
             )
           )
-          .catch(() => console.log('Request Error')),
+          .catch((error) => {
+            if (error) {
+              setTimeout(() => {
+                setAlert({
+                  type: 'error',
+                  message: `حصل خطأ أثناء محاولة إحضار البيانات من لوحة تحكم جوجل يمكنك الذهاب و رؤية البيانات في اللوحة`,
+                });
+              }, 1000);
+            }
+            setTimeout(() => setAlert(false), 3000);
+          }),
       1000
     );
     window.gapi.load('auth2', () =>
@@ -148,21 +159,30 @@ const ChartsPage = () => {
         setIsSignedIn(signedIn);
       })
     );
-  });
+  }, [date]);
   return (
     <MDBContainer>
       <Card hoverable>
         <div className="chart__first">
           <Bar data={pathData} height="8rem" width="14rem" />
+          <SelectBox className="select_chart" onChange={changeSelect} />
         </div>
       </Card>
-
       <div className="chart__second">
         <Card hoverable>
+          {alert && (
+            <>
+              <Alert
+                type={alert.type}
+                message={alert.message}
+                className="Home__alert"
+              />
+            </>
+          )}
           <Doughnut data={eventsData} height="8rem" width="14rem" />
           {!isSignedIn && (
             <GoogleLogin
-              clientId="65637092858-8nm8i0t7151g09jth8u148sgsbkufaih.apps.googleusercontent.com"
+              clientId={process.env.REACT_APP_Client_id}
               buttonText="Login"
               cookiePolicy="single_host_origin"
             />
