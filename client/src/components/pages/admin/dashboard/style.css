@@ -61,7 +61,7 @@ hr {
 }
 
 .update__input {
-  width: 5rem;
+  width: 5rem !important;
 }
 
 .update__text_rate {
@@ -72,7 +72,6 @@ hr {
   position: absolute;
   bottom: 0;
   left: 0;
-  /* width: %; */
   margin: 0 0 20.3rem 14rem;
 }
 
