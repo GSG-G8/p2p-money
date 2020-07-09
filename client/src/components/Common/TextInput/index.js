@@ -13,6 +13,7 @@ const TextInput = ({
   handleChange,
   onFocus,
   value,
+  step,
   name,
 }) => (
   <div className="inputSpecs">
@@ -25,6 +26,7 @@ const TextInput = ({
         onChange={handleChange}
         onFocus={onFocus}
         value={value}
+        step={step}
         name={name}
       />
     </ConfigProvider>
@@ -35,11 +37,12 @@ TextInput.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string,
   disabled: PropTypes.bool,
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   handleChange: PropTypes.func,
   onFocus: PropTypes.func,
   name: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  step: PropTypes.string,
 };
 
 TextInput.defaultProps = {
@@ -49,6 +52,8 @@ TextInput.defaultProps = {
   onFocus: () => {},
   name: '',
   handleChange: () => {},
+  placeholder: '',
+  step: '.1',
 };
 
 export default TextInput;

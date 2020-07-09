@@ -9,7 +9,7 @@ import addImg from '../../../assets/icons/addImg.svg';
 
 import './style.css';
 
-const AdminCard = ({ loading, type, title, description }) => {
+const AdminCard = ({ loading, type, title, description, onClick }) => {
   let imgSource;
   switch (type) {
     case 'transaction':
@@ -23,7 +23,12 @@ const AdminCard = ({ loading, type, title, description }) => {
       break;
   }
   return (
-    <Card className="admin-card-container" hoverable loading={loading}>
+    <Card
+      onClick={onClick}
+      className="admin-card-container"
+      hoverable
+      loading={loading}
+    >
       <div className="admin-card__content">
         <img
           className="admin-card__img"
@@ -44,6 +49,7 @@ AdminCard.propTypes = {
   type: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 AdminCard.defaultProps = {
@@ -51,5 +57,6 @@ AdminCard.defaultProps = {
   type: 'add', // another option is 'clients' and 'transaction' to change the icon
   title: 'إضافة',
   description: 'الأسعار الحالية',
+  onClick: () => {},
 };
 export default AdminCard;
